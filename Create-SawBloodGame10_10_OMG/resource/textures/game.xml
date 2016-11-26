@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="game.png">
+	<!-- Created with Adobe Animate version 15.1.0.210 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="airplane0000" x="429" y="686" width="172" height="212" pivotX="97.6" pivotY="104.15"/>
+	<SubTexture name="bShadow0000" x="744" y="1220" width="48" height="26" pivotX="22.15" pivotY="11.65"/>
+	<SubTexture name="backGround0000" x="2" y="2" width="900" height="500" pivotX="400" pivotY="250"/>
+	<SubTexture name="blood0000" x="934" y="1203" width="49" height="27" pivotX="26.1" pivotY="15.35" frameX="-2" frameY="-2" frameWidth="53" frameHeight="30"/>
+	<SubTexture name="blood0001" x="934" y="1173" width="51" height="28" frameX="-1" frameY="-1" frameWidth="53" frameHeight="30"/>
+	<SubTexture name="blood0002" x="959" y="902" width="53" height="30"/>
+	<SubTexture name="bloodDrop0000" x="1015" y="415" width="7" height="5" pivotX="3.1" pivotY="2.8"/>
+	<SubTexture name="bomb0000" x="986" y="415" width="27" height="61" pivotX="13.15" pivotY="30.2"/>
+	<SubTexture name="boooom0000" x="959" y="760" width="60" height="60" pivotX="71.6" pivotY="68.75" frameX="-43" frameY="-40" frameWidth="150" frameHeight="128"/>
+	<SubTexture name="boooom0001" x="603" y="686" width="68" height="69" frameX="-39" frameY="-35" frameWidth="150" frameHeight="128"/>
+	<SubTexture name="boooom0002" x="2" y="1196" width="105" height="90" frameX="-25" frameY="-25" frameWidth="150" frameHeight="128"/>
+	<SubTexture name="boooom0003" x="394" y="1113" width="142" height="118" frameX="-6" frameY="-9" frameWidth="150" frameHeight="128"/>
+	<SubTexture name="boooom0004" x="248" y="1106" width="144" height="124" frameX="-6" frameY="-4" frameWidth="150" frameHeight="128"/>
+	<SubTexture name="boooom0005" x="2" y="1067" width="144" height="127" frameX="0" frameY="0" frameWidth="150" frameHeight="128"/>
+	<SubTexture name="boooom0006" x="786" y="1093" width="146" height="125" frameX="-3" frameY="-2" frameWidth="150" frameHeight="128"/>
+	<SubTexture name="boooom0007" x="939" y="942" width="69" height="101" frameX="-36" frameY="-25" frameWidth="150" frameHeight="128"/>
+	<SubTexture name="boooom0008" x="150" y="912" width="73" height="102" frameX="-20" frameY="-19" frameWidth="150" frameHeight="128"/>
+	<SubTexture name="bullets0000" x="538" y="1113" width="42" height="18" pivotX="19.3" pivotY="7.2"/>
+	<SubTexture name="bullets0001" x="986" y="478" width="36" height="18" frameX="-3" frameY="0" frameWidth="42" frameHeight="18"/>
+	<SubTexture name="bullets0002" x="630" y="1137" width="36" height="18" frameX="-3" frameY="0" frameWidth="42" frameHeight="18"/>
+	<SubTexture name="bulletsShadow0000" x="987" y="1173" width="32" height="12" pivotX="14.8" pivotY="4.75"/>
+	<SubTexture name="cursor0000" x="150" y="1016" width="75" height="75" pivotX="37.05" pivotY="37.05"/>
+	<SubTexture name="forwardGround0000" x="2" y="504" width="750" height="180" pivotX="0" pivotY="1"/>
+	<SubTexture name="heel0000" x="538" y="1137" width="90" height="176" pivotX="62.55" pivotY="113.75" frameX="-19" frameY="-27" frameWidth="129" frameHeight="211"/>
+	<SubTexture name="heel0001" x="148" y="1100" width="98" height="184" frameX="-15" frameY="-21" frameWidth="129" frameHeight="211"/>
+	<SubTexture name="heel0002" x="587" y="945" width="106" height="190" frameX="-11" frameY="-16" frameWidth="129" frameHeight="211"/>
+	<SubTexture name="heel0003" x="904" y="215" width="114" height="198" frameX="-7" frameY="-10" frameWidth="129" frameHeight="211"/>
+	<SubTexture name="heel0004" x="359" y="900" width="121" height="204" frameX="-4" frameY="-5" frameWidth="129" frameHeight="211"/>
+	<SubTexture name="heel0005" x="228" y="887" width="129" height="211"/>
+	<SubTexture name="heel0006" x="228" y="887" width="129" height="211"/>
+	<SubTexture name="heel0007" x="228" y="887" width="129" height="211"/>
+	<SubTexture name="heel0008" x="904" y="2" width="116" height="211" frameX="-6" frameY="0" frameWidth="129" frameHeight="211"/>
+	<SubTexture name="heel0009" x="482" y="900" width="103" height="211" frameX="-13" frameY="0" frameWidth="129" frameHeight="211"/>
+	<SubTexture name="heel0010" x="695" y="945" width="89" height="211" frameX="-20" frameY="0" frameWidth="129" frameHeight="211"/>
+	<SubTexture name="hole0000" x="959" y="864" width="45" height="36" pivotX="19.65" pivotY="15.35"/>
+	<SubTexture name="miniExplosion0000" x="744" y="1158" width="23" height="21" pivotX="17.55" pivotY="17.65" frameX="-6" frameY="-8" frameWidth="43" frameHeight="40"/>
+	<SubTexture name="miniExplosion0001" x="744" y="1158" width="23" height="21" frameX="-6" frameY="-8" frameWidth="43" frameHeight="40"/>
+	<SubTexture name="miniExplosion0002" x="959" y="822" width="43" height="40"/>
+	<SubTexture name="miniExplosion0003" x="959" y="822" width="43" height="40"/>
+	<SubTexture name="miniExplosion0004" x="959" y="822" width="43" height="40"/>
+	<SubTexture name="miniExplosion0005" x="998" y="1109" width="22" height="22" frameX="-8" frameY="-8" frameWidth="43" frameHeight="40"/>
+	<SubTexture name="miniExplosion0006" x="998" y="1109" width="22" height="22" frameX="-8" frameY="-8" frameWidth="43" frameHeight="40"/>
+	<SubTexture name="smoke0000" x="673" y="686" width="65" height="62" pivotX="-315.6" pivotY="-148.6" frameX="-96" frameY="-96" frameWidth="254" frameHeight="254"/>
+	<SubTexture name="smoke0001" x="904" y="415" width="80" height="80" frameX="-87" frameY="-87" frameWidth="254" frameHeight="254"/>
+	<SubTexture name="smoke0002" x="630" y="1158" width="112" height="110" frameX="-72" frameY="-72" frameWidth="254" frameHeight="254"/>
+	<SubTexture name="smoke0003" x="788" y="942" width="149" height="149" frameX="-53" frameY="-53" frameWidth="254" frameHeight="254"/>
+	<SubTexture name="smoke0004" x="603" y="760" width="183" height="183" frameX="-36" frameY="-36" frameWidth="254" frameHeight="254"/>
+	<SubTexture name="smoke0005" x="228" y="686" width="199" height="199" frameX="-28" frameY="-28" frameWidth="254" frameHeight="254"/>
+	<SubTexture name="smoke0006" x="2" y="686" width="224" height="224" frameX="-15" frameY="-15" frameWidth="254" frameHeight="254"/>
+	<SubTexture name="smoke0007" x="754" y="504" width="254" height="254"/>
+	<SubTexture name="smoke0008" x="2" y="912" width="146" height="153" frameX="-54" frameY="-54" frameWidth="254" frameHeight="254"/>
+	<SubTexture name="smoke0009" x="2" y="912" width="146" height="153" frameX="-54" frameY="-54" frameWidth="254" frameHeight="254"/>
+	<SubTexture name="smoke0010" x="788" y="760" width="169" height="180" frameX="-44" frameY="-43" frameWidth="254" frameHeight="254"/>
+	<SubTexture name="smoke0011" x="788" y="760" width="169" height="180" frameX="-44" frameY="-43" frameWidth="254" frameHeight="254"/>
+	<SubTexture name="turelPlace0000" x="939" y="1045" width="62" height="62" pivotX="31" pivotY="31"/>
+	<SubTexture name="turelPlace0001" x="934" y="1109" width="62" height="62"/>
+	<SubTexture name="turelPlace0002" x="1003" y="1045" width="19" height="19" frameX="-22" frameY="-22" frameWidth="62" frameHeight="62"/>
+</TextureAtlas>
