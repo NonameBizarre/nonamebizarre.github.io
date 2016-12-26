@@ -1,0 +1,403 @@
+{"frames":{
+
+"santa_run_00000":
+{
+	"frame":{"x":0,"y":0,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00001":
+{
+	"frame":{"x":0,"y":237,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00002":
+{
+	"frame":{"x":257,"y":0,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00003":
+{
+	"frame":{"x":257,"y":237,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00004":
+{
+	"frame":{"x":514,"y":0,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00005":
+{
+	"frame":{"x":514,"y":237,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00006":
+{
+	"frame":{"x":0,"y":474,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00007":
+{
+	"frame":{"x":0,"y":711,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00008":
+{
+	"frame":{"x":257,"y":474,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00009":
+{
+	"frame":{"x":257,"y":711,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00010":
+{
+	"frame":{"x":514,"y":474,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00011":
+{
+	"frame":{"x":514,"y":711,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00012":
+{
+	"frame":{"x":771,"y":0,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00013":
+{
+	"frame":{"x":771,"y":237,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00014":
+{
+	"frame":{"x":1028,"y":0,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00015":
+{
+	"frame":{"x":771,"y":474,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00016":
+{
+	"frame":{"x":1028,"y":237,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00017":
+{
+	"frame":{"x":1285,"y":0,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00018":
+{
+	"frame":{"x":771,"y":711,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00019":
+{
+	"frame":{"x":1028,"y":474,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00020":
+{
+	"frame":{"x":1285,"y":237,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00021":
+{
+	"frame":{"x":1542,"y":0,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00022":
+{
+	"frame":{"x":1028,"y":711,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00023":
+{
+	"frame":{"x":1285,"y":474,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00024":
+{
+	"frame":{"x":1542,"y":237,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00025":
+{
+	"frame":{"x":1285,"y":711,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00026":
+{
+	"frame":{"x":1542,"y":474,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00027":
+{
+	"frame":{"x":1542,"y":711,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_run_00028":
+{
+	"frame":{"x":0,"y":948,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_stand_00000":
+{
+	"frame":{"x":0,"y":1185,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_stand_00001":
+{
+	"frame":{"x":257,"y":948,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_stand_00002":
+{
+	"frame":{"x":0,"y":1422,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_stand_00003":
+{
+	"frame":{"x":257,"y":1185,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_stand_00004":
+{
+	"frame":{"x":514,"y":948,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00000":
+{
+	"frame":{"x":0,"y":1659,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00001":
+{
+	"frame":{"x":257,"y":1422,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00002":
+{
+	"frame":{"x":514,"y":1185,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00003":
+{
+	"frame":{"x":771,"y":948,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00004":
+{
+	"frame":{"x":257,"y":1659,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00005":
+{
+	"frame":{"x":514,"y":1422,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00006":
+{
+	"frame":{"x":771,"y":1185,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00007":
+{
+	"frame":{"x":1028,"y":948,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00008":
+{
+	"frame":{"x":514,"y":1659,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00009":
+{
+	"frame":{"x":771,"y":1422,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00010":
+{
+	"frame":{"x":1028,"y":1185,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00011":
+{
+	"frame":{"x":1285,"y":948,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00012":
+{
+	"frame":{"x":771,"y":1659,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00013":
+{
+	"frame":{"x":1028,"y":1422,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00014":
+{
+	"frame":{"x":1285,"y":1185,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+},
+"santa_turn_00015":
+{
+	"frame":{"x":1542,"y":948,"w":255,"h":235},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":255,"y":235},
+	"sourceSize":{"w":255,"h":235}
+}
+}}

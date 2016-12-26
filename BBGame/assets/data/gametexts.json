@@ -1,0 +1,72 @@
+{
+	"en" : {
+		"startText" : "Tap to start",
+		"gameOver" : "Game over",
+		"score" : "Your score: %val0%",
+		"bestScore" : "Best score: %val0%",
+		"newBest" : "New best score!"
+	},
+	"es" : {
+		"startText" : "Tap to start",
+		"gameOver" : "Game over",
+		"score" : "Your score: %val0%",
+		"bestScore" : "Best score: %val0%",
+		"newBest" : "New best score!"
+	},
+	"de" : {
+		"startText" : "Tap to start",
+		"gameOver" : "Game over",
+		"score" : "Your score: %val0%",
+		"bestScore" : "Best score: %val0%",
+		"newBest" : "New best score!"
+	},
+	"fr" : {
+		"startText" : "Tap to start",
+		"gameOver" : "Game over",
+		"score" : "Your score: %val0%",
+		"bestScore" : "Best score: %val0%",
+		"newBest" : "New best score!"
+	},
+	"it" : {
+		"startText" : "Tap to start",
+		"gameOver" : "Game over",
+		"score" : "Your score: %val0%",
+		"bestScore" : "Best score: %val0%",
+		"newBest" : "New best score!"
+	},
+	"pt" : {
+		"startText" : "Tap to start",
+		"gameOver" : "Game over",
+		"score" : "Your score: %val0%",
+		"bestScore" : "Best score: %val0%",
+		"newBest" : "New best score!"
+	},
+	"tr" : {
+		"startText" : "Tap to start",
+		"gameOver" : "Game over",
+		"score" : "Your score: %val0%",
+		"bestScore" : "Best score: %val0%",
+		"newBest" : "New best score!"
+	},
+	"ru" : {
+		"startText" : "Tap to start",
+		"gameOver" : "Game over",
+		"score" : "Your score: %val0%",
+		"bestScore" : "Best score: %val0%",
+		"newBest" : "New best score!"
+	},
+	"pl" : {
+		"startText" : "Tap to start",
+		"gameOver" : "Game over",
+		"score" : "Your score: %val0%",
+		"bestScore" : "Best score: %val0%",
+		"newBest" : "New best score!"
+	},
+	"nl" : {
+		"startText" : "Tap to start",
+		"gameOver" : "Game over",
+		"score" : "Your score: %val0%",
+		"bestScore" : "Best score: %val0%",
+		"newBest" : "New best score!"
+	}
+}

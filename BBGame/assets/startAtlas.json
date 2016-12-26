@@ -1,0 +1,35 @@
+{"frames":{
+
+"bounce":
+{
+	"frame":{"x":0,"y":0,"w":728,"h":218},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":728,"y":218},
+	"sourceSize":{"w":728,"h":218}
+},
+"christmas":
+{
+	"frame":{"x":0,"y":220,"w":478,"h":145},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":478,"y":145},
+	"sourceSize":{"w":478,"h":145}
+},
+"merry":
+{
+	"frame":{"x":0,"y":367,"w":343,"h":113},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":343,"y":113},
+	"sourceSize":{"w":343,"h":113}
+},
+"btn":
+{
+	"frame":{"x":480,"y":220,"w":340,"h":105},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":340,"y":105},
+	"sourceSize":{"w":340,"h":105}
+}
+}}

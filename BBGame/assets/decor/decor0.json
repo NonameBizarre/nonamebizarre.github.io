@@ -1,0 +1,19 @@
+{"frames":{
+
+"sugrob0":
+{
+	"frame":{"x":0,"y":0,"w":258,"h":190},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":258,"y":190},
+	"sourceSize":{"w":258,"h":190}
+},
+"sugrob1":
+{
+	"frame":{"x":260,"y":0,"w":123,"h":140},
+	"rotated":false,
+	"trimmed":false,
+	"spriteSourceSize":{"x":0,"y":0,"w":123,"y":140},
+	"sourceSize":{"w":123,"h":140}
+}
+}}
