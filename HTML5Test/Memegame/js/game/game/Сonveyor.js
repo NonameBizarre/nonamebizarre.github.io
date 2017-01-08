@@ -13,7 +13,7 @@ var Game;
             this._GameElementContainer = gameElementContainer;
             this._GameElementContainer.addChild(this);
             this._speed = 0;
-            this._cellLandscapeCount = 7;
+            this._cellLandscapeCount = 8;
             this._orderList = [];
             this._selectElementsArray = [];
             this._cellArray = [];
@@ -24,10 +24,10 @@ var Game;
             }
             for (var n = 0; n < 3; n++) {
                 for (var i = 0; i < this._cellLandscapeCount; i++) {
-                    this._cellArray[n][i] = new Game.BasicCell(this.game, 0, 0, this._GameElementContainer, true, this);
+                    this._cellArray[n][i] = new Game.BasicCell(this.game, this.x, this.y, this._GameElementContainer, true, this);
                     this._cellArray[n][i].name = 'Cell_' + (i + n * this._cellLandscapeCount + n); // ВНИМАНИЕ! ПРИ РЕАЛИЗАЦИИ ДОБАВЛЕНИЯ БЛОКОВ В ЛЕНТУ, НЕОБХОДИМО УМНОЖАТЬ НЕ НА 6, А НА ДРУГОЕ ЧИСЛО! СЛАБОЕ МЕСТО!!!!!!
-                    this._cellArray[n][i].x = -112 * 3 + (112 + 20) * i - 112; // Создамём полосу
-                    this._cellArray[n][i].y = -112 * 2 + (112 + 20) * n + 10;
+                    this._cellArray[n][i].x += -112 * 3 + (112 + 10) * i - 112; // Создамём полосу
+                    this._cellArray[n][i].y += -112 * 2 + (112 + 10) * n + 10;
                 }
             }
         }
@@ -64,7 +64,7 @@ var Game;
             var arraySelectNumb = selectedArray.length;
             for (var i = 0; i < arraySelectNumb; i++) {
                 for (var n = 0; n < goodOrderArray.length; n++) {
-                    if (selectedArray[0].key == goodOrderArray[n].key) {
+                    if (selectedArray[0].key == goodOrderArray[n].key && selectedArray[0].tint == goodOrderArray[n].tint) {
                         selectedArray[0].goodOrederCall(goodOrderArray[n], currentTable);
                         break;
                     }
@@ -73,22 +73,31 @@ var Game;
         };
         Сonveyor.prototype.checkOrdersFromCell = function (currentCell) {
             currentCell.setDefoultVisible();
-            currentCell.loadCurrentTexture(Phaser.ArrayUtils.removeRandomItem(this._orderList));
+            var randomItem = Phaser.ArrayUtils.removeRandomItem(this._orderList);
+            var correctObject = randomItem.split('_')[0];
+            var correctColor = randomItem.split('_')[1];
+            currentCell.loadCurrentTexture(correctObject, correctColor);
             //currentCell.loadTexture();
         };
         Сonveyor.prototype.changeCurrentCellFromOrdersCell = function (currentCell) {
-            this._orderList[this._orderList.length] = currentCell._currentTextureKey;
+            this._orderList[this._orderList.length] = currentCell._currentTextureKey + '_' + currentCell.tint;
             currentCell.setDefoultVisible();
-            currentCell.loadCurrentTexture(this._orderList[0]);
+            var firstItem = this._orderList[0];
+            var correctObject = firstItem.split('_')[0];
+            var correctColor = firstItem.split('_')[1];
+            currentCell.loadCurrentTexture(correctObject, correctColor);
             this._orderList.splice(0, 1);
         };
         Сonveyor.prototype.shakeArrayAfterChangePosition = function (currentRow) {
             var cellKeysArray = [];
             for (var i = 0; i < 3; i++) {
-                cellKeysArray[i] = this._cellArray[i][currentRow]._currentTextureKey;
+                cellKeysArray[i] = this._cellArray[i][currentRow]._currentTextureKey + '_' + this._cellArray[i][currentRow].tint;
             }
             for (var n = 0; n < 3; n++) {
-                this._cellArray[n][currentRow].loadCurrentTexture(Phaser.ArrayUtils.removeRandomItem(cellKeysArray));
+                var randomItem = Phaser.ArrayUtils.removeRandomItem(cellKeysArray);
+                var correctObject = randomItem.split('_')[0];
+                var correctColor = randomItem.split('_')[1];
+                this._cellArray[n][currentRow].loadCurrentTexture(correctObject, correctColor);
                 this._cellArray[n][currentRow].dropSelect();
             }
             console.log('SHAKED!');
@@ -107,7 +116,7 @@ var Game;
             for (var n = 0; n < 3; n++) {
                 for (var i = 0; i < this._cellLandscapeCount; i++) {
                     var nowOrderCheck = false;
-                    if (this._cellArray[n][i].x > -400) {
+                    if (this._cellArray[n][i].x > this.x - 400) {
                         this._cellArray[n][i].x -= this._speed;
                     }
                     else {
@@ -117,7 +126,7 @@ var Game;
                                 maxX = this._cellArray[n][m].x;
                             }
                         }
-                        this._cellArray[n][i].x = maxX + 122 + 10;
+                        this._cellArray[n][i].x = maxX + 122;
                         if (this._cellArray[n][i].key == 'CellClean' && this._orderList.length > 0) {
                             this.checkOrdersFromCell(this._cellArray[n][i]);
                             nowOrderCheck = true;

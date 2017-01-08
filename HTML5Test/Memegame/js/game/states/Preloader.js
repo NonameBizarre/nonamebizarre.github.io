@@ -26,6 +26,18 @@ var Game;
             this.game.load.image('CellMOG', 'assets/CellMOG.png');
             this.game.load.image('CellPePe', 'assets/CellPePe.png');
             this.game.load.image('CellPommid', 'assets/CellPommid.png');
+            this.game.load.image('DuDec', 'assets/DuDec.png');
+            this.game.load.image('DyBovSky', 'assets/DyBovSky.png');
+            this.game.load.image('GodBen', 'assets/GodBen.png');
+            this.game.load.image('hehehe', 'assets/hehehe.png');
+            this.game.load.image('Kama', 'assets/Kama.png');
+            this.game.load.image('Kanobu', 'assets/Kanobu.png');
+            this.game.load.image('KotLetKi', 'assets/KotLetKi.png');
+            this.game.load.image('Kovrizjka', 'assets/Kovrizjka.png');
+            this.game.load.image('Mouse', 'assets/Mouse.png');
+            this.game.load.image('NoFact', 'assets/NoFact.png');
+            this.game.load.image('PhillPhish', 'assets/PhillPhish.png');
+            this.game.load.image('Smoke', 'assets/Smoke.png');
         };
         Preloader.prototype.create = function () {
             console.log("Preloader");

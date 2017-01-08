@@ -20,7 +20,8 @@ var Game;
             this._bottomOffset = null;
             this.setPortretPosition(x, y);
             this.setLandscapePosition(x, y);
-            window.addEventListener("changeOrientationAndResize", this.changeOrientation.bind(this), false);
+            //window.addEventListener("changeOrientationAndResize", this.changeOrientation.bind(this), false)
+            Game.Config.globalEvents.on("changeOrientationAndResize", this.changeOrientation.bind(this), false);
         }
         /*
             Устанавливаем ОТНОСИТЕЛЬНУЮ позицию. На разных устройствах визуальное положение компонента

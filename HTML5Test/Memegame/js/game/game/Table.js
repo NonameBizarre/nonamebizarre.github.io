@@ -10,6 +10,7 @@ var Game;
         function Table(game, x, y, gameElementContainer, gameObjectConveyor, manager) {
             _super.call(this, game, x, y, 'TableClean');
             this.anchor.set(0.5);
+            //this.scale.set(0.8);
             this._GameElementContainer = gameElementContainer;
             this._GameElementContainer.addChild(this);
             this._gameObjectConveyor = gameObjectConveyor;
@@ -44,7 +45,9 @@ var Game;
             for (var i = 0; i < orderArray.length; i++) {
                 var cy = Math.floor(i / 4);
                 var cx = i - 4 * cy;
-                this._cellArray[cy][cx].loadCurrentTexture(orderArray[i]);
+                var correctObject = orderArray[i].split('_')[0];
+                var correctColor = orderArray[i].split('_')[1];
+                this._cellArray[cy][cx].loadCurrentTexture(correctObject, correctColor);
             }
             this._currentOrderLength = orderArray.length;
             this._gameObjectConveyor.addOrderObjects(orderArray);
@@ -73,7 +76,7 @@ var Game;
                         var missObjetc = true;
                         for (var n = 0; n < 3; n++) {
                             for (var m = 0; m < 4; m++) {
-                                if (this._cellArray[n][m].key != 'CellClean' && this._cellArray[n][m].key == selectedArray[i].key && !this._cellArray[n][m]._tableCellUsed) {
+                                if (this._cellArray[n][m].key != 'CellClean' && this._cellArray[n][m].key == selectedArray[i].key && !this._cellArray[n][m]._tableCellUsed && this._cellArray[n][m].tint == selectedArray[i].tint) {
                                     goodOrderArray[goodOrderArray.length] = this._cellArray[n][m];
                                     this._cellArray[n][m]._tableCellUsed = true;
                                     missObjetc = false;
@@ -100,7 +103,7 @@ var Game;
                                     }
                                     if (this._cellArray[n][m].key != 'CellClean' && this._cellArray[n][m]._mode == 'hide') {
                                         this._cellArray[n][m].hideShowCell('show');
-                                        arrayToConveerOrderAdd[arrayToConveerOrderAdd.length] = this._cellArray[n][m]._currentTextureKey;
+                                        arrayToConveerOrderAdd[arrayToConveerOrderAdd.length] = this._cellArray[n][m]._currentTextureKey + '_' + this._cellArray[n][m].tint;
                                         this._currentOrderLength += 1;
                                     }
                                 }

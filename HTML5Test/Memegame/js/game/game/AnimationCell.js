@@ -7,9 +7,10 @@ var Game;
 (function (Game) {
     var AnimationCell = (function (_super) {
         __extends(AnimationCell, _super);
-        function AnimationCell(game, x, y, gameElementContainer, elementKey, tableObject, currentCell) {
+        function AnimationCell(game, x, y, gameElementContainer, elementKey, tableObject, currentCell, objectTint) {
             _super.call(this, game, x, y, elementKey);
             this.anchor.set(0.5);
+            this.tint = objectTint;
             this._GameElementContainer = gameElementContainer;
             this._GameElementContainer.addChild(this);
             this._tableObject = tableObject;

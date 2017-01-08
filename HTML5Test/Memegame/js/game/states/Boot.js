@@ -22,6 +22,7 @@ var Game;
             //  this.game.scale.onOrientationChange.add(this.changeOrientation, this);
             //   this.game.scale.onSizeChange.add(this.changeOrientation, this);
             //PlayerConfig.globalEvents = new OEventDispatcher();
+            Game.Config.globalEvents = new Game.OEventDispatcher();
             window.addEventListener("resize", this.changeOrientation.bind(this), false);
             this.game.scale.onOrientationChange.add(this.changeOrientation, this);
             // Загрузка прелоадера
@@ -30,9 +31,9 @@ var Game;
         };
         Boot.prototype.changeOrientation = function () {
             Game.Config.changeScale(this.game);
-            //PlayerConfig.globalEvents.dispatch('changeOrientationAndResize');
-            var event = new Event('changeOrientationAndResize');
-            window.dispatchEvent(event);
+            Game.Config.globalEvents.dispatch('changeOrientationAndResize');
+            //let event = new Event('changeOrientationAndResize');
+            //window.dispatchEvent(event);
         };
         return Boot;
     }(Phaser.State));

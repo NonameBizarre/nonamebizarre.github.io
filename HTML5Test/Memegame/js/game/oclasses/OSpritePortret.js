@@ -15,7 +15,7 @@ var Game;
                 this.setBackGround(colorbg, alphabg);
             }
             this.changeOrientation();
-            PlayerConfig.globalEvents.on("changeOrientationAndResize", this.changeOrientation.bind(this), false);
+            Game.Config.globalEvents.on("changeOrientationAndResize", this.changeOrientation.bind(this), false);
         }
         OSpritePortret.prototype.setBackGround = function (color, alpha) {
             alpha = alpha ? alpha : 1;
@@ -34,12 +34,14 @@ var Game;
             this.changeOrientation();
         };
         OSpritePortret.prototype.changeOrientation = function () {
-            var scale = Game.Config.height / Game.Config.defaultHeight;
+            //let scale: number = Config.height / Config.defaultHeight;
+            var scale = Math.min(Game.Config.width / Game.Config.defaultWidth, Game.Config.height / Game.Config.defaultHeight);
             this.x = Game.Config.width * 0.5;
             this.y = Game.Config.height * 0.5;
             if (this._mask) {
                 this._mask.x = this.x;
                 this._mask.y = this.y;
+                this._mask.scale.x = this._mask.scale.y = scale;
             }
             this.scale.x = this.scale.y = scale;
         };

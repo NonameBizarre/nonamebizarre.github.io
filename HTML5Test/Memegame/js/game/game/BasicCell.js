@@ -23,9 +23,10 @@ var Game;
                 this.events.onInputDown.add(this.listener, this);
             }
         }
-        BasicCell.prototype.loadCurrentTexture = function (textureKey) {
+        BasicCell.prototype.loadCurrentTexture = function (textureKey, tintColor) {
             this._currentTextureKey = textureKey;
             this.loadTexture(this._currentTextureKey);
+            this.tint = Number(tintColor);
         };
         BasicCell.prototype.setDefoultVisible = function () {
             if (this.alpha != 0) {
@@ -35,8 +36,8 @@ var Game;
         BasicCell.prototype.goodOrederCall = function (currentCell, tableObject) {
             this.dropSelect();
             this.alpha = 1;
-            var aninObject = new Game.AnimationCell(this.game, this.x, this.y, this._GameElementContainer, this._currentTextureKey, tableObject, currentCell);
-            this.loadCurrentTexture('CellClean');
+            var aninObject = new Game.AnimationCell(this.game, this.x, this.y, this._GameElementContainer, this._currentTextureKey, tableObject, currentCell, this.tint);
+            this.loadCurrentTexture('CellClean', '0xffffff');
         };
         BasicCell.prototype.dropSelect = function () {
             if (this._isSelect) {
