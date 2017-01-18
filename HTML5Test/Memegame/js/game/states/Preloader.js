@@ -18,6 +18,10 @@ var Game;
             //this.game.load.image('CellClean', 'assets/CellClean.png');
             this.game.load.image('CellClean', 'assets/CellClean2.png');
             this.game.load.image('TableClean', 'assets/TableClean.png');
+            this.game.load.image('pauseMenu', 'assets/pauseMenu.png');
+            this.game.load.image('defouldButton', 'assets/defouldButton.png');
+            this.game.load.image('LineFromTimePlank', 'assets/LineFromTimePlank.png');
+            this.game.load.image('WholeTimePlank', 'assets/WholeTimePlank.png');
             //Игровые объекты
             /*
             this.game.load.image('CellHat', 'assets/CellHat.png');

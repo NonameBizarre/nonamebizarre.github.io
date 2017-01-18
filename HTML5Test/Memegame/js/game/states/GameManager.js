@@ -18,6 +18,7 @@ var Game;
             this._GameElementContainer.onMask();
             this._Conveyor = new Game.Сonveyor(this.game, -50, -50, this._GameElementContainer);
             this._Conveyor.setSpeed(1);
+            this._gamePauseActive = false;
             this._Table = [];
             this._Table.length = 4;
             this._tableIsDone = 0;
@@ -26,6 +27,7 @@ var Game;
             this._Table[1] = new Game.Table(this.game, 190, 195, this._GameElementContainer, this._Conveyor, this);
             this._Table[2] = new Game.Table(this.game, -190, 480, this._GameElementContainer, this._Conveyor, this);
             this._Table[3] = new Game.Table(this.game, 190, 480, this._GameElementContainer, this._Conveyor, this);
+            this._timePlank = new Game.TimePlank(this.game, 0, -560, this._GameElementContainer, this);
             this._currentObjectArray = [];
             this._currentColorArray = [];
             this._tempCompliteObjects = [];
@@ -162,8 +164,28 @@ var Game;
                 this._Table[i].setOrder(returnArray);
             }
         };
+        GameManager.prototype.goodPlayerCombo = function (comboLenght) {
+            this._timePlank.addTime(comboLenght);
+        };
+        GameManager.prototype.changePauseState = function (setPause) {
+            //this._gamePauseActive = setPause;
+            //this._timePlank.setPause(setPause); 
+            this.game.paused = setPause;
+            this.pauseMenuCreate();
+        };
+        GameManager.prototype.pauseUpdate = function () {
+            if (this._menuWindow.exists) {
+                this._menuWindow.game.tweens.update();
+            }
+        };
+        GameManager.prototype.pauseMenuCreate = function () {
+            this._menuWindow = new Game.MenuWindow(this.game, 0, 0 - Game.Config.defaultHeight / 2, this._GameElementContainer, this);
+        };
+        GameManager.prototype.gameOver = function () {
+        };
         GameManager.prototype.update = function () {
-            this._Conveyor.update();
+            if (!this._gamePauseActive)
+                this._Conveyor.update();
         };
         GameManager.prototype.render = function () {
         };

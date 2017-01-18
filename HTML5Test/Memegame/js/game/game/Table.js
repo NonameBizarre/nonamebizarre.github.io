@@ -118,6 +118,7 @@ var Game;
                     if (isGoodSelect) {
                         this._gameObjectConveyor.goodOrderSelect(selectedArray, goodOrderArray, this);
                         this._currentOrderLength -= goodOrderArray.length;
+                        this._manager.goodPlayerCombo(goodOrderArray.length);
                         if (this._currentOrderLength == 0) {
                             this._tableIsBlocked = true;
                             this.tweenOverlayTable(false);
