@@ -1034,12 +1034,145 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Banner;
 (function (Banner) {
+    var EnemyDragon = (function (_super) {
+        __extends(EnemyDragon, _super);
+        function EnemyDragon(game, x, y, parrent) {
+            _super.call(this, game, x, y, 'enemyDragon');
+            this.anchor.set(0.5, 0.5);
+            this._parrent = parrent;
+            //this._liveHPBar = this.game.add.sprite(120,-80,"fullLivePlank");
+            // this._liveHPBar.anchor.set(0.5);
+            //this.addChild(this._liveHPBar);       
+            this._defoldHPBarSprite = "fullLivePlank";
+            this._attackRound = 0;
+            this._iconOver = false;
+            this._hitAttack = false;
+            this._hirtEmitter = this.game.add.emitter(this.x - 40, this.y - 20, 40);
+            this._hirtEmitter.gravity = 0;
+            this._hirtEmitter.setAlpha(1, 0.5, 300);
+            this._hirtEmitter.setScale(1.2, 2.1, 1.2, 2.1, 300);
+            this._hirtEmitter.setXSpeed(-300, 300);
+            this._hirtEmitter.setYSpeed(-300, 300);
+            this._hirtEmitter.makeParticles(['fx_Fruit_B_5', 'fx_Fruit_B_4', 'fx_Fruit_B_3', 'fx_Fruit_B_2', 'fx_Fruit_B_1']);
+            this._hirtEmitter.start(false, 400, 5);
+            this._hirtEmitter.on = false;
+            this.addChild(this._hirtEmitter);
+            this._attackFireball = this.game.add.sprite(-200, 0, "fierballTest");
+            this._attackFireball.anchor.set(0.5);
+            this._attackFireball.alpha = 0;
+            this.addChild(this._attackFireball);
+        }
+        EnemyDragon.prototype.update = function () {
+            if (this._hitAttack) {
+                var min = -6;
+                var max = 6;
+                this.x += (Math.floor(Math.random() * (max - min + 1)) + min) * 2;
+                this.y += (Math.floor(Math.random() * (max - min + 1)) + min) / 2;
+            }
+        };
+        EnemyDragon.prototype.changeHPLiveSprite = function (overMode) {
+            if (this._attackRound == 0) {
+                if (overMode && !this._iconOver) {
+                    this._iconOver = true;
+                    this._parrent._enemyHPPlank.loadTexture("livePlank_firstAttOnEnemy");
+                }
+                else if (!overMode && this._iconOver) {
+                    this._iconOver = false;
+                    this._parrent._enemyHPPlank.loadTexture(this._defoldHPBarSprite);
+                }
+            }
+            else {
+                if (overMode && !this._iconOver) {
+                    this._iconOver = true;
+                    this._parrent._enemyHPPlank.loadTexture("livePlank_secondAttOnEnemy");
+                }
+                else if (!overMode && this._iconOver) {
+                    this._iconOver = false;
+                    this._parrent._enemyHPPlank.loadTexture(this._defoldHPBarSprite);
+                }
+            }
+        };
+        EnemyDragon.prototype.attackDragon = function () {
+            var _this = this;
+            if (this._attackRound == 0) {
+                this._attackRound += 1;
+                this._defoldHPBarSprite = "livePlank_firstAttOnEnemyTrue";
+                this._parrent._enemyHPPlank.loadTexture(this._defoldHPBarSprite);
+                this._parrent._enemyShoot.changeAttackSprite("normal");
+            }
+            else {
+                this._parrent._enemyHPPlank.alpha = 0;
+                this._parrent._enemyShoot.changeAttackSprite("strong");
+                this._attackRound += 1;
+            }
+            this._hitAttack = true;
+            this._hirtEmitter.on = true;
+            if (this._attackRound == 1) {
+                this.game.time.events.add(Phaser.Timer.SECOND * 0.3, this.setDefoultPos, this);
+                this.game.time.events.add(Phaser.Timer.SECOND * 0.1, function () { _this._hirtEmitter.on = false; }, this);
+                this.game.add.tween(this).to({ x: 70 }, 300, Phaser.Easing.Back.Out, true).onComplete.add(function () { _this.game.add.tween(_this).to({ x: 0 }, 200, Phaser.Easing.Back.Out, true); });
+            }
+            else if (this._attackRound == 2) {
+                this.game.time.events.add(Phaser.Timer.SECOND * 0.1, function () { _this._hirtEmitter.on = false; }, this);
+                this.game.add.tween(this).to({ x: 70 }, 300, Phaser.Easing.Back.Out, true).onComplete.add(function () { _this.game.add.tween(_this).to({ x: 0 }, 200, Phaser.Easing.Back.Out, true); });
+                this.game.time.events.add(Phaser.Timer.SECOND * 0.3, this.dieDragon, this);
+            }
+        };
+        EnemyDragon.prototype.dieDragon = function () {
+            this._hitAttack = false;
+            this.x = 0;
+            this.y = this.height / 2;
+            this.anchor.set(0.5, 1);
+            this.game.add.tween(this.scale).to({ x: 0, y: 0 }, 400, Phaser.Easing.Sinusoidal.Out, true, 500).onComplete.add(this.startEndGame, this);
+        };
+        EnemyDragon.prototype.startEndGame = function () {
+            this._parrent.startEndGame();
+        };
+        EnemyDragon.prototype.setDefoultPos = function () {
+            this._hitAttack = false;
+            this.x = 0;
+            this.y = 0;
+            this.game.time.events.add(Phaser.Timer.SECOND * 0.4, this.startAttack, this);
+            this._parrent.changeTurn("enemy");
+        };
+        EnemyDragon.prototype.startAttack = function () {
+            this._attackFireball.alpha = 1;
+            this.game.add.tween(this._attackFireball).to({ x: [this._attackFireball.x, this._attackFireball.x - 220, this._attackFireball.x - 420], y: [this._attackFireball.y, this._attackFireball.y - 60, this._attackFireball.y] }, 850, Phaser.Easing.Linear.None, true, 100).interpolation(function (v, k) { return Phaser.Math.catmullRomInterpolation(v, k); }).onComplete.add(this.fierballOnPlayerDragon, this);
+        };
+        EnemyDragon.prototype.fierballOnPlayerDragon = function () {
+            this._attackFireball.alpha = 0;
+            this._attackFireball.x = -200;
+            this._attackFireball.y = 0;
+            this._parrent.enemyAttacked();
+        };
+        return EnemyDragon;
+    })(Phaser.Sprite);
+    Banner.EnemyDragon = EnemyDragon;
+})(Banner || (Banner = {}));
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Banner;
+(function (Banner) {
     var HpPlank = (function (_super) {
         __extends(HpPlank, _super);
         function HpPlank(game, x, y) {
-            _super.call(this, game, x, y, 'livePlank_empty');
+            _super.call(this, game, x, y, 'fullLivePlank');
             this.anchor.set(0.5, 0.5);
         }
+        HpPlank.prototype.changeHPPlanckPlayer = function (plank_mode_round) {
+            switch (plank_mode_round) {
+                case 0:
+                    this.loadTexture("fullLivePlank");
+                    break;
+                case 1:
+                    this.loadTexture("livePlank_firstAttEnemyOnPlayerTrue");
+                    break;
+            }
+        };
         return HpPlank;
     })(Phaser.Sprite);
     Banner.HpPlank = HpPlank;
@@ -1054,12 +1187,14 @@ var Banner;
 (function (Banner) {
     var PlayerDragon = (function (_super) {
         __extends(PlayerDragon, _super);
-        function PlayerDragon(game, x, y) {
+        function PlayerDragon(game, x, y, currentEnDragon, parrent) {
             _super.call(this, game, x, y, 'testDragon');
             this.anchor.set(0.5, 0.5);
+            this._currentEnDragon = currentEnDragon;
             this._attackRound = 0;
             this._gameMode = "null";
             this._blockGame = false;
+            this._currentParrent = parrent;
             //this._attackPlank = new AttackButtons(this.game,220,0);  
             //this.addChild(this._attackPlank);
             // Вот тут панель для кнопок атаки
@@ -1093,12 +1228,31 @@ var Banner;
             this._progressAttackPanel.addChild(this._arrow);
             this._criticalAttack = false; // Если стрелка попала в ограничения
             this.game.input.onDown.add(this.onDownAttack, this);
+            this._perfectHintAttack = this.game.add.sprite(40, -95, "hit_string");
+            this._perfectHintAttack.anchor.set(0, 0.5);
+            this._perfectHintAttack.alpha = 0;
+            this._progressAttackPanel.addChild(this._perfectHintAttack);
             this._attackHelper = this.game.add.sprite(214, -29, "testArm");
             this._attackHelper.anchor.set(0.5);
             this._attackHelper.scale.set(1.8);
             this._attackHelper.alpha = 0;
             this.addChild(this._attackHelper);
             this._attackHelperActive = true;
+            //this._liveHPBar = this.game.add.sprite(-120,-80,"fullLivePlank");
+            //this._liveHPBar.anchor.set(0.5);
+            //this.addChild(this._liveHPBar);
+            this._attackFireball = this.game.add.sprite(200, 0, "fierballTest");
+            this._attackFireball.anchor.set(0.5);
+            this._attackFireball.alpha = 0;
+            this.addChild(this._attackFireball);
+            this._fierballEmitter = this.game.add.emitter(this.x, this.y, 20);
+            this._fierballEmitter.gravity = -200;
+            this._fierballEmitter.setAlpha(1, 0, 700);
+            this._fierballEmitter.setScale(0.8, 0, 0.8, 0, 700);
+            this._fierballEmitter.makeParticles('fierballSmokeTest');
+            this._fierballEmitter.start(false, 700, 20);
+            this._fierballEmitter.on = false;
+            this.addChild(this._fierballEmitter);
             //Рука-помощник
             //Курсор нажимает на кнопку: x: 214, y:-29
             //Зелёные области
@@ -1110,6 +1264,18 @@ var Banner;
             //Верхняя граница -0.3045979556594794
             this.changeGameMode("attackBtnPanel");
         }
+        /*
+        public changeHPPlanck(){
+            switch(this._attackRound){
+                case 0:
+                    this._liveHPBar.loadTexture("fullLivePlank");
+                    break;
+                case 1:
+                    this._liveHPBar.loadTexture("livePlank_firstAttEnemyOnPlayerTrue");
+                    break;
+            }
+        }
+        */
         PlayerDragon.prototype.update = function () {
             switch (this._gameMode) {
                 case "progressAtackPanel":
@@ -1125,6 +1291,15 @@ var Banner;
                         this._arrow.rotation = Math.sin(this._arg += 0.03) * 0.45 - 0.07;
                     }
                     break;
+                case "attackBtnPanel":
+                    this._btnOne.update();
+                    this._btnTwo.update();
+                    this._btnThree.update();
+                    break;
+            }
+            if (this._attackFireball.alpha == 1) {
+                this._fierballEmitter.emitX = this._attackFireball.x;
+                this._fierballEmitter.emitY = this._attackFireball.y;
             }
         };
         PlayerDragon.prototype.onDownAttack = function () {
@@ -1133,15 +1308,27 @@ var Banner;
                     case 0:
                         if (this._arrow.rotation >= -0.3381627507134902 && this._arrow.rotation <= -0.060284060923254223) {
                             this._criticalAttack = true; // попали в зелёную!
+                            this._perfectHintAttack.loadTexture("perfect_string");
+                        }
+                        else {
+                            this._perfectHintAttack.loadTexture("hit_string");
                         }
                         break;
                     case 1:
                         if (this._arrow.rotation >= -0.3045979556594794 && this._arrow.rotation <= -0.18063722692808337) {
                             this._criticalAttack = true; // попали в зелёную!
+                            this._perfectHintAttack.loadTexture("perfect_string");
+                        }
+                        else {
+                            this._perfectHintAttack.loadTexture("hit_string");
                         }
                         break;
                 }
+                //this._perfectHintAttack.y = this._arrow.y
+                this._perfectHintAttack.alpha = 1;
                 this.preEndTweenProgressPanel();
+                this.fierballAtackStart();
+                this._blockGame = true;
             }
         };
         PlayerDragon.prototype.refreshAttackButton = function (btn) {
@@ -1170,19 +1357,24 @@ var Banner;
                     this._gameMode = "attackBtnPanel";
                     this._blockGame = true;
                     this.startTweenAttackPanel();
+                    //this.game.time.events.add(Phaser.Timer.SECOND * 0.3, this._currentParrent.changeTurn,null,"player");
+                    this._currentParrent.changeTurn("player");
                     break;
                 case "progressAtackPanel":
                     this._gameMode = "progressAtackPanel";
                     this._blockGame = true;
                     this.hideAttackButons();
+                    this._currentParrent.hideTrunUI();
                     console.log(this._progressAttackPanel.alpha);
                     this.startTweenProgressPanel();
                     break;
                 case "enemyAttack":
                     this._gameMode = "enemyAttack";
                     this._blockGame = true;
-                    console.log("ВрагАтакует!");
-                    this.changeGameMode("attackBtnPanel");
+                    this._currentEnDragon.attackDragon();
+                    //console.log("ВрагАтакует!");
+                    //this.changeGameMode("attackBtnPanel")
+                    //this.changeHPPlanck();
                     break;
             }
         };
@@ -1200,7 +1392,28 @@ var Banner;
             this._btnOne.enabled = true;
             this._btnTwo.enabled = true;
             this._btnThree.enabled = true;
-            this.showArmHelper();
+            this.game.time.events.add(Phaser.Timer.SECOND * 0.5, this.showArmHelper, this);
+            //this.showArmHelper();
+        };
+        //Твины для атаки
+        PlayerDragon.prototype.fierballAtackStart = function () {
+            this._fierballEmitter.on = true;
+            this._attackFireball.alpha = 1;
+            this.game.add.tween(this._attackFireball).to({ x: [this._attackFireball.x, this._attackFireball.x + 220, this._attackFireball.x + 420], y: [this._attackFireball.y, this._attackFireball.y - 60, this._attackFireball.y] }, 850, Phaser.Easing.Linear.None, true, 100).interpolation(function (v, k) { return Phaser.Math.catmullRomInterpolation(v, k); }).onComplete.add(this.fierballOnEnemyDragon, this);
+        };
+        PlayerDragon.prototype.fierballOnEnemyDragon = function () {
+            this._fierballEmitter.on = false;
+            this._attackFireball.alpha = 0;
+            this._attackFireball.x = 200;
+            this._attackFireball.y = 0;
+            this.changeGameMode("enemyAttack");
+        };
+        PlayerDragon.prototype.enemyIsAttacked = function () {
+            //this.changeGameMode("attackBtnPanel")
+            //this.changeHPPlanck();
+            this._currentParrent._playerShoot.changeAttackSprite("fireball");
+            this._currentParrent._playerHPPlank.changeHPPlanckPlayer(1);
+            this.game.time.events.add(Phaser.Timer.SECOND * 0.3, this.changeGameMode, this, 'attackBtnPanel');
         };
         // Анимация для руки-помощника
         PlayerDragon.prototype.showArmHelper = function () {
@@ -1211,13 +1424,13 @@ var Banner;
         };
         PlayerDragon.prototype.startMoveArmHelper = function () {
             if (this._attackHelperActive) {
-                this.game.add.tween(this._attackHelper).to({ x: [this._attackHelper.x, this._attackHelper.x + 320, this._attackHelper.x + 520], y: [this._attackHelper.y, this._attackHelper.y - 60, this._attackHelper.y] }, 850, Phaser.Easing.Linear.None, true, 100).interpolation(function (v, k) { return Phaser.Math.catmullRomInterpolation(v, k); }).onComplete.add(this.endMoveArmHepler, this);
+                this.game.add.tween(this._attackHelper).to({ x: [this._attackHelper.x, this._attackHelper.x + 220, this._attackHelper.x + 420], y: [this._attackHelper.y, this._attackHelper.y - 60, this._attackHelper.y] }, 850, Phaser.Easing.Linear.None, true, 100).interpolation(function (v, k) { return Phaser.Math.catmullRomInterpolation(v, k); }).onComplete.add(this.endMoveArmHepler, this);
                 this._tween = this.game.add.tween(this._attackHelper).to({ alpha: 0 }, 200, Phaser.Easing.Sinusoidal.Out, true, 750);
             }
         };
         PlayerDragon.prototype.endMoveArmHepler = function () {
             if (this._attackHelperActive) {
-                this._tween = this.game.add.tween(this._attackHelper).to({ alpha: 0 }, 50, Phaser.Easing.Sinusoidal.Out, true, 550);
+                this._tween = this.game.add.tween(this._attackHelper).to({ alpha: 0 }, 50, Phaser.Easing.Sinusoidal.Out, true, 750);
                 this._tween.onComplete.add(this.showArmHelper, this);
                 this._attackHelper.x = 214;
                 this._attackHelper.y = -29;
@@ -1234,10 +1447,10 @@ var Banner;
             this._blockGame = true;
             var curDellay;
             if (this._criticalAttack) {
-                curDellay = 200;
+                curDellay = 300;
             }
             else {
-                curDellay = 0;
+                curDellay = 300;
             }
             this.game.add.tween(this._progressAttackPanel.scale).to({ x: 1.5, y: 1.5 }, 640, Phaser.Easing.Sinusoidal.Out, true, curDellay).onComplete.add(this.endTweenProgressPanel, this);
             this.game.add.tween(this._progressAttackPanel).to({ alpha: 0 }, 630, Phaser.Easing.Sinusoidal.Out, true, curDellay);
@@ -1248,11 +1461,11 @@ var Banner;
             this._progressAttackPanel.visible = false;
             this._progressAttackPanel.scale.set(1);
             this._progressAttackPanel.alpha = 1;
+            this._perfectHintAttack.alpha = 0;
             this._criticalAttack = false;
             this._progressAttackPanel.loadTexture("attackPlank_phase2");
             this._attackRound += 1;
             this._arg = 0;
-            this.changeGameMode("enemyAttack");
         };
         return PlayerDragon;
     })(Phaser.Sprite);
@@ -1260,7 +1473,6 @@ var Banner;
     // классы которые нахуй никому не нужны, потому мы их просто набрасываем вниз и не экспортим
     var VAttackBut = (function (_super) {
         __extends(VAttackBut, _super);
-        //private _parEmitter: any;
         function VAttackBut(game, x, y, iconPic, dragon) {
             if (iconPic === void 0) { iconPic = "attackIcon1"; }
             _super.call(this, game, x, y);
@@ -1270,10 +1482,17 @@ var Banner;
             this._bg.alpha = 0;
             this._icon = game.add.image(0, 0, iconPic);
             this._icon.anchor.set(0.5, 0.5);
-            //this._parEmitter = this.game.add.emitter(this._icon.x,this._icon.y,20);
-            //this._parEmitter.gravity = 200;
-            //this._parEmitter.makeParticles('fx_sparks2');
-            //this.addChild(this._parEmitter);
+            //this._icon.blendMode = PIXI.blendModes.HARD_LIGHT;
+            this._parEmitter = this.game.add.emitter(this._icon.x, this._icon.y, 20);
+            this._parEmitter.gravity = 200;
+            this._parEmitter.setAlpha(1, 0, 700);
+            this._parEmitter.setScale(0.8, 0, 0.8, 0, 700);
+            this._parEmitter.makeParticles('fx_sparks2');
+            this._parEmitter.start(false, 700, 20);
+            this._parEmitter.on = false;
+            //this._parEmitter.
+            //Phaser.Color. this._parEmitter
+            this.addChild(this._parEmitter);
             this.enabled = true;
             this._icon.events.onInputOver.add(this.over, this);
             this._icon.events.onInputOut.add(this.out, this);
@@ -1294,18 +1513,26 @@ var Banner;
             this._bg.alpha = 1;
             this._dragon.refreshAttackButton(this);
         };
-        VAttackBut.prototype.checkHit = function (x) {
-            return x > Banner.Config.width * 0.6;
+        VAttackBut.prototype.checkHit = function (x, y) {
+            //return x > Config.width * 0.6; //this._currentEnDragon
+            if (this._dragon._currentEnDragon.getBounds().contains(x, y)) {
+                return true;
+            }
+            else {
+                return false;
+            }
         };
         VAttackBut.prototype.dragUpdate = function (sprite, pointer, dragX, dragY, snapPoin) {
             // Тут мы подсвечиваем атаку, если это необходимо. Можешь поменять на хитбокс врага
-            if (this.checkHit(pointer.x)) {
+            if (this.checkHit(pointer.x, pointer.y)) {
                 this._icon.alpha = 0.5;
                 this._icon.scale.set(1.3);
+                this._dragon._currentEnDragon.changeHPLiveSprite(true);
             }
             else {
                 this._icon.alpha = 1;
                 this._icon.scale.set(0.9);
+                this._dragon._currentEnDragon.changeHPLiveSprite(false);
             }
             //this._parEmitter.x = this._icon.x;
             //this._parEmitter.y = this._icon.y;                
@@ -1321,8 +1548,18 @@ var Banner;
             this._icon.alpha = 1;
             this._icon.scale.set(1.0);
             this._bg.alpha = 0;
-            if (this.checkHit(pointer.x)) {
+            this._parEmitter.on = false;
+            if (this.checkHit(pointer.x, pointer.y)) {
                 this._dragon.changeGameMode("progressAtackPanel");
+            }
+        };
+        VAttackBut.prototype.update = function () {
+            if (this._bg.alpha == 1) {
+                this._parEmitter.emitX = this._icon.x;
+                this._parEmitter.emitY = this._icon.y;
+                if (!this._parEmitter.on) {
+                    this._parEmitter.on = true;
+                }
             }
         };
         Object.defineProperty(VAttackBut.prototype, "enabled", {
@@ -1340,6 +1577,190 @@ var Banner;
         });
         return VAttackBut;
     })(Phaser.Sprite);
+})(Banner || (Banner = {}));
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Banner;
+(function (Banner) {
+    var UIAttackSprite = (function (_super) {
+        __extends(UIAttackSprite, _super);
+        function UIAttackSprite(game, x, y, parrent) {
+            _super.call(this, game, x, y, 'normAttack_string');
+            this.anchor.set(0.5, 0.5);
+            this.alpha = 0;
+            this._startX = x;
+            this._startY = y;
+            //this.changeAttackSprite("strong");
+        }
+        UIAttackSprite.prototype.changeAttackSprite = function (mode) {
+            switch (mode) {
+                case "normal":
+                    this.loadTexture("normAttack_string");
+                    break;
+                case "strong":
+                    this.loadTexture("strAttack_string");
+                    break;
+                case "fireball":
+                    this.loadTexture("fireball_string");
+                    break;
+            }
+            this.turnSpriteMove();
+        };
+        UIAttackSprite.prototype.turnSpriteMove = function () {
+            this._tween = this.game.add.tween(this).to({ alpha: 1 }, 200, Phaser.Easing.Sinusoidal.In, true);
+            this._tween.onComplete.add(this.hideUITurn, this);
+        };
+        UIAttackSprite.prototype.hideUITurn = function () {
+            this.game.tweens.remove(this._tween);
+            this._tween = this.game.add.tween(this).to({ alpha: 0 }, 1000, Phaser.Easing.Sinusoidal.Out, true, 1000);
+            this._tween.onComplete.add(this.refreshUIString, this);
+            this.game.add.tween(this).to({ y: this.y - 40 }, 2000, Phaser.Easing.Sinusoidal.Out, true);
+        };
+        UIAttackSprite.prototype.refreshUIString = function () {
+            this.game.tweens.remove(this._tween);
+            this.alpha = 0;
+            this.y = this._startY;
+        };
+        return UIAttackSprite;
+    })(Phaser.Sprite);
+    Banner.UIAttackSprite = UIAttackSprite;
+})(Banner || (Banner = {}));
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Banner;
+(function (Banner) {
+    var UIString = (function (_super) {
+        __extends(UIString, _super);
+        function UIString(game, x, y, parrent) {
+            _super.call(this, game, x, y, '');
+            this.anchor.set(0.5, 0.5);
+            this._firstShow = true;
+            this._brake = false;
+            this._currentDragonTurnSprite = this.game.add.sprite(0, 100, "youTurn");
+            this._currentDragonTurnSprite.anchor.set(0.5);
+            this._currentDragonTurnSprite.alpha = 0;
+            this._currentDragonTurnSprite.scale.set(1.4);
+            this.addChild(this._currentDragonTurnSprite);
+        }
+        UIString.prototype.changeUITurnAndStart = function (mode) {
+            this._brake = true;
+            this.refreshUIString();
+            if (mode == 'player') {
+                this._currentDragonTurnSprite.loadTexture("youTurn");
+            }
+            else {
+                this._currentDragonTurnSprite.loadTexture("opTurn");
+            }
+        };
+        UIString.prototype.turnStringMove = function () {
+            //this._currentDragonTurnSprite
+            //this.game.add.tween(this._currentDragonTurnSprite).to({y:this._currentDragonTurnSprite.y},300,Phaser.Easing.Elastic.In,true);
+            if (!this._brake) {
+                this._currentDragonTurnSprite.alpha = 1;
+                this._tween = this.game.add.tween(this._currentDragonTurnSprite.scale).to({ x: 1, y: 1 }, 200, Phaser.Easing.Sinusoidal.Out, true);
+                this._tween.onComplete.add(this.turnStringYoYo, this);
+            }
+        };
+        UIString.prototype.turnStringYoYo = function () {
+            if (!this._brake) {
+                this._tween = this.game.add.tween(this._currentDragonTurnSprite.scale).to({ x: 0.9, y: 0.9 }, 400, Phaser.Easing.Sinusoidal.Out, true, 0, 5, true);
+                if (this._firstShow) {
+                    this._tween.onComplete.add(this.turnStringYoYo, this);
+                }
+                else {
+                    this._tween.onComplete.add(this.hideUITurn, this);
+                }
+            }
+        };
+        UIString.prototype.hideUITurn = function () {
+            this.game.tweens.remove(this._tween);
+            this._tween = this.game.add.tween(this._currentDragonTurnSprite).to({ alpha: 0 }, 200, Phaser.Easing.Sinusoidal.Out, true);
+        };
+        UIString.prototype.refreshUIString = function () {
+            this._currentDragonTurnSprite.alpha = 0;
+            this._currentDragonTurnSprite.scale.set(1.4);
+            this.game.tweens.remove(this._tween);
+            this._brake = false;
+            this.turnStringMove();
+        };
+        return UIString;
+    })(Phaser.Sprite);
+    Banner.UIString = UIString;
+})(Banner || (Banner = {}));
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Banner;
+(function (Banner) {
+    var UITurnString = (function (_super) {
+        __extends(UITurnString, _super);
+        function UITurnString(game, x, y, parrent) {
+            _super.call(this, game, x, y, '');
+            this.anchor.set(0.5, 0.5);
+            this._firstShow = true;
+            this._brake = false;
+            this._currentDragonTurnSprite = this.game.add.sprite(0, 100, "youTurn");
+            this._currentDragonTurnSprite.anchor.set(0.5);
+            this._currentDragonTurnSprite.alpha = 0;
+            this._currentDragonTurnSprite.scale.set(1.4);
+            this.addChild(this._currentDragonTurnSprite);
+        }
+        UITurnString.prototype.changeUITurnAndStart = function (mode) {
+            this._brake = true;
+            this.refreshUIString();
+            if (mode == 'player') {
+                this._currentDragonTurnSprite.loadTexture("youTurn");
+            }
+            else {
+                this._currentDragonTurnSprite.loadTexture("opTurn");
+            }
+        };
+        UITurnString.prototype.turnStringMove = function () {
+            //this._currentDragonTurnSprite
+            //this.game.add.tween(this._currentDragonTurnSprite).to({y:this._currentDragonTurnSprite.y},300,Phaser.Easing.Elastic.In,true);
+            if (!this._brake) {
+                this._currentDragonTurnSprite.alpha = 1;
+                this._tween = this.game.add.tween(this._currentDragonTurnSprite.scale).to({ x: 1, y: 1 }, 200, Phaser.Easing.Sinusoidal.Out, true);
+                this._tween.onComplete.add(this.turnStringYoYo, this);
+            }
+        };
+        UITurnString.prototype.turnStringYoYo = function () {
+            if (!this._brake) {
+                this._tween = this.game.add.tween(this._currentDragonTurnSprite.scale).to({ x: 0.9, y: 0.9 }, 400, Phaser.Easing.Sinusoidal.Out, true, 0, 5, true);
+                this._tween.onComplete.add(this.turnStringYoYo, this);
+            }
+        };
+        UITurnString.prototype.hideUITurn = function () {
+            this.game.tweens.remove(this._tween);
+            this._tween = this.game.add.tween(this._currentDragonTurnSprite).to({ alpha: 0 }, 200, Phaser.Easing.Sinusoidal.Out, true);
+        };
+        UITurnString.prototype.refreshUIString = function () {
+            this._currentDragonTurnSprite.alpha = 0;
+            this._currentDragonTurnSprite.scale.set(1.4);
+            this.game.tweens.remove(this._tween);
+            this._brake = false;
+            if (!this._firstShow) {
+                this.turnStringMove();
+            }
+            else {
+                this.game.time.events.add(Phaser.Timer.SECOND * 0.3, this.turnStringMove, this);
+                this._firstShow = false;
+            }
+        };
+        return UITurnString;
+    })(Phaser.Sprite);
+    Banner.UITurnString = UITurnString;
 })(Banner || (Banner = {}));
 
 var __extends = (this && this.__extends) || function (d, b) {
@@ -2111,17 +2532,87 @@ var Banner;
         Body.prototype.create = function () {
             this._bg = this.game.add.sprite(Banner.Config.halfWidth, Banner.Config.halfHeight, "bg");
             this._bg.anchor.set(0.5, 0.5);
+            this._uiTurnStringSprite = new Banner.UITurnString(this.game, 0, 0, this);
+            //Драконы
+            this._ospriteEnemyDragon = new Banner.OSprite(this.game, 80, 300);
+            this._ospriteEnemyDragon.setLandscapePosition(425, 560, true);
             this._ospritePlayerDragon = new Banner.OSprite(this.game, 80, 300);
-            this._ospritePlayerDragon.setLandscapePosition(100, 560, true);
-            this._dragon = new Banner.PlayerDragon(this.game, 0, 0);
+            this._ospritePlayerDragon.setLandscapePosition(90, 560, true);
+            this._enemyDragon = new Banner.EnemyDragon(this.game, 0, 0, this);
+            this._ospriteEnemyDragon.addChild(this._enemyDragon);
+            this._dragon = new Banner.PlayerDragon(this.game, 0, 0, this._enemyDragon, this);
             this._ospritePlayerDragon.addChild(this._dragon);
+            //HP Bar's
+            this._ospriteDragonHPBar = new Banner.OSprite(this.game, 80, 300);
+            this._ospriteDragonHPBar.setLandscapePosition(30, 422, true);
+            this._ospriteEnemyHPBar = new Banner.OSprite(this.game, 80, 300);
+            this._ospriteEnemyHPBar.setLandscapePosition(485, 422, true);
+            this._playerHPPlank = new Banner.HpPlank(this.game, 0, 0);
+            this._ospriteDragonHPBar.addChild(this._playerHPPlank);
+            this._enemyHPPlank = new Banner.HpPlank(this.game, 0, 0);
+            this._ospriteEnemyHPBar.addChild(this._enemyHPPlank);
+            //Надпись текущего хода
+            this._ospriteUITurn = new Banner.OSprite(this.game, 80, 300);
+            this._ospriteUITurn.setLandscapePosition(256, 0, true);
+            this._ospriteUITurn.addChild(this._uiTurnStringSprite);
+            //Надписи с атакой
+            this._ospriteEnemyAttack = new Banner.OSprite(this.game, 80, 300);
+            this._ospriteEnemyAttack.setLandscapePosition(370, 520, true);
+            this._ospriteEnemyAttack.scale.set(0.8);
+            this._ospritePlayerAttack = new Banner.OSprite(this.game, 80, 300);
+            this._ospritePlayerAttack.setLandscapePosition(170, 520, true);
+            this._ospritePlayerAttack.scale.set(0.8);
+            this._playerShoot = new Banner.UIAttackSprite(this.game, 0, 0, this);
+            this._enemyShoot = new Banner.UIAttackSprite(this.game, 0, 0, this);
+            this._ospriteEnemyAttack.addChild(this._enemyShoot);
+            this._ospritePlayerAttack.addChild(this._playerShoot);
+            /****/ //--// \****\ 
+            //this._dragon.scale.set(0.8);          
             //this._attackPlank = new attackPlank(this.game,-120,40);            
             //this._bg.addChild(this._attackPlank);
+            //this._uiStringSprite.changeUITurnAndStart("player");
+            this._ospriteFinalBack = new Banner.OSprite(this.game, Banner.Config.halfWidth, Banner.Config.halfHeight);
+            this._ospriteFinalBack.setLandscapePosition(Banner.Config.halfHeight - 32, Banner.Config.halfWidth, true);
+            this._blackBack = this.game.add.graphics(0, 0);
+            this._blackBack.beginFill(0x000000, 1);
+            this._blackBack.alpha = 0;
+            this._blackBack.drawRect(-Banner.Config.halfWidth, -Banner.Config.halfHeight, Banner.Config.width, Banner.Config.height); //хмм, не до конца растягивается (в частности айпэды)
+            this._blackBack.endFill();
+            this._ospriteFinalBack.addChild(this._blackBack);
+            this._gameLogo = this.game.add.sprite(0, -100, "mainLogo");
+            this._gameLogo.anchor.set(0.5);
+            this._gameLogo.scale.set(1.4);
+            this._gameLogo.alpha = 0;
+            this._ospriteFinalBack.addChild(this._gameLogo);
+            this._gameBtn = this.game.add.sprite(0, 180, "downloadNow");
+            this._gameBtn.anchor.set(0.5);
+            this._gameBtn.scale.set(0);
+            this._gameBtn.alpha = 0;
+            this._ospriteFinalBack.addChild(this._gameBtn);
+            //this.game.time.events.add(Phaser.Timer.SECOND * 2.4, this.startEndGame, this);  
+            //this.startEndGame();
             Banner.Config.globalEvents.on("changeOrientationAndResize", this.changeOrientation.bind(this), false);
             this.changeOrientation();
         };
+        Body.prototype.startEndGame = function () {
+            this.game.add.tween(this._blackBack).to({ alpha: 0.7 }, 300, Phaser.Easing.Sinusoidal.In, true);
+            this.game.add.tween(this._gameLogo).to({ alpha: 1 }, 400, Phaser.Easing.Sinusoidal.In, true, 100);
+            this.game.add.tween(this._gameLogo.scale).to({ x: 1, y: 1 }, 400, Phaser.Easing.Back.Out, true, 100);
+            this.game.add.tween(this._gameBtn).to({ alpha: 1 }, 400, Phaser.Easing.Sinusoidal.In, true, 200);
+            this.game.add.tween(this._gameBtn.scale).to({ x: 1, y: 1 }, 400, Phaser.Easing.Elastic.Out, true, 200);
+        };
+        Body.prototype.enemyAttacked = function () {
+            this._dragon.enemyIsAttacked();
+        };
         Body.prototype.update = function () {
             this._dragon.update();
+            this._enemyDragon.update();
+        };
+        Body.prototype.changeTurn = function (mode) {
+            this._uiTurnStringSprite.changeUITurnAndStart(mode);
+        };
+        Body.prototype.hideTrunUI = function () {
+            this._uiTurnStringSprite.hideUITurn();
         };
         Body.prototype.changeOrientation = function () {
             var maxScale = Math.max(Banner.Config.width / Banner.Config.defaultWidth, Banner.Config.height / Banner.Config.defaultHeight);
@@ -2150,22 +2641,42 @@ var Banner;
             this.game.load.image("bg", "assets/bg.png");
             //Графон. Полутестовый.
             this.game.load.image("testDragon", "assets/testDragon.png");
+            this.game.load.image("enemyDragon", "assets/enemyDragon.png");
             this.game.load.image("testArm", "assets/testArm.png");
             this.game.load.image("testArrow", "assets/testArrow.png");
             this.game.load.image("attackIcon1", "assets/attackIcon1.png");
             this.game.load.image("attackIcon2", "assets/attackIcon2.png");
             this.game.load.image("attackIcon3", "assets/attackIcon3.png");
             this.game.load.image("attackIconEmpty", "assets/attackIconEmpty.png");
-            this.game.load.image("attackPlaneIcon", "assets/attackPlaneIcon.png");
+            //this.game.load.image("attackPlaneIcon", "assets/attackPlaneIcon.png")
             this.game.load.image("attackPlank_phase1", "assets/attackPlank_phase1.png");
             this.game.load.image("attackPlank_phase2", "assets/attackPlank_phase2.png");
             //this.game.load.image("attackPlank_empty", "assets/attackPlank_empty.png")
             // this.game.load.image("attackPlank_green", "assets/attackPlank_green.png")
             //this.game.load.image("attackPlank_red", "assets/attackPlank_red.png")fx_sparks2
             this.game.load.image("fx_sparks2", "assets/fx_sparks2.png");
-            this.game.load.image("livePlank_empty", "assets/livePlank_empty.png");
-            this.game.load.image("livePlank_ginger", "assets/livePlank_ginger.png");
-            this.game.load.image("livePlank_green", "assets/livePlank_green.png");
+            this.game.load.image("fierballSmokeTest", "assets/fierballSmokeTest.png");
+            this.game.load.image("fx_Fruit_B_1", "assets/fx_Fruit_B_1.png");
+            this.game.load.image("fx_Fruit_B_2", "assets/fx_Fruit_B_2.png");
+            this.game.load.image("fx_Fruit_B_3", "assets/fx_Fruit_B_3.png");
+            this.game.load.image("fx_Fruit_B_4", "assets/fx_Fruit_B_4.png");
+            this.game.load.image("fx_Fruit_B_5", "assets/fx_Fruit_B_5.png");
+            this.game.load.image("fierballTest", "assets/fierballTest.png");
+            this.game.load.image("fullLivePlank", "assets/fullLivePlank.png");
+            this.game.load.image("livePlank_firstAttOnEnemy", "assets/livePlank_firstAttOnEnemy.png");
+            this.game.load.image("livePlank_firstAttOnEnemyTrue", "assets/livePlank_firstAttOnEnemyTrue.png");
+            this.game.load.image("livePlank_secondAttOnEnemy", "assets/livePlank_secondAttOnEnemy.png");
+            this.game.load.image("livePlank_firstAttEnemyOnPlayerTrue", "assets/livePlank_firstAttEnemyOnPlayerTrue.png");
+            //НАДПИСИ
+            this.game.load.image("hit_string", "assets/hit_string.png");
+            this.game.load.image("perfect_string", "assets/perfect_string.png");
+            this.game.load.image("opTurn", "assets/opTurn.png");
+            this.game.load.image("youTurn", "assets/youTurn.png");
+            this.game.load.image("normAttack_string", "assets/normAttack_string.png");
+            this.game.load.image("strAttack_string", "assets/strAttack_string.png");
+            this.game.load.image("fireball_string", "assets/fireball_string.png");
+            this.game.load.image("mainLogo", "assets/mainLogo.png");
+            this.game.load.image("downloadNow", "assets/downloadNow.png");
         };
         Boot.prototype.create = function () {
             this.input.maxPointers = 1;
