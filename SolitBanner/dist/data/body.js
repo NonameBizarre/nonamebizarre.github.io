@@ -520,7 +520,7 @@ var TBanner;
                     }
                     //Спускаем активную карту вниз, когда счётчик доходит до нуля.
                     this._currentCardName = cardName;
-                    this.gameScoreText.text = this._currentCardName;
+                    this.gameScoreText.text += '/' + this._currentCardName;
                 }
                 return true;
             }
