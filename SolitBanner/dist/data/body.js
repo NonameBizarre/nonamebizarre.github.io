@@ -49,6 +49,8 @@ var TBanner;
         };
         BaseCard.prototype.rightCard = function () {
             //3) Даём очки
+            this.inputEnabled = false;
+            this.events.onInputUp.remove(this.onTap, this);
             this._cardScoreText = new TBanner.CardScore(this.game, this.world.x, this.world.y, 100);
             if (window["SOUND"]) {
                 var audio = this.game.add.audioSprite('sfx');
@@ -218,10 +220,6 @@ var TBanner;
             this._cardHolderOverlay.addChild(this._arrowCantMove);
             this._arrowCantMove.anchor.set(0.5);
             this._arrowCantMove.alpha = 0;
-            this.gameScoreText = this.game.add.bitmapText(x, y, 'font2', '100', 35);
-            this.gameScoreText.anchor.set(0.5);
-            this.gameScoreText.tint = 0xfefcc7;
-            this._cardHolderBucket.addChild(this.gameScoreText);
             this.activeInput(true);
             this._cardHolderCards.events.onInputUp.add(this.inputUp, this);
             this._cardHolderBucket.events.onInputUp.add(this.inputUp, this);
@@ -520,7 +518,6 @@ var TBanner;
                     }
                     //Спускаем активную карту вниз, когда счётчик доходит до нуля.
                     this._currentCardName = cardName;
-                    this.gameScoreText.text += '/' + this._currentCardName;
                 }
                 return true;
             }
