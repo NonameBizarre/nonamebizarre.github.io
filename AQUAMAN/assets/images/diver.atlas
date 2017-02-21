@@ -1,0 +1,55 @@
+
+diver.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Arm2
+  rotate: false
+  xy: 183, 47
+  size: 54, 38
+  orig: 54, 38
+  offset: 0, 0
+  index: -1
+Leg1
+  rotate: false
+  xy: 80, 2
+  size: 54, 48
+  orig: 54, 48
+  offset: 0, 0
+  index: -1
+Leg2
+  rotate: false
+  xy: 127, 66
+  size: 54, 58
+  orig: 54, 58
+  offset: 0, 0
+  index: -1
+arm_body
+  rotate: true
+  xy: 136, 4
+  size: 60, 38
+  orig: 60, 38
+  offset: 0, 0
+  index: -1
+bag_empty
+  rotate: true
+  xy: 183, 87
+  size: 37, 67
+  orig: 37, 67
+  offset: 0, 0
+  index: -1
+bag_full
+  rotate: false
+  xy: 80, 52
+  size: 45, 72
+  orig: 45, 72
+  offset: 0, 0
+  index: -1
+body_body
+  rotate: false
+  xy: 2, 2
+  size: 76, 122
+  orig: 76, 122
+  offset: 0, 0
+  index: -1
