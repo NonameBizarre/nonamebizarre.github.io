@@ -1,0 +1,55 @@
+{
+  "resources": [
+    "mygameaudio.ogg",
+    "mygameaudio.m4a",
+    "mygameaudio.mp3",
+    "mygameaudio.ac3"
+  ],
+  "spritemap": {
+    "attack": {
+      "start": 0,
+      "end": 0.34793650793650793,
+      "loop": false
+    },
+    "bubble1": {
+      "start": 2,
+      "end": 2.3657142857142857,
+      "loop": false
+    },
+    "bubble2": {
+      "start": 4,
+      "end": 4.313469387755102,
+      "loop": false
+    },
+    "bubble3": {
+      "start": 6,
+      "end": 6.28734693877551,
+      "loop": false
+    },
+    "bubbles": {
+      "start": 8,
+      "end": 9.097142857142858,
+      "loop": false
+    },
+    "coinGet": {
+      "start": 11,
+      "end": 11.731428571428571,
+      "loop": false
+    },
+    "din": {
+      "start": 13,
+      "end": 14.071020408163266,
+      "loop": false
+    },
+    "outOfWhater": {
+      "start": 16,
+      "end": 16.67918367346939,
+      "loop": false
+    },
+    "swimming": {
+      "start": 18,
+      "end": 19.175510204081633,
+      "loop": false
+    }
+  }
+}

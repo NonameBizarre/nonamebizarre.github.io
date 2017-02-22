@@ -1,0 +1,51 @@
+﻿{"frames": {
+
+"fishAsses0000":
+{
+	"frame": {"x":159,"y":61,"w":27,"h":41},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":8,"y":8,"w":35,"h":57},
+	"sourceSize": {"w":35,"h":57}
+},
+"fishAsses0001":
+{
+	"frame": {"x":159,"y":2,"w":34,"h":57},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":57},
+	"sourceSize": {"w":35,"h":57}
+},
+"fishes0000":
+{
+	"frame": {"x":2,"y":164,"w":164,"h":67},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":6,"w":164,"h":79},
+	"sourceSize": {"w":164,"h":79}
+},
+"fishes0001":
+{
+	"frame": {"x":2,"y":2,"w":155,"h":79},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":164,"h":79},
+	"sourceSize": {"w":164,"h":79}
+},
+"fishes0002":
+{
+	"frame": {"x":2,"y":83,"w":155,"h":79},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":164,"h":79},
+	"sourceSize": {"w":164,"h":79}
+}},
+"meta": {
+	"app": "Adobe Animate",
+	"version": "15.1.0.210",
+	"image": "fishes.png",
+	"format": "RGBA8888",
+	"size": {"w":256,"h":256},
+	"scale": "1"
+}
+}

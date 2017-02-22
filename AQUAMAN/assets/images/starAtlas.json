@@ -1,0 +1,75 @@
+﻿{"frames": {
+
+"StarPoint_10000":
+{
+	"frame": {"x":1,"y":147,"w":62,"h":59},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":8,"y":7,"w":78,"h":73},
+	"sourceSize": {"w":78,"h":73}
+},
+"StarPoint_10001":
+{
+	"frame": {"x":1,"y":147,"w":62,"h":59},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":8,"y":7,"w":78,"h":73},
+	"sourceSize": {"w":78,"h":73}
+},
+"StarPoint_10002":
+{
+	"frame": {"x":78,"y":75,"w":74,"h":69},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":2,"w":78,"h":73},
+	"sourceSize": {"w":78,"h":73}
+},
+"StarPoint_10003":
+{
+	"frame": {"x":1,"y":1,"w":78,"h":73},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":78,"h":73},
+	"sourceSize": {"w":78,"h":73}
+},
+"StarPoint_10004":
+{
+	"frame": {"x":1,"y":75,"w":76,"h":71},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":78,"h":73},
+	"sourceSize": {"w":78,"h":73}
+},
+"StarPoint_10005":
+{
+	"frame": {"x":80,"y":1,"w":71,"h":67},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":3,"w":78,"h":73},
+	"sourceSize": {"w":78,"h":73}
+},
+"StarPoint_10006":
+{
+	"frame": {"x":152,"y":1,"w":66,"h":63},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":6,"w":78,"h":73},
+	"sourceSize": {"w":78,"h":73}
+},
+"StarPoint_10007":
+{
+	"frame": {"x":78,"y":145,"w":66,"h":62},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":7,"w":78,"h":73},
+	"sourceSize": {"w":78,"h":73}
+}},
+"meta": {
+	"app": "Adobe Animate",
+	"version": "15.1.1.13",
+	"image": "starAtlas.png",
+	"format": "RGBA8888",
+	"size": {"w":256,"h":256},
+	"scale": "1"
+}
+}
