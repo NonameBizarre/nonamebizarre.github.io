@@ -956,6 +956,7 @@ var TProject;
             this._gameUi.y = this.game.height - 200;
             this.game.stage.addChild(this._gameUi);
             this._container.addChild(this._bg);
+            this.globalGameStateCount();
             this._renderTexture.renderXY(this._container, 0, 0, true);
             PhaserInput.onKeyboardOpen.add(function () {
                 _this.game.paused = true;
@@ -1016,7 +1017,6 @@ var TProject;
             }
         };
         Body.prototype.startGameCameraAnimation = function () {
-            var _this = this;
             //Корректная анимация на начало игры
             this._myCamera.set(-960, -530, 1.7);
             this._myCamera.add(-140, -590, 1.9, 1700)
@@ -1028,10 +1028,9 @@ var TProject;
             //this._myCamera.add(-300, -500, 1.45, 1000)
             //.add(-600, -400, 1.45, 1500, 500);
             this._myCamera.start();
-            setTimeout(function () {
-                TProject._.log("Show UI");
-                _this.globalGameStateCount();
-            }, 5650);
+            //setTimeout(()=> {
+            //     _.log("Show UI");
+            //this.globalGameStateCount()}, 5650);
             /*
 
              this.game.time.events.add(5650, ()=> {
