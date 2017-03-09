@@ -1,0 +1,59 @@
+﻿{"frames": {
+
+"Ball instance 10000":
+{
+	"frame": {"x":1,"y":1,"w":95,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":93},
+	"sourceSize": {"w":96,"h":93}
+},
+"Ball instance 10001":
+{
+	"frame": {"x":97,"y":1,"w":95,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":96,"h":93},
+	"sourceSize": {"w":96,"h":93}
+},
+"Ball instance 10002":
+{
+	"frame": {"x":1,"y":189,"w":94,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":96,"h":93},
+	"sourceSize": {"w":96,"h":93}
+},
+"Ball instance 10003":
+{
+	"frame": {"x":1,"y":95,"w":95,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":93},
+	"sourceSize": {"w":96,"h":93}
+},
+"Ball instance 10004":
+{
+	"frame": {"x":97,"y":95,"w":95,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":93},
+	"sourceSize": {"w":96,"h":93}
+},
+"Ball instance 10005":
+{
+	"frame": {"x":96,"y":189,"w":94,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":96,"h":93},
+	"sourceSize": {"w":96,"h":93}
+}},
+"meta": {
+	"app": "Adobe Animate",
+	"version": "15.1.0.210",
+	"image": "ballBtn.png",
+	"format": "RGBA8888",
+	"size": {"w":256,"h":512},
+	"scale": "1"
+}
+}

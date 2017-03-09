@@ -1,0 +1,69 @@
+
+ballAndGoalie.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Ball
+  rotate: false
+  xy: 881, 157
+  size: 96, 94
+  orig: 96, 94
+  offset: 0, 0
+  index: -1
+BallShadow
+  rotate: false
+  xy: 763, 113
+  size: 22, 4
+  orig: 22, 4
+  offset: 0, 0
+  index: -1
+Goalie
+  rotate: true
+  xy: 530, 101
+  size: 150, 231
+  orig: 150, 231
+  offset: 0, 0
+  index: -1
+GoalieEyes
+  rotate: true
+  xy: 979, 189
+  size: 62, 38
+  orig: 62, 38
+  offset: 0, 0
+  index: -1
+GoalieLeft
+  rotate: false
+  xy: 2, 62
+  size: 268, 189
+  orig: 268, 189
+  offset: 0, 0
+  index: -1
+GoalieLeftShadow
+  rotate: false
+  xy: 530, 57
+  size: 123, 42
+  orig: 123, 42
+  offset: 0, 0
+  index: -1
+GoalieRight
+  rotate: false
+  xy: 272, 51
+  size: 256, 200
+  orig: 256, 200
+  offset: 0, 0
+  index: -1
+GoalieRightShadow
+  rotate: false
+  xy: 2, 2
+  size: 126, 58
+  orig: 126, 58
+  offset: 0, 0
+  index: -1
+GoalieShadow
+  rotate: false
+  xy: 763, 119
+  size: 116, 132
+  orig: 116, 132
+  offset: 0, 0
+  index: -1

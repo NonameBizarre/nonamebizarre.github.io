@@ -1,0 +1,293 @@
+
+footballer.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BCloseEye
+  rotate: true
+  xy: 310, 9
+  size: 78, 48
+  orig: 78, 48
+  offset: 0, 0
+  index: -1
+BHappyHead.png
+  rotate: false
+  xy: 366, 172
+  size: 104, 82
+  orig: 104, 82
+  offset: 0, 0
+  index: -1
+BHead
+  rotate: false
+  xy: 905, 175
+  size: 101, 79
+  orig: 101, 79
+  offset: 0, 0
+  index: -1
+BInterestingHead
+  rotate: false
+  xy: 472, 172
+  size: 104, 82
+  orig: 104, 82
+  offset: 0, 0
+  index: -1
+BLeftArmPall
+  rotate: false
+  xy: 360, 31
+  size: 30, 26
+  orig: 30, 26
+  offset: 0, 0
+  index: -1
+BLeftArmUp
+  rotate: false
+  xy: 675, 153
+  size: 17, 26
+  orig: 17, 26
+  offset: 0, 0
+  index: -1
+BLeftTin
+  rotate: false
+  xy: 524, 116
+  size: 62, 54
+  orig: 62, 54
+  offset: 0, 0
+  index: -1
+BLeftUpLeg
+  rotate: true
+  xy: 1008, 231
+  size: 23, 11
+  orig: 23, 11
+  offset: 0, 0
+  index: -1
+BRightArmPall
+  rotate: true
+  xy: 443, 103
+  size: 29, 36
+  orig: 29, 36
+  offset: 0, 0
+  index: -1
+BRightArmUp
+  rotate: true
+  xy: 386, 2
+  size: 27, 7
+  orig: 27, 7
+  offset: 0, 0
+  index: -1
+BRightTin
+  rotate: false
+  xy: 366, 150
+  size: 82, 20
+  orig: 82, 20
+  offset: 0, 0
+  index: -1
+BRightUpLeg
+  rotate: false
+  xy: 1008, 185
+  size: 13, 20
+  orig: 13, 20
+  offset: 0, 0
+  index: -1
+BSadHead
+  rotate: false
+  xy: 247, 158
+  size: 117, 96
+  orig: 117, 96
+  offset: 0, 0
+  index: -1
+CloseEye
+  rotate: false
+  xy: 361, 106
+  size: 80, 42
+  orig: 80, 42
+  offset: 0, 0
+  index: -1
+HappyHead
+  rotate: false
+  xy: 254, 89
+  size: 105, 67
+  orig: 105, 67
+  offset: 0, 0
+  index: -1
+Head
+  rotate: false
+  xy: 801, 182
+  size: 102, 72
+  orig: 102, 72
+  offset: 0, 0
+  index: -1
+InterestingHead
+  rotate: false
+  xy: 689, 183
+  size: 110, 71
+  orig: 110, 71
+  offset: 0, 0
+  index: -1
+LeftArmPall
+  rotate: false
+  xy: 401, 78
+  size: 30, 26
+  orig: 30, 26
+  offset: 0, 0
+  index: -1
+LeftArmUp
+  rotate: true
+  xy: 721, 164
+  size: 17, 26
+  orig: 17, 26
+  offset: 0, 0
+  index: -1
+LeftMidLeg
+  rotate: true
+  xy: 1008, 207
+  size: 22, 10
+  orig: 22, 10
+  offset: 0, 0
+  index: -1
+LeftPen
+  rotate: false
+  xy: 694, 158
+  size: 25, 23
+  orig: 25, 23
+  offset: 0, 0
+  index: -1
+LeftTin
+  rotate: false
+  xy: 588, 119
+  size: 61, 60
+  orig: 61, 60
+  offset: 0, 0
+  index: -1
+LeftUpLeg
+  rotate: false
+  xy: 442, 91
+  size: 17, 10
+  orig: 17, 10
+  offset: 0, 0
+  index: -1
+LeftUpUpArm
+  rotate: true
+  xy: 360, 2
+  size: 27, 24
+  orig: 27, 24
+  offset: 0, 0
+  index: -1
+LefttDownLeg
+  rotate: true
+  xy: 361, 85
+  size: 19, 38
+  orig: 19, 38
+  offset: 0, 0
+  index: -1
+MainBody
+  rotate: false
+  xy: 651, 126
+  size: 22, 53
+  orig: 22, 53
+  offset: 0, 0
+  index: -1
+RCloseEye
+  rotate: true
+  xy: 254, 2
+  size: 85, 54
+  orig: 85, 54
+  offset: 0, 0
+  index: -1
+RHappyHead
+  rotate: false
+  xy: 132, 123
+  size: 113, 131
+  orig: 113, 131
+  offset: 0, 0
+  index: -1
+RHead
+  rotate: true
+  xy: 132, 2
+  size: 119, 120
+  orig: 119, 120
+  offset: 0, 0
+  index: -1
+RInterestingHead
+  rotate: false
+  xy: 2, 130
+  size: 128, 124
+  orig: 128, 124
+  offset: 0, 0
+  index: -1
+RSadHead
+  rotate: false
+  xy: 2, 4
+  size: 128, 124
+  orig: 128, 124
+  offset: 0, 0
+  index: -1
+RightArmPall
+  rotate: true
+  xy: 481, 103
+  size: 29, 36
+  orig: 29, 36
+  offset: 0, 0
+  index: -1
+RightArmUp
+  rotate: false
+  xy: 749, 174
+  size: 27, 7
+  orig: 27, 7
+  offset: 0, 0
+  index: -1
+RightDownLeg
+  rotate: false
+  xy: 360, 59
+  size: 38, 24
+  orig: 38, 24
+  offset: 0, 0
+  index: -1
+RightMidLeg
+  rotate: false
+  xy: 433, 86
+  size: 7, 18
+  orig: 7, 18
+  offset: 0, 0
+  index: -1
+RightPen
+  rotate: true
+  xy: 400, 54
+  size: 22, 28
+  orig: 22, 28
+  offset: 0, 0
+  index: -1
+RightTin
+  rotate: false
+  xy: 450, 134
+  size: 72, 36
+  orig: 72, 36
+  offset: 0, 0
+  index: -1
+RightUpLeg
+  rotate: true
+  xy: 749, 161
+  size: 11, 20
+  orig: 11, 20
+  offset: 0, 0
+  index: -1
+RightUpUpArm
+  rotate: false
+  xy: 675, 131
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: -1
+SadHead
+  rotate: false
+  xy: 578, 181
+  size: 109, 73
+  orig: 109, 73
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: true
+  xy: 247, 134
+  size: 22, 4
+  orig: 22, 4
+  offset: 0, 0
+  index: -1
