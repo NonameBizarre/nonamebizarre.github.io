@@ -1046,7 +1046,7 @@ var TProject;
                 this._finalText.fill = "#008000";
                 this.showTextInMinimap();
                 this.game.time.events.add(1500, function () {
-                    _this._winLosePanel.show(true);
+                    _this.gameOver(true);
                 });
             }
             else {
@@ -1059,7 +1059,7 @@ var TProject;
                 this.showTextInMinimap();
                 this._gameUi.showCorrectAnswer();
                 this.game.time.events.add(1500, function () {
-                    _this._winLosePanel.show(false);
+                    _this.gameOver(false);
                 });
             }
         };
@@ -1100,8 +1100,15 @@ var TProject;
             this.startGameCameraAnimation();
             this._finalText.text = "";
         };
-        Body.prototype.gameOver = function () {
+        Body.prototype.gameOver = function (win) {
             // this.gotoFunction("WIN_FUNC" / "LOSE_FUNC");
+            this._winLosePanel.show(win);
+            if (win) {
+                this.gotoFunction("WIN_FUNC");
+            }
+            else {
+                this.gotoFunction("LOSE_FUNC");
+            }
         };
         Body.prototype.update = function () {
             if (this._passUpdateCounte <= 0) {
