@@ -28,24 +28,24 @@ var TProject;
             this._body = body;
             this._currentAnimationString = "";
             this._playerChoise = "";
-            this._backNet = this.game.add.sprite(635, -160, "Net0");
+            this._backNet = this.game.add.sprite(635, -160, "mainAsset", "Net0");
             this._backNet.anchor.set(0.5);
-            this._freeGate = this.game.add.sprite(632, -157, "FreeGate");
+            this._freeGate = this.game.add.sprite(632, -157, "mainAsset", "FreeGate");
             this._freeGate.anchor.set(0.5);
-            this._freeNet = this.game.add.sprite(692, -145, "FreeNet");
+            this._freeNet = this.game.add.sprite(692, -145, "mainAsset", "FreeNet");
             this._freeNet.anchor.set(0.5);
             this.addChild(this._backNet);
             this.addChild(this._freeGate);
             this.addChild(this._freeNet);
-            this._target1 = this.game.add.sprite(557, -132, "target1");
-            this._target2 = this.game.add.sprite(560, -199, "target2");
-            this._target3 = this.game.add.sprite(632, -193, "target3");
-            this._target4 = this.game.add.sprite(628, -116, "target4");
+            this._target1 = this.game.add.sprite(557, -132, "mainAsset", "target1");
+            this._target2 = this.game.add.sprite(560, -199, "mainAsset", "target2");
+            this._target3 = this.game.add.sprite(632, -193, "mainAsset", "target3");
+            this._target4 = this.game.add.sprite(628, -116, "mainAsset", "target4");
             this.setTargets(this._target1, "LeftDown");
             this.setTargets(this._target2, "LeftUp");
             this.setTargets(this._target3, "RightUp");
             this.setTargets(this._target4, "RightDown");
-            this._arrow = this.game.add.sprite(600, -332, "arrow");
+            this._arrow = this.game.add.sprite(600, -332, "mainAsset", "arrow");
             this._arrow.anchor.set(0.5);
             this._arrow.alpha = 0;
             this.addChild(this._arrow);
@@ -118,7 +118,7 @@ var TProject;
         };
         BallAndGoal.prototype.eventManager = function (eventName, stringName) {
             if (eventName == "ballInNet") {
-                this._backNet.loadTexture(stringName);
+                this._backNet.loadTexture("mainAsset", stringName);
                 if (stringName == "Net0") {
                     this._backNet.position.set(635, -160);
                 }
@@ -126,7 +126,10 @@ var TProject;
                     this._backNet.position.set(645, -160);
                 }
             }
-            TProject._.log(stringName);
+            else if (eventName == "ballInGoalie") {
+                TProject.Config.audio.play("goalCeep", 0.6);
+            }
+            //_.log(stringName);
             if (stringName == "coverUpGate3") {
                 this.setChildIndex(this._spine, this.children.length - 8);
             }
@@ -135,11 +138,22 @@ var TProject;
             }
         };
         BallAndGoal.prototype.refresh = function () {
-            this._backNet.loadTexture("Net0");
+            this._backNet.loadTexture("mainAsset", "Net0");
             this._currentAnimation = this._spine.setAnimationByName(0, "idle", true);
+            this._spine.setToSetupPose();
             this._currentAnimation.timeScale = 0.6;
             this._arrow.alpha = 0;
             this._arrow.position.set(600, -332);
+            this._backNet.position.set(635, -160);
+            this.setChildIndex(this._backNet, this.children.length - 1);
+            this.setChildIndex(this._freeGate, this.children.length - 1);
+            this.setChildIndex(this._freeNet, this.children.length - 1);
+            this.setChildIndex(this._target1, this.children.length - 1);
+            this.setChildIndex(this._target2, this.children.length - 1);
+            this.setChildIndex(this._target3, this.children.length - 1);
+            this.setChildIndex(this._target4, this.children.length - 1);
+            this.setChildIndex(this._arrow, this.children.length - 1);
+            this.setChildIndex(this._spine, this.children.length - 1);
         };
         BallAndGoal.prototype.update = function () {
         };
@@ -215,12 +229,12 @@ var TProject;
             this._question = this.game.add.text(-59.0, 110.0, "948 - 45", { font: "Poppins", fontSize: "30px", fontWeight: "bold", fill: "#000000" });
             this._question.anchor.set(0.5);
             this.addChild(this._question);
-            this._txtCorrectAnswer = this.game.add.text(-59.0, 85.0, "CORRECT\nANSWER:", { font: "Poppins", fontSize: "25px", fontWeight: "normal", fill: "#ffffff" });
+            this._txtCorrectAnswer = this.game.add.text(-9.0, 105.0, "CORRECT\nANSWER:", { font: "Poppins", fontSize: "25px", fontWeight: "normal", fill: "#ffffff" });
             this._txtCorrectAnswer.anchor.set(0.5);
             this._txtCorrectAnswer.align = "center";
             this._txtCorrectAnswer.lineSpacing = -8;
             this.addChild(this._txtCorrectAnswer);
-            this._txtCorrectAnswerValue = this.game.add.text(-59.0, 135.0, "948 - 45", { font: "Poppins", fontSize: "30px", fontWeight: "bold", fill: "#000000" });
+            this._txtCorrectAnswerValue = this.game.add.text(-9.0, 165.0, "948 - 45", { font: "Poppins", fontSize: "30px", fontWeight: "bold", fill: "#000000" });
             this._txtCorrectAnswerValue.anchor.set(0.5);
             this.addChild(this._txtCorrectAnswerValue);
             this.init();
@@ -247,6 +261,7 @@ var TProject;
             this._txtCorrectAnswerValue.visible = true;
         };
         GameUI.prototype.show = function () {
+            var _this = this;
             this._txtAnswer.visible = true;
             this._txtSolve.visible = true;
             this._question.visible = true;
@@ -257,9 +272,9 @@ var TProject;
             this._submitBtn.inputEnabled = true;
             this.answer.inputEnabled = true;
             this.answer.blockInput = false;
-            //if (this.game.device.desktop) {
-            this.answer.startFocus();
-            //} else {
+            if (this.game.device.desktop) {
+                this.answer.startFocus();
+            } // else {
             //    this.answer.endFocus();
             //}
             // let input: any = document.createElement('input'); 
@@ -268,12 +283,15 @@ var TProject;
             // //_.log();
             // this.game.parent.ap
             //.appendChild(input); 
+            this.answer.events.onInputDown.add(function () {
+                _this.game.input.enabled = false;
+            }, this);
         };
         GameUI.prototype.setQuestion = function (text) {
             this._question.text = text;
         };
         GameUI.prototype.setCorrectAnswer = function (text) {
-            this._txtCorrectAnswerValue.text = text;
+            this._txtCorrectAnswerValue.text = this._question.text + " = " + text;
         };
         GameUI.prototype.attack = function () {
             var _this = this;
@@ -783,7 +801,7 @@ var TProject;
             var _this = this;
             _super.call(this, game, 0, 0);
             this.anchor.set(0.5);
-            this._backRect = this.game.add.graphics(0, 60);
+            this._backRect = this.game.add.graphics(0, 0);
             this._backRect.beginFill(0x000000, 1);
             this._backRect.alpha = 0;
             this._backRect.drawRect(-this.game.world.width / 2, -this.game.world.height / 2, this.game.world.width, this.game.world.height);
@@ -855,13 +873,13 @@ var TProject;
                 _this._heroAnimation = _this._spine.setAnimationByName(0, "Idle", true);
                 _this._spine.x = 130;
                 _this._spine.y = 5;
-                setTimeout(function () {
+                _this.game.time.events.add(900, function () {
                     var currentAnim = (!playerWin ? "Lose_" + _this._charSkin : "Win2");
-                    TProject._.log(currentAnim);
+                    //_.log(currentAnim);
                     _this._heroAnimation = _this._spine.setAnimationByName(0, currentAnim, true); //Lose_3
                     _this._heroAnimation.timeScale = 0.8;
                     _this._body.globalGameStateCount();
-                }, 900);
+                }, _this);
             };
         };
         Сharacter.prototype.eventManager = function (eventName) {
@@ -871,6 +889,7 @@ var TProject;
         };
         Сharacter.prototype.refresh = function () {
             this._heroAnimation = this._spine.setAnimationByName(0, "Idle", true);
+            this._spine.setToSetupPose();
             this._spine.x = 0;
             this._spine.y = 0;
         };
@@ -945,7 +964,12 @@ var TProject;
             this._scoreboar.mask = this._mask;
             this._scoreboar.addChild(this._minimap);
             this.game.stage.addChild(this._scoreboar);
-            this._scoreboardBorder = new Phaser.Image(this.game, this.game.world.centerX - 10.0, 0.0, "scoreboard");
+            this._finalText = this.game.add.text(this.game.world.centerX - 10.0, 40.0, "", //MISS! GOAL!
+            { font: "Poppins", fontSize: "80px", fontWeight: "bold", fill: "#008000" }); //#ff0000 #008000
+            this._finalText.anchor.set(0.5);
+            this._finalText.align = "left";
+            this.game.stage.addChild(this._finalText);
+            this._scoreboardBorder = new Phaser.Image(this.game, this.game.world.centerX - 10.0, 0.0, "mainAsset", "scoreboard");
             this._scoreboardBorder.anchor.set(0.5, 0.0);
             this.game.stage.addChild(this._scoreboardBorder);
             // this.testText();
@@ -956,18 +980,15 @@ var TProject;
             this._gameUi.y = this.game.height - 200;
             this.game.stage.addChild(this._gameUi);
             this._container.addChild(this._bg);
-            this.globalGameStateCount();
             this._renderTexture.renderXY(this._container, 0, 0, true);
             PhaserInput.onKeyboardOpen.add(function () {
-                _this.game.paused = true;
-                _this._gameUi.test(false);
-                _this.game.input.enabled = false;
             });
             PhaserInput.onKeyboardClose.add(function () {
-                _this.game.paused = false;
-                _this._gameUi.test(true);
-                _this.game.input.enabled = true;
             });
+            this._winLosePanel = new TProject.WinLosePanel(this.game, this);
+            this._winLosePanel.x = this.game.world.centerX;
+            this._winLosePanel.y = 255;
+            this.game.stage.addChild(this._winLosePanel);
         };
         Body.prototype.globalGameStateCount = function (value) {
             if (value === void 0) { value = undefined; }
@@ -981,10 +1002,10 @@ var TProject;
                     break;
                 case 2:
                     //Игрок ответил. Показываем таргеты для нападения. Тут-же и передаём Bad или Good приписку
+                    TProject.Config.audio.play("buttonDown", 0.6);
                     var rightAns = this._parsingText.getCurrentA();
                     this._playerWin = ("" + value == "" + rightAns ? true : false);
-                    if (!this._playerWin)
-                        this._gameUi.setCorrectAnswer(rightAns);
+                    this._gameUi.setCorrectAnswer(rightAns);
                     this._ballAndGoal.showTargets(this._playerWin);
                     break;
                 case 3:
@@ -995,6 +1016,12 @@ var TProject;
                     break;
                 case 4:
                     this._ballAndGoal.kickAnimationStart();
+                    TProject.Config.audio.play("ballPunch", 0.6);
+                    if (this._playerWin) {
+                        this.game.time.events.add(100, function () {
+                            TProject.Config.audio.play("GoodPunch", 0.6);
+                        });
+                    }
                     //Персонаж передал команду запустить анимацию мяча 
                     break;
                 case 5:
@@ -1005,18 +1032,39 @@ var TProject;
             }
         };
         Body.prototype.cameraFocusOnBall = function () {
+            this._myCamera.stop();
             this._myCamera.set(-240, -580, 1.6); //- удар по мячу
         };
         Body.prototype.cameraFocusEndGame = function () {
+            var _this = this;
             if (this._playerWin) {
+                this._myCamera.stop();
+                TProject.Config.audio.play("Good", 0.6);
                 this._myCamera.set(-330, -580, 1.9); //- выигрыш
+                this._finalString = "GOAL!";
+                this._finalTextCount = this._finalString.length;
+                this._finalText.fill = "#008000";
+                this.showTextInMinimap();
+                this.game.time.events.add(1500, function () {
+                    _this._winLosePanel.show(true);
+                });
             }
             else {
+                this._myCamera.stop();
+                TProject.Config.audio.play("Bad", 0.6);
                 this._myCamera.set(-330, -620, 1.9); //- проигрыш
+                this._finalString = "MISS!";
+                this._finalTextCount = this._finalString.length;
+                this._finalText.fill = "#ff0000";
+                this.showTextInMinimap();
                 this._gameUi.showCorrectAnswer();
+                this.game.time.events.add(1500, function () {
+                    _this._winLosePanel.show(false);
+                });
             }
         };
         Body.prototype.startGameCameraAnimation = function () {
+            var _this = this;
             //Корректная анимация на начало игры
             this._myCamera.set(-960, -530, 1.7);
             this._myCamera.add(-140, -590, 1.9, 1700)
@@ -1028,19 +1076,29 @@ var TProject;
             //this._myCamera.add(-300, -500, 1.45, 1000)
             //.add(-600, -400, 1.45, 1500, 500);
             this._myCamera.start();
-            //setTimeout(()=> {
-            //     _.log("Show UI");
-            //this.globalGameStateCount()}, 5650);
-            /*
-
-             this.game.time.events.add(5650, ()=> {
-                 _.log("Show UI");
-                 this.globalGameStateCount();
-             });
-
-             */
+            this.game.time.events.add(5650, function () {
+                //_.log("Show UI");
+                _this.globalGameStateCount();
+            });
+        };
+        Body.prototype.showTextInMinimap = function () {
+            var _this = this;
+            if (this._finalTextCount > 0) {
+                this._finalText.text = this._finalText.text + this._finalString.charAt(this._finalText.text.length);
+                this._finalTextCount--;
+                //MISS! GOAL!
+                //fill  #ff0000 #008000
+                this.game.time.events.add(300, function () {
+                    _this.showTextInMinimap();
+                });
+            }
         };
         Body.prototype.replay = function () {
+            this._character.refresh();
+            this._ballAndGoal.refresh();
+            this._gameUi.init();
+            this.startGameCameraAnimation();
+            this._finalText.text = "";
         };
         Body.prototype.gameOver = function () {
             // this.gotoFunction("WIN_FUNC" / "LOSE_FUNC");
@@ -1100,17 +1158,23 @@ var TProject;
             this.game.plugins.add(PhaserSpine.SpinePlugin);
             this.game.load.onFileComplete.add(this.loadingUpdate, this);
             this.game.load.atlas("ui", "assets/images/ui.png", "assets/images/ui.json");
+            this.game.load.atlas("mainAsset", "assets/images/mainAsset.png", "assets/images/mainAsset.json");
+            this.game.load.atlas("ballBtn", "assets/images/ballBtn.png", "assets/images/ballBtn.json");
             this.game.load.image("mainMenu", "assets/images/mainMenu.png");
             this.game.load.image("bg", "assets/images/bg.png");
+            /*
             this.game.load.image("scoreboard", "assets/images/scoreboard.png");
-            this.game.load.atlas("ballBtn", "assets/images/ballBtn.png", "assets/images/ballBtn.json");
+
             this.game.load.image("target1", "assets/images/target1.png");
             this.game.load.image("target2", "assets/images/target2.png");
             this.game.load.image("target3", "assets/images/target3.png");
             this.game.load.image("target4", "assets/images/target4.png");
+
             this.game.load.image("arrow", "assets/images/arrow.png");
+
             this.game.load.image("FreeGate", "assets/images/FreeGate.png");
             this.game.load.image("FreeNet", "assets/images/FreeNet.png");
+
             this.game.load.image("Net0", "assets/images/Net0.png");
             this.game.load.image("NetLeftDown", "assets/images/NetLeftDown.png");
             this.game.load.image("NetLeftUp1", "assets/images/NetLeftUp1.png");
@@ -1118,11 +1182,13 @@ var TProject;
             this.game.load.image("NetRightDown", "assets/images/NetRightDown.png");
             this.game.load.image("NetRightUp1", "assets/images/NetRightUp1.png");
             this.game.load.image("NetRightUp2", "assets/images/NetRightUp2.png");
+
+            */
             this.game.load.spine("footballer", "assets/images/footballer.json");
             this.game.load.spine("ballAndGoalie", "assets/images/ballAndGoalie.json");
             this.game.load.text('settings', 'assets/settings.txt');
             //Загружаем звуки
-            //this.game.load.audiosprite("sfx", ["assets/sounds/sfx.mp3","assets/sounds/sfx.ogg"], "assets/sounds/sfx.json");
+            this.game.load.audiosprite("sfx", ["assets/sounds/mygameaudio.mp3", "assets/sounds/mygameaudio.ogg"], "assets/sounds/mygameaudio.json");
         };
         Boot.prototype.create = function () {
             var _this = this;
@@ -1161,7 +1227,7 @@ var TProject;
                 text = this.game.add.text(-1000, -1000, ".  ", { font: "Poppins", fontSize: "28px", fontWeight: "normal", fill: "#00CC00" });
                 text.parent.removeChild(text);
                 text = null;
-                // Config.audio = this.game.add.audioSprite("sfx");
+                TProject.Config.audio = this.game.add.audioSprite("sfx");
                 if (window["SHOW_MENU"] == true) {
                     this.game.state.start("MainMenu", true);
                 }
