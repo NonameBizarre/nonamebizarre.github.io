@@ -549,7 +549,7 @@ var TProject;
             this._bikeWhaterEmitter.on = true;
             this._playerContainer.frameName = "waterBike_10002";
         };
-        Player.prototype.respavn = function () {
+        Player.prototype.respawn = function () {
             var _this = this;
             if (!this._gameOver) {
                 this.game.tweens.remove(this._inWhaterTween);
@@ -684,7 +684,7 @@ var TProject;
                         this._splashEmitter.start(true, 1500, null, 20);
                         this._currentGame.uiCanReduceLive();
                         this.game.time.events.add(1000, function () {
-                            _this.respavn();
+                            _this.respawn();
                         });
                     }
                 }
@@ -709,6 +709,7 @@ var TProject;
         __extends(Rock, _super);
         function Rock(game, x, y, scale) {
             _super.call(this, game, x, y);
+            this._inWater = false;
             this._sprite = this.game.add.sprite(0, 0);
             this._sprite.scale.set(scale);
             this.addChild(this._sprite);
@@ -716,16 +717,50 @@ var TProject;
             this._sprite.anchor.set(0.5);
             this.game.add.tween(this._sprite).to({ angle: -360 }, 1000, Phaser.Easing.Linear.None, true, 0, -1, false);
             this.game.physics.arcade.enable(this);
-            this.body.immovable = true;
+            this._bodyRad = 10;
+            this.body.setCircle(this._bodyRad * scale, -this._bodyRad * scale, -this._bodyRad * scale);
+            this._sprite.body.immovable = true;
             this.body.velocity.x = -5 * 60;
             this.body.velocity.y = 7 * 60;
+            this._emitters = this.game.add.emitter(0, 0, 40);
+            this._emitters.makeParticles("gameAsset", ["part_1", "part_2", "part_3", "part_4", "part_5", "part_6"]);
+            this._emitters.gravity = 775;
+            this._emitters.setAlpha(1, 0, 1200);
+            this._emitters.setXSpeed(-300, -50);
+            this._emitters.setYSpeed(-300, -355);
+            this.addChild(this._emitters);
+            this._emitters.width = 200;
+            this._emitters.height = 200;
         }
+        Rock.prototype.update = function () {
+            if (this.body.y >= 440 && !this._inWater) {
+                this._inWater = true;
+                this.startEmitters();
+                TProject._.log(this._emitters.worldPosition);
+                this.setSpeed(0, 200);
+            }
+        };
+        Rock.prototype.startEmitters = function () {
+            this._emitters.x = this.body.x;
+            this._emitters.y = this.body.y + 30;
+            this._emitters.on = true;
+            this._emitters.start(true, 1500, null, 20);
+        };
         Rock.prototype.setSpeed = function (vx, vy) {
             this.body.velocity.x = vx;
             this.body.velocity.y = vy;
         };
+        Rock.prototype.getSprite = function () {
+            return this._sprite;
+        };
+        Rock.prototype.getPosition = function () {
+            return this._sprite.worldPosition;
+        };
+        Rock.prototype.getHeight = function () {
+            return this._sprite.height;
+        };
         Rock.prototype.render = function () {
-            this.game.debug.body(this._sprite);
+            this.game.debug.body(this);
         };
         return Rock;
     })(Phaser.Sprite);
@@ -751,8 +786,8 @@ var TProject;
             this._sprite.body.immovable = true;
             if (type === "shark") {
                 this._sprite.loadTexture("enemyAsset", "shark");
-                this._sprite.body.setSize(240, 80, 5, 45);
-                this._sprite.body.velocity.x = -10 * 60;
+                this._sprite.body.setSize(240, 60, 5, 40);
+                this._sprite.body.velocity.x = -8 * 60;
                 this.game.add.tween(this._sprite).to({ y: this._sprite.y - 10 }, 500, Phaser.Easing.Sinusoidal.InOut, true, 0, -1, true);
             }
             else if (type === "buoy") {
@@ -760,11 +795,20 @@ var TProject;
                 this._sprite.animations.add("buoyAnim", Phaser.Animation.generateFrameNames("buoy_", 10001, 10096));
                 this._sprite.animations.play("buoyAnim", 24, true);
                 this._sprite.body.setSize(32, 80, 15, 15);
-                this._sprite.body.velocity.x = -8 * 60;
+                this._sprite.body.velocity.x = -6 * 60;
             }
         }
         WaterEnemy.prototype.setSpeed = function (v) {
             this.body.velocity.x = v;
+        };
+        WaterEnemy.prototype.getPosition = function () {
+            return this._sprite.worldPosition;
+        };
+        WaterEnemy.prototype.getWidth = function () {
+            return this._sprite.width;
+        };
+        WaterEnemy.prototype.getSprite = function () {
+            return this._sprite;
         };
         WaterEnemy.prototype.render = function () {
             this.game.debug.body(this._sprite);
@@ -866,6 +910,7 @@ var TProject;
         Boot.prototype.preload = function () {
             TProject._.log("Loading...");
             this.fontloading();
+            this.game.plugins.add(PhaserSpine.SpinePlugin);
             this.game.load.onFileComplete.add(this.loadingUpdate, this);
             this.game.load.atlas("ui", "assets/images/ui.png", "assets/images/ui.json");
             this.game.load.atlas("mobileButton", "assets/images/mobileButton.png", "assets/images/mobileButton.json");
@@ -876,6 +921,7 @@ var TProject;
             this.game.load.image("bg", "assets/images/gameBG.png");
             this.game.load.image("ground", "assets/images/ground.png");
             this.game.load.image("water", "assets/images/water.png");
+            this.game.load.spine("CutScene1", "assets/images/CutScene1.json");
             //Загружаем звуки
             //this.game.load.audiosprite("sfx", ["assets/sounds/sfx.mp3","assets/sounds/sfx.ogg"], "assets/sounds/sfx.json");
         };
@@ -953,7 +999,60 @@ var TProject;
             _super.apply(this, arguments);
         }
         CutsceneOne.prototype.create = function () {
-            this.game.state.start("GameOne", true); // сразу пиздуем на первую игру
+            //this.game.state.start("GameOne", true); // сразу пиздуем на первую игру
+            this._bg = this.game.add.sprite(0, 0, "bg");
+            this._maskSprite = this.game.add.sprite(0, 0);
+            var mask = this.game.add.graphics(0, 0);
+            mask.beginFill(0xffffff, 1);
+            mask.drawRect(40, 0, this.game.width - 60, this.game.height);
+            mask.endFill();
+            this._maskSprite.mask = mask;
+            this._spine = this.game.add.spine(this.game.world.width / 2, this.game.world.height / 2, "CutScene1");
+            this._sceneAnimation = this._spine.setAnimationByName(0, "idle", true);
+            this._sceneAnimation.timeScale = 0.8;
+            this._maskSprite.addChild(this._spine);
+            this._bg.inputEnabled = true;
+            this._bg.events.onInputDown.add(this.onDown, this);
+            this._splashEmitter = this.game.add.emitter(0, 0, 40);
+            this._splashEmitter.makeParticles("gameAsset", ["part_1", "part_2", "part_3", "part_4", "part_5", "part_6"]);
+            this._splashEmitter.gravity = 775;
+            this._splashEmitter.setAlpha(1, 0, 1200);
+            this._splashEmitter.setXSpeed(-300, 300);
+            this._splashEmitter.setYSpeed(-300, -355);
+            this._splashEmitter.minParticleScale = 2;
+            this._splashEmitter.maxParticleScale = 2;
+            this._splashEmitter.width = 100;
+            this._splashEmitter.height = 2;
+            this._maskSprite.addChild(this._splashEmitter);
+        };
+        CutsceneOne.prototype.onDown = function () {
+            var _this = this;
+            TProject._.log("Mouse Down");
+            this._sceneAnimation = this._spine.setAnimationByName(0, "action", false);
+            this._sceneAnimation.timeScale = 0.8;
+            this._sceneAnimation.onEvent = function (trackIndex, event) {
+                _this.eventManager(event.data.name);
+            };
+            this._sceneAnimation.onComplete = function () {
+                _this.game.state.start("GameOne", true);
+            };
+        };
+        CutsceneOne.prototype.eventManager = function (eventName) {
+            if (eventName == "DolphinHelp") {
+                TProject._.log("Play Dolphin Song");
+                this._splashEmitter.x = this.game.world.width / 2 - 200;
+                this._splashEmitter.y = this.game.world.height / 2 + 240;
+                this._splashEmitter.start(true, 1500, null, 20);
+            }
+            else if (eventName == "SquealOfBrakes") {
+                TProject._.log("Play Squeal Of Brakes");
+            }
+            else if (eventName == "WhaterSplash") {
+                TProject._.log("Play Whater Splash");
+                this._splashEmitter.x = this.game.world.width / 2 + 270;
+                this._splashEmitter.y = this.game.world.height / 2 + 240;
+                this._splashEmitter.start(true, 1500, null, 20);
+            }
         };
         CutsceneOne.prototype.update = function () {
         };
@@ -994,18 +1093,24 @@ var TProject;
         __extends(GameOne, _super);
         function GameOne() {
             _super.apply(this, arguments);
-            this._sTime = [1, 30, 33, 35, 39, 41];
-            this._bTime = [3, 6, 9, 12, 15, 15.2, 18, 18.2, 21, 22, 24, 26];
+            this._sTime = [29, 31, 34, 37, 39];
+            this._bTime = [2, 5, 8, 12, 14.5, 15.5, 18.5, 18.7, 22, 23, 25, 29, 35, 39]; //[3, 6, 9, 12, 15, 15.2, 18, 18.2, 21, 22, 24, 26];
             this._waterEnemies = [];
             this._rocks = [];
-            this._smallRockTime = [];
-            this._bigRockTime = [];
+            this._smallRockTime = [1];
+            this._bigRockTime = [2];
         }
         GameOne.prototype.create = function () {
             TProject._.log("Start game!");
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.game.time.advancedTiming = true;
             this._bg = this.game.add.sprite(0, 0, "bg");
+            this._maskSprite = this.game.add.sprite(0, 0);
+            var mask = this.game.add.graphics(0, 0);
+            mask.beginFill(0xffffff, 1);
+            mask.drawRect(40, 0, this.game.width - 60, this.game.height);
+            mask.endFill();
+            this._maskSprite.mask = mask;
             this._startGame = false;
             if (!this.game.device.desktop) {
                 this._water = this.game.add.tileSprite(0, this.game.height - 160, 1918, 45, "water");
@@ -1016,8 +1121,10 @@ var TProject;
                 this._water = this.game.add.tileSprite(0, this.game.height - 70, 1918, 45, "water");
             }
             this._player = new TProject.Player(this.game, this.game.world.width / 2, this.game.world.height / 2, true, this._water.y, this);
-            this._bg.addChild(this._player);
             this._gameUI = new TProject.GameUI(this.game);
+            this._bg.addChild(this._maskSprite);
+            this._maskSprite.addChild(this._water);
+            this._maskSprite.addChild(this._player);
             this.game.stage.addChild(this._gameUI);
             this.startDolphin();
         };
@@ -1026,14 +1133,14 @@ var TProject;
             this._dolphin = this.game.add.sprite(-60, this._water.y + 80, "playerAsset", "dolphin_10002");
             this._dolphin.anchor.set(0.5);
             this._dolphin.scale.set(0.8);
-            this._bg.addChild(this._dolphin);
+            this._maskSprite.addChild(this._dolphin);
             this.game.add.tween(this._dolphin).to({ x: 180, y: this._water.y + 40 }, 900, Phaser.Easing.Sinusoidal.InOut, true)
                 .onComplete.add(function () {
                 _this._dolphin.frameName = "dolphin_10001";
                 _this._fakePlayer = _this.game.add.sprite(_this._dolphin.x + 10, _this._dolphin.y - 40, "playerAsset", "playerSomersault_10001");
                 _this._fakePlayer.anchor.set(0.5);
                 _this._fakePlayer.scale.set(0.65);
-                _this._bg.addChild(_this._fakePlayer);
+                _this._maskSprite.addChild(_this._fakePlayer);
                 _this._fakePlayer.animations.add("somersaultAnim", Phaser.Animation.generateFrameNames("playerSomersault_", 10001, 10020));
                 _this._fakePlayer.animations.play("somersaultAnim", 34, false);
                 _this.game.add.tween(_this._dolphin).to({ x: -60, y: _this._water.y + 80 }, 900, Phaser.Easing.Sinusoidal.InOut, true);
@@ -1042,8 +1149,8 @@ var TProject;
                     .interpolation(function (v, k) { return Phaser.Math.catmullRomInterpolation(v, k); })
                     .onComplete.add(function () {
                     _this._fakePlayer.animations.stop("somersaultAnim");
-                    _this._bg.removeChild(_this._fakePlayer);
-                    _this._bg.removeChild(_this._dolphin);
+                    _this._maskSprite.removeChild(_this._fakePlayer);
+                    _this._maskSprite.removeChild(_this._dolphin);
                     _this.startGame();
                 });
             });
@@ -1080,25 +1187,25 @@ var TProject;
             for (var _i = 0, _a = this._bTime; _i < _a.length; _i++) {
                 var i = _a[_i];
                 this.game.time.events.add(1000 * i, function () {
-                    var buoy = new TProject.WaterEnemy(_this.game, _this.game.width - 10, _this.game.height - 40, "buoy");
+                    var buoy = new TProject.WaterEnemy(_this.game, _this.game.width + 40, _this._water.y + 30, "buoy");
                     _this._waterEnemies.push(buoy);
-                    _this._bg.addChild(buoy);
+                    _this._maskSprite.addChild(buoy);
                 });
             }
             for (var _b = 0, _c = this._sTime; _b < _c.length; _b++) {
                 var i = _c[_b];
                 this.game.time.events.add(1000 * i, function () {
-                    var shark = new TProject.WaterEnemy(_this.game, _this.game.width + 10, _this.game.height - 35, "shark");
+                    var shark = new TProject.WaterEnemy(_this.game, _this.game.width + 140, _this._water.y + 40, "shark");
                     _this._waterEnemies.push(shark);
-                    _this._bg.addChild(shark);
+                    _this._maskSprite.addChild(shark);
                 });
             }
             for (var _d = 0, _e = this._smallRockTime; _d < _e.length; _d++) {
                 var i = _e[_d];
                 this.game.time.events.add(1000 * i, function () {
-                    var rock = new TProject.Rock(_this.game, _this.game.width + 10, _this.game.height - 50, 1);
+                    var rock = new TProject.Rock(_this.game, _this.game.width * 2 / 3, 50, 0.5);
                     _this._rocks.push(rock);
-                    _this._bg.addChild(rock);
+                    _this._maskSprite.addChild(rock);
                 });
             }
             this._player.startGame();
@@ -1131,15 +1238,18 @@ var TProject;
                 this._water.tilePosition.x += -3;
             }
             this._player.update();
+            if (this._rocks[0])
+                this._rocks[0].update();
+            this.checkEnemyBounds();
             for (var i = 0; i < this._waterEnemies.length; i++) {
                 if (this._waterEnemies[i]) {
-                    if (this.game.physics.arcade.collide(this._player._playerContainer, this._waterEnemies[i]._sprite))
+                    if (this.game.physics.arcade.collide(this._player._playerContainer, this._waterEnemies[i].getSprite()))
                         this._player.hit();
                 }
             }
             for (var i = 0; i < this._rocks.length; i++) {
                 if (this._rocks[i])
-                    if (this.game.physics.arcade.collide(this._player._playerContainer, this._rocks[i]._sprite))
+                    if (this.game.physics.arcade.collide(this._player._playerContainer, this._rocks[i].getSprite()))
                         this._player.hit();
             }
         };
@@ -1147,19 +1257,36 @@ var TProject;
             this.game.debug.text("" + this.game.time.fps, 2, 14, "#00ff00");
             this._player.render();
             for (var i = 0; i < this._waterEnemies.length; i++) {
-                if (this._waterEnemies[i])
+                if (this._waterEnemies[i]) {
                     this._waterEnemies[i].render();
+                }
             }
             for (var i = 0; i < this._rocks.length; i++) {
                 if (this._rocks[i])
                     this._rocks[i].render();
             }
-            //this.rock.render();
         };
         GameOne.prototype.gotoFunction = function (name) {
             var fnc = window[name];
             if (typeof fnc === "function") {
                 fnc();
+            }
+        };
+        GameOne.prototype.waterY = function () {
+            return this._water.y;
+        };
+        GameOne.prototype.checkEnemyBounds = function () {
+            for (var i = 0; i < this._waterEnemies.length; i++) {
+                if (this._waterEnemies[i].getPosition().x < -this._waterEnemies[i].getWidth()) {
+                    this._waterEnemies[i].destroy();
+                    this._waterEnemies.splice(i, 1);
+                }
+            }
+            for (var i = 0; i < this._rocks.length; i++) {
+                if (this._rocks[i].getPosition().y < -this._rocks[i].getHeight()) {
+                    this._rocks[i].destroy();
+                    this._rocks.splice(i, 1);
+                }
             }
         };
         return GameOne;
