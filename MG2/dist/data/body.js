@@ -29,6 +29,53 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var TProject;
 (function (TProject) {
+    var GameUI = (function (_super) {
+        __extends(GameUI, _super);
+        function GameUI(game) {
+            _super.call(this, game, 0, 0);
+            this._liveCount = 5; //Тут нужно брать инфу из сохранённой игры.
+            this._liveContainer = [];
+            for (var i = 0; i < 5; i++) {
+                this._liveContainer[i] = [];
+                this._liveContainer[i][0] = this.game.add.sprite(48 + i * 30, 45, "gameAsset", "ui_head");
+                this._liveContainer[i][0].anchor.set(0.5);
+                this._liveContainer[i][1] = this.game.add.sprite(this._liveContainer[i][0].x, this._liveContainer[i][0].y, "gameAsset", "ui_cross_10001");
+                this._liveContainer[i][1].animations.add("crossStart", Phaser.Animation.generateFrameNames("ui_cross_", 10001, 10009));
+                this._liveContainer[i][1].anchor.set(0.5);
+                if (i < 5 - this._liveCount) {
+                    this._liveContainer[i][1].alpha = 1;
+                    this._liveContainer[i][1].frameName = "ui_cross_10009";
+                }
+                else {
+                    this._liveContainer[i][1].alpha = 0;
+                }
+                this.addChild(this._liveContainer[i][0]);
+                this.addChild(this._liveContainer[i][1]);
+            }
+        }
+        GameUI.prototype.liveReduce = function () {
+            if (this._liveCount > 0) {
+                var curLiv = this._liveContainer.length - this._liveCount;
+                this._liveContainer[curLiv][1].alpha = 1;
+                this._liveContainer[curLiv][1].animations.play("crossStart", 24, false);
+                this._liveCount--;
+            }
+        };
+        GameUI.prototype.getGameStatus = function () {
+            return this._liveCount == 0;
+        };
+        return GameUI;
+    })(Phaser.Sprite);
+    TProject.GameUI = GameUI;
+})(TProject || (TProject = {}));
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var TProject;
+(function (TProject) {
     var MobileController = (function (_super) {
         __extends(MobileController, _super);
         function MobileController(game, cbLeft, cbRight, cbJump) {
@@ -455,8 +502,8 @@ var TProject;
 (function (TProject) {
     var Player = (function (_super) {
         __extends(Player, _super);
-        function Player(game, x, y, onWhater, groundLine) {
-            _super.call(this, game, x, y);
+        function Player(game, x, y, onWhater, groundLine, currentGame) {
+            _super.call(this, game, x, groundLine);
             this._onWhater = onWhater;
             this._ground = groundLine + 10;
             this._xSpeed = 0;
@@ -466,6 +513,10 @@ var TProject;
             this._isJump = true;
             this._isHit = false;
             this._setAnim = false;
+            this._immortal = false;
+            this._gameOver = false;
+            this._startGame = false;
+            this._currentGame = currentGame;
             this._splashEmitter = this.game.add.emitter(0, 0, 40);
             this._splashEmitter.makeParticles("gameAsset", ["part_1", "part_2", "part_3", "part_4", "part_5", "part_6"]);
             this._splashEmitter.gravity = 775;
@@ -474,7 +525,7 @@ var TProject;
             this._splashEmitter.setXSpeed(-300, -50);
             this._splashEmitter.setYSpeed(-300, -355);
             this.addChild(this._splashEmitter);
-            this._playerContainer = this.game.add.sprite(0, 0, "playerAsset", "waterBike_10002");
+            this._playerContainer = this.game.add.sprite(0, 0, "playerAsset", "waterBike_10001");
             this._playerContainer.anchor.set(0.5);
             this.addChild(this._playerContainer);
             this._splashEmitter.width = this._playerContainer.width / 2;
@@ -488,26 +539,75 @@ var TProject;
             this._bikeWhaterEmitter.setYSpeed(-100, -150);
             this._bikeWhaterEmitter.start(false, 800, 75, null);
             this.addChild(this._bikeWhaterEmitter);
-            game.physics.arcade.enable(this._playerContainer);
+            this._bikeWhaterEmitter.on = false;
+            this.game.physics.arcade.enable(this._playerContainer);
             this._playerContainer.body.setSize(40, 20, 35, 55);
+            this._playerContainer.body.immovable = true;
         }
+        Player.prototype.startGame = function () {
+            this._startGame = true;
+            this._bikeWhaterEmitter.on = true;
+            this._playerContainer.frameName = "waterBike_10002";
+        };
+        Player.prototype.respavn = function () {
+            var _this = this;
+            if (!this._gameOver) {
+                this.game.tweens.remove(this._inWhaterTween);
+                this._deadContainer.animations.stop("hitAnim");
+                this.removeChild(this._deadContainer);
+                this._playerContainer.alpha = 0;
+                this._inWhaterTween = this.game.add.tween(this._playerContainer.body).to({ y: this._ground - 200, x: 20, rotation: 0 }, 50, Phaser.Easing.Linear.None, true);
+                this._inWhaterTween.onComplete.add(function () {
+                    _this._playerContainer.frameName = "waterBike_10002";
+                    _this._playerContainer.alpha = 1;
+                    _this._isHit = false;
+                    _this._isJump = true;
+                    _this._bikeWhaterEmitter.on = false;
+                    _this._setAnim = false;
+                    _this._immortal = true;
+                    _this._ySpeed = 0;
+                    _this._xSpeed = 3.5;
+                    _this.game.add.tween(_this._playerContainer).to({ alpha: 0.1 }, 200, Phaser.Easing.Linear.None, true, 0, 8, true).onComplete.add(function () {
+                        _this._immortal = false;
+                    });
+                });
+            }
+        };
+        Player.prototype.gameOver = function () {
+            this._gameOver = true;
+        };
         Player.prototype.hit = function () {
+            if (!this._isHit && !this._immortal) {
+                this.game.tweens.remove(this._inWhaterTween);
+                this._playerContainer.frameName = "waterBike_10001";
+                this._deadContainer = this.game.add.sprite(this._playerContainer.x + 15, this._playerContainer.y - 10, "playerAsset", "playerHit_10001");
+                this._deadContainer.scale.set(0.75);
+                this._deadContainer.anchor.set(0.5);
+                this._deadContainer.animations.add("hitAnim", Phaser.Animation.generateFrameNames("playerHit_", 10001, 10010));
+                this._deadContainer.animations.play("hitAnim", 24, true);
+                this.addChild(this._deadContainer);
+                this._isHit = true;
+                this._isJump = true;
+                this._bikeWhaterEmitter.on = false;
+                this._ySpeed = -7.5;
+                this._xSpeed = -4.5;
+            }
         };
         Player.prototype.addSpeed = function () {
             if (!this._isHit) {
                 if (this._xSpeed < 6.5)
-                    this._xSpeed += 0.5;
+                    this._xSpeed += 0.35;
             }
         };
         Player.prototype.decreaseSpeed = function () {
             if (!this._isHit) {
                 if (this._xSpeed > -6.5)
-                    this._xSpeed -= 0.5;
+                    this._xSpeed -= 0.35;
             }
         };
         Player.prototype.jump = function () {
             var _this = this;
-            if (!this._isJump) {
+            if (!this._isJump && !this._isHit) {
                 this.game.tweens.remove(this._inWhaterTween);
                 this._isJump = true;
                 this._inWhaterTween = this.game.add.tween(this._playerContainer.body).to({ y: [this._ground] }, 50, Phaser.Easing.Sinusoidal.Out, true);
@@ -524,18 +624,19 @@ var TProject;
         };
         Player.prototype.update = function () {
             var _this = this;
-            if (!this._isHit) {
+            if (!this._isHit && this._startGame) {
+                //_.log("X: " + this._playerContainer.body.x + " Y: " + this._playerContainer.body.y)
                 this._playerContainer.body.x += this._xSpeed;
-                this._bikeWhaterEmitter.x = this._playerContainer.x - 40;
-                this._bikeWhaterEmitter.y = this._playerContainer.y + 10;
-                this._playerContainer.body.rotation = -(this._playerContainer.worldPosition.x - 90) / 700 * 30;
-                if (this._playerContainer.worldPosition.x > 700) {
+                this._bikeWhaterEmitter.x = this._playerContainer.x - 45;
+                this._bikeWhaterEmitter.y = this._playerContainer.y + 20;
+                this._playerContainer.body.rotation = -(this._playerContainer.worldPosition.x - 30) / 730 * 30;
+                if (this._playerContainer.worldPosition.x > 730) {
                     this._xSpeed = 0;
-                    this._playerContainer.body.x = this._playerContainer.body.x - (this._playerContainer.worldPosition.x - 700);
+                    this._playerContainer.body.x = this._playerContainer.body.x - (this._playerContainer.worldPosition.x - 730);
                 }
-                else if (this._playerContainer.worldPosition.x < 90) {
+                else if (this._playerContainer.worldPosition.x < 30) {
                     this._xSpeed = 0;
-                    this._playerContainer.body.x = this._playerContainer.body.x + (90 - this._playerContainer.worldPosition.x);
+                    this._playerContainer.body.x = this._playerContainer.body.x + (30 - this._playerContainer.worldPosition.x);
                 }
                 if (!this._isJump) {
                     this._playerContainer.body.y += Math.sin(this._sinArg += 0.1) / 2;
@@ -567,6 +668,27 @@ var TProject;
                     }
                 }
             }
+            else if (this._isHit && this._startGame) {
+                if (!this._gameOver) {
+                    this._playerContainer.body.y += this._ySpeed;
+                    this._deadContainer.y += this._ySpeed * 1.5;
+                    this._ySpeed += this._gravity;
+                    this._deadContainer.x += this._xSpeed * 0.8;
+                    this._playerContainer.body.x += this._xSpeed;
+                    this._playerContainer.body.rotation -= 5;
+                    this._deadContainer.angle -= 9;
+                    if (this._playerContainer.body.y > this._ground && this._isJump && this._ySpeed > 0) {
+                        this._isJump = false;
+                        this._splashEmitter.x = this._playerContainer.x;
+                        this._splashEmitter.y = this._playerContainer.y + 50;
+                        this._splashEmitter.start(true, 1500, null, 20);
+                        this._currentGame.uiCanReduceLive();
+                        this.game.time.events.add(1000, function () {
+                            _this.respavn();
+                        });
+                    }
+                }
+            }
         };
         Player.prototype.render = function () {
             this.game.debug.body(this._playerContainer);
@@ -574,6 +696,82 @@ var TProject;
         return Player;
     })(Phaser.Sprite);
     TProject.Player = Player;
+})(TProject || (TProject = {}));
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var TProject;
+(function (TProject) {
+    var Rock = (function (_super) {
+        __extends(Rock, _super);
+        function Rock(game, x, y, scale) {
+            _super.call(this, game, x, y);
+            this._sprite = this.game.add.sprite(0, 0);
+            this._sprite.scale.set(scale);
+            this.addChild(this._sprite);
+            this._sprite.loadTexture("enemyAsset", "rock");
+            this._sprite.anchor.set(0.5);
+            this.game.add.tween(this._sprite).to({ angle: -360 }, 1000, Phaser.Easing.Linear.None, true, 0, -1, false);
+            this.game.physics.arcade.enable(this);
+            this.body.immovable = true;
+            this.body.velocity.x = -5 * 60;
+            this.body.velocity.y = 7 * 60;
+        }
+        Rock.prototype.setSpeed = function (vx, vy) {
+            this.body.velocity.x = vx;
+            this.body.velocity.y = vy;
+        };
+        Rock.prototype.render = function () {
+            this.game.debug.body(this._sprite);
+        };
+        return Rock;
+    })(Phaser.Sprite);
+    TProject.Rock = Rock;
+})(TProject || (TProject = {}));
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var TProject;
+(function (TProject) {
+    var WaterEnemy = (function (_super) {
+        __extends(WaterEnemy, _super);
+        function WaterEnemy(game, x, y, type) {
+            _super.call(this, game, x, y);
+            this._sprite = this.game.add.sprite(0, 0);
+            this._sprite.anchor.set(0.5);
+            //this._sprite.scale.set(0.8);
+            this.addChild(this._sprite);
+            this.game.physics.arcade.enable(this._sprite);
+            this._sprite.body.immovable = true;
+            if (type === "shark") {
+                this._sprite.loadTexture("enemyAsset", "shark");
+                this._sprite.body.setSize(240, 80, 5, 45);
+                this._sprite.body.velocity.x = -10 * 60;
+                this.game.add.tween(this._sprite).to({ y: this._sprite.y - 10 }, 500, Phaser.Easing.Sinusoidal.InOut, true, 0, -1, true);
+            }
+            else if (type === "buoy") {
+                this._sprite.loadTexture("enemyAsset", "buoy_10001");
+                this._sprite.animations.add("buoyAnim", Phaser.Animation.generateFrameNames("buoy_", 10001, 10096));
+                this._sprite.animations.play("buoyAnim", 24, true);
+                this._sprite.body.setSize(32, 80, 15, 15);
+                this._sprite.body.velocity.x = -8 * 60;
+            }
+        }
+        WaterEnemy.prototype.setSpeed = function (v) {
+            this.body.velocity.x = v;
+        };
+        WaterEnemy.prototype.render = function () {
+            this.game.debug.body(this._sprite);
+        };
+        return WaterEnemy;
+    })(Phaser.Sprite);
+    TProject.WaterEnemy = WaterEnemy;
 })(TProject || (TProject = {}));
 
 var __extends = (this && this.__extends) || function (d, b) {
@@ -796,20 +994,20 @@ var TProject;
         __extends(GameOne, _super);
         function GameOne() {
             _super.apply(this, arguments);
+            this._sTime = [1, 30, 33, 35, 39, 41];
             this._bTime = [3, 6, 9, 12, 15, 15.2, 18, 18.2, 21, 22, 24, 26];
-            this._sTime = [30, 33, 35, 39, 41];
+            this._waterEnemies = [];
+            this._rocks = [];
+            this._smallRockTime = [];
+            this._bigRockTime = [];
         }
         GameOne.prototype.create = function () {
-            var _this = this;
             TProject._.log("Start game!");
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.game.time.advancedTiming = true;
             this._bg = this.game.add.sprite(0, 0, "bg");
+            this._startGame = false;
             if (!this.game.device.desktop) {
-                this._mobileController = new TProject.MobileController(this.game, function () { _this._player.decreaseSpeed(); }, function () { _this._player.addSpeed(); }, function () { _this._player.jump(); });
-                this.game.stage.addChild(this._mobileController);
-                this._mobileController.x = 80.0;
-                this._mobileController.y = this.game.height - 70.0;
                 this._water = this.game.add.tileSprite(0, this.game.height - 160, 1918, 45, "water");
             }
             else {
@@ -817,8 +1015,63 @@ var TProject;
                 this._bg.events.onInputDown.add(this.onDown, this);
                 this._water = this.game.add.tileSprite(0, this.game.height - 70, 1918, 45, "water");
             }
-            this._player = new TProject.Player(this.game, this.game.world.width / 2, this.game.world.height / 2, true, this._water.y);
+            this._player = new TProject.Player(this.game, this.game.world.width / 2, this.game.world.height / 2, true, this._water.y, this);
             this._bg.addChild(this._player);
+            this._gameUI = new TProject.GameUI(this.game);
+            this.game.stage.addChild(this._gameUI);
+            this.startDolphin();
+        };
+        GameOne.prototype.startDolphin = function () {
+            var _this = this;
+            this._dolphin = this.game.add.sprite(-60, this._water.y + 80, "playerAsset", "dolphin_10002");
+            this._dolphin.anchor.set(0.5);
+            this._dolphin.scale.set(0.8);
+            this._bg.addChild(this._dolphin);
+            this.game.add.tween(this._dolphin).to({ x: 180, y: this._water.y + 40 }, 900, Phaser.Easing.Sinusoidal.InOut, true)
+                .onComplete.add(function () {
+                _this._dolphin.frameName = "dolphin_10001";
+                _this._fakePlayer = _this.game.add.sprite(_this._dolphin.x + 10, _this._dolphin.y - 40, "playerAsset", "playerSomersault_10001");
+                _this._fakePlayer.anchor.set(0.5);
+                _this._fakePlayer.scale.set(0.65);
+                _this._bg.addChild(_this._fakePlayer);
+                _this._fakePlayer.animations.add("somersaultAnim", Phaser.Animation.generateFrameNames("playerSomersault_", 10001, 10020));
+                _this._fakePlayer.animations.play("somersaultAnim", 34, false);
+                _this.game.add.tween(_this._dolphin).to({ x: -60, y: _this._water.y + 80 }, 900, Phaser.Easing.Sinusoidal.InOut, true);
+                _this.game.add.tween(_this._fakePlayer)
+                    .to({ x: [_this._player.x], y: [_this._fakePlayer.y - 100, _this._fakePlayer.y] }, 450, Phaser.Easing.Sinusoidal.InOut, true, 100)
+                    .interpolation(function (v, k) { return Phaser.Math.catmullRomInterpolation(v, k); })
+                    .onComplete.add(function () {
+                    _this._fakePlayer.animations.stop("somersaultAnim");
+                    _this._bg.removeChild(_this._fakePlayer);
+                    _this._bg.removeChild(_this._dolphin);
+                    _this.startGame();
+                });
+            });
+        };
+        GameOne.prototype.onDown = function () {
+            TProject._.log("Mouse Down");
+        };
+        GameOne.prototype.uiCanReduceLive = function () {
+            var _this = this;
+            this.game.time.events.add(400, function () {
+                _this._gameUI.liveReduce();
+                if (_this._gameUI.getGameStatus()) {
+                    _this.gameOver();
+                    _this._player.gameOver();
+                }
+            });
+        };
+        GameOne.prototype.startGame = function () {
+            var _this = this;
+            this._startGame = true;
+            if (!this.game.device.desktop) {
+                this._mobileController = new TProject.MobileController(this.game, function () { _this._player.decreaseSpeed(); }, function () { _this._player.addSpeed(); }, function () { _this._player.jump(); });
+                this.game.stage.addChild(this._mobileController);
+                this._mobileController.x = 80.0;
+                this._mobileController.y = this.game.height - 70.0;
+            }
+            else {
+            }
             this.game.input.onUp.add(function () {
                 if (_this._mobileController) {
                     _this._mobileController.up();
@@ -826,20 +1079,34 @@ var TProject;
             }, this);
             for (var _i = 0, _a = this._bTime; _i < _a.length; _i++) {
                 var i = _a[_i];
-                this.game.time.events.add(1000 * i, function () { _this.addBuoy(); });
+                this.game.time.events.add(1000 * i, function () {
+                    var buoy = new TProject.WaterEnemy(_this.game, _this.game.width - 10, _this.game.height - 40, "buoy");
+                    _this._waterEnemies.push(buoy);
+                    _this._bg.addChild(buoy);
+                });
             }
             for (var _b = 0, _c = this._sTime; _b < _c.length; _b++) {
                 var i = _c[_b];
-                this.game.time.events.add(1000 * i, function () { _this.addShark(); });
+                this.game.time.events.add(1000 * i, function () {
+                    var shark = new TProject.WaterEnemy(_this.game, _this.game.width + 10, _this.game.height - 35, "shark");
+                    _this._waterEnemies.push(shark);
+                    _this._bg.addChild(shark);
+                });
             }
-            this.addRock();
-        };
-        GameOne.prototype.onDown = function () {
-            TProject._.log("Mouse Down");
+            for (var _d = 0, _e = this._smallRockTime; _d < _e.length; _d++) {
+                var i = _e[_d];
+                this.game.time.events.add(1000 * i, function () {
+                    var rock = new TProject.Rock(_this.game, _this.game.width + 10, _this.game.height - 50, 1);
+                    _this._rocks.push(rock);
+                    _this._bg.addChild(rock);
+                });
+            }
+            this._player.startGame();
         };
         GameOne.prototype.replay = function () {
         };
         GameOne.prototype.gameOver = function () {
+            TProject._.log("GameOver!");
             // this.gotoFunction("WIN_FUNC" / "LOSE_FUNC");
         };
         GameOne.prototype.update = function () {
@@ -857,42 +1124,43 @@ var TProject;
                     this._player.jump();
                 }
             }
-            this._water.tilePosition.x += -10;
+            if (this._startGame) {
+                this._water.tilePosition.x += -8;
+            }
+            else {
+                this._water.tilePosition.x += -3;
+            }
             this._player.update();
+            for (var i = 0; i < this._waterEnemies.length; i++) {
+                if (this._waterEnemies[i]) {
+                    if (this.game.physics.arcade.collide(this._player._playerContainer, this._waterEnemies[i]._sprite))
+                        this._player.hit();
+                }
+            }
+            for (var i = 0; i < this._rocks.length; i++) {
+                if (this._rocks[i])
+                    if (this.game.physics.arcade.collide(this._player._playerContainer, this._rocks[i]._sprite))
+                        this._player.hit();
+            }
         };
         GameOne.prototype.render = function () {
             this.game.debug.text("" + this.game.time.fps, 2, 14, "#00ff00");
             this._player.render();
+            for (var i = 0; i < this._waterEnemies.length; i++) {
+                if (this._waterEnemies[i])
+                    this._waterEnemies[i].render();
+            }
+            for (var i = 0; i < this._rocks.length; i++) {
+                if (this._rocks[i])
+                    this._rocks[i].render();
+            }
+            //this.rock.render();
         };
         GameOne.prototype.gotoFunction = function (name) {
             var fnc = window[name];
             if (typeof fnc === "function") {
                 fnc();
             }
-        };
-        GameOne.prototype.addBuoy = function () {
-            var t = this.game.add.sprite(this.game.width + 10, this.game.height - 80, "enemyAsset", "buoy_10001");
-            t.scale.set(0.8);
-            t.animations.add("buoyAnim", Phaser.Animation.generateFrameNames("buoy_", 10001, 10096));
-            t.animations.play("buoyAnim", 50, true);
-            this.game.physics.arcade.enable(t);
-            t.body.velocity.x = -10 * 60;
-        };
-        GameOne.prototype.addShark = function () {
-            var s = this.game.add.sprite(this.game.width + 10, this.game.height - 100, "enemyAsset", "shark_10001");
-            s.scale.set(0.8);
-            s.animations.add("buoyAnim", Phaser.Animation.generateFrameNames("shark_", 10001, 10027));
-            s.animations.play("buoyAnim", 5, true);
-            this.game.physics.arcade.enable(s);
-            s.body.velocity.x = -10 * 60;
-        };
-        GameOne.prototype.addRock = function () {
-            var m = this.game.add.sprite(this.game.width - 50, 50, "enemyAsset", "rock");
-            m.anchor.set(0.5);
-            this.game.add.tween(m).to({ angle: -360 }, 1000, Phaser.Easing.Linear.None, true, 0, -1, false);
-            this.game.physics.arcade.enable(m);
-            m.body.velocity.x = -5 * 60;
-            m.body.velocity.y = 7 * 60;
         };
         return GameOne;
     })(Phaser.State);
