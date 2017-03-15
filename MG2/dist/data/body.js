@@ -926,7 +926,7 @@ var TProject;
             //this.game.load.audiosprite("sfx", ["assets/sounds/sfx.mp3","assets/sounds/sfx.ogg"], "assets/sounds/sfx.json");
         };
         Boot.prototype.create = function () {
-            this.game.input.maxPointers = 1;
+            this.game.input.maxPointers = 2;
             this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
             this.game.scale.pageAlignHorizontally = true;
@@ -1147,7 +1147,7 @@ var TProject;
                 _this._maskSprite.addChild(_this._fakePlayer);
                 _this._fakePlayer.animations.add("somersaultAnim", Phaser.Animation.generateFrameNames("playerSomersault_", 10001, 10020));
                 _this.game.time.events.add(100, function () {
-                    _this._fakePlayer.animations.play("somersaultAnim", 24, false);
+                    _this._fakePlayer.animations.play("somersaultAnim", 34, false);
                 });
                 _this.game.add.tween(_this._dolphin).to({ x: -60, y: _this._water.y + 80 }, 1100, Phaser.Easing.Sinusoidal.InOut, true, 0);
                 _this.game.add.tween(_this._fakePlayer)
@@ -1190,30 +1190,30 @@ var TProject;
                     _this._mobileController.up();
                 }
             }, this);
-            for (var _i = 0, _a = this._bTime; _i < _a.length; _i++) {
-                var i = _a[_i];
-                this.game.time.events.add(1000 * i, function () {
-                    var buoy = new TProject.WaterEnemy(_this.game, _this.game.width + 40, _this._water.y + 30, "buoy");
-                    _this._waterEnemies.push(buoy);
-                    _this._maskSprite.addChild(buoy);
+            /*
+            for (let i  of this._bTime) {
+                this.game.time.events.add(1000 * i, ()=>{
+                    let buoy = new WaterEnemy(this.game, this.game.width + 40, this._water.y + 30, "buoy");
+                    this._waterEnemies.push(buoy);
+                    this._maskSprite.addChild(buoy);
                 });
             }
-            for (var _b = 0, _c = this._sTime; _b < _c.length; _b++) {
-                var i = _c[_b];
-                this.game.time.events.add(1000 * i, function () {
-                    var shark = new TProject.WaterEnemy(_this.game, _this.game.width + 140, _this._water.y + 40, "shark");
-                    _this._waterEnemies.push(shark);
-                    _this._maskSprite.addChild(shark);
+
+            for (let i  of this._sTime) {
+                this.game.time.events.add(1000 * i, ()=>{
+                    let shark = new WaterEnemy(this.game, this.game.width + 140, this._water.y + 40, "shark");
+                    this._waterEnemies.push(shark);
+                    this._maskSprite.addChild(shark);
                 });
             }
-            for (var _d = 0, _e = this._smallRockTime; _d < _e.length; _d++) {
-                var i = _e[_d];
-                this.game.time.events.add(1000 * i, function () {
-                    var rock = new TProject.Rock(_this.game, _this.game.width * 2 / 3, 50, 0.5);
-                    _this._rocks.push(rock);
-                    _this._maskSprite.addChild(rock);
+            for (let i  of this._smallRockTime) {
+                this.game.time.events.add(1000 * i, ()=>{
+                    let rock = new Rock(this.game, this.game.width*2/3, 50, 0.5);
+                    this._rocks.push(rock);
+                    this._maskSprite.addChild(rock);
                 });
             }
+            */
             this._player.startGame();
         };
         GameOne.prototype.replay = function () {
