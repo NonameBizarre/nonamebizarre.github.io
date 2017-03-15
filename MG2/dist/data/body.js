@@ -566,7 +566,7 @@ var TProject;
                     _this._setAnim = false;
                     _this._immortal = true;
                     _this._ySpeed = 0;
-                    _this._xSpeed = 3.5;
+                    _this._xSpeed = 2.8;
                     _this.game.add.tween(_this._playerContainer).to({ alpha: 0.1 }, 200, Phaser.Easing.Linear.None, true, 0, 8, true).onComplete.add(function () {
                         _this._immortal = false;
                     });
@@ -595,14 +595,14 @@ var TProject;
         };
         Player.prototype.addSpeed = function () {
             if (!this._isHit) {
-                if (this._xSpeed < 6.5)
-                    this._xSpeed += 0.35;
+                if (this._xSpeed < 5.5)
+                    this._xSpeed += 0.25;
             }
         };
         Player.prototype.decreaseSpeed = function () {
             if (!this._isHit) {
-                if (this._xSpeed > -6.5)
-                    this._xSpeed -= 0.35;
+                if (this._xSpeed > -5.5)
+                    this._xSpeed -= 0.25;
             }
         };
         Player.prototype.jump = function () {
@@ -613,7 +613,7 @@ var TProject;
                 this._inWhaterTween = this.game.add.tween(this._playerContainer.body).to({ y: [this._ground] }, 50, Phaser.Easing.Sinusoidal.Out, true);
                 this._inWhaterTween.onComplete.add(function () {
                     _this._playerContainer.body.y = _this._ground;
-                    _this._ySpeed = -7.5;
+                    _this._ySpeed = -8.5;
                     _this._splashEmitter.x = _this._playerContainer.x;
                     _this._splashEmitter.y = _this._playerContainer.y + 30;
                     _this._splashEmitter.start(true, 1500, null, 20);
@@ -787,7 +787,7 @@ var TProject;
             if (type === "shark") {
                 this._sprite.loadTexture("enemyAsset", "shark");
                 this._sprite.body.setSize(240, 60, 5, 40);
-                this._sprite.body.velocity.x = -8 * 60;
+                this._sprite.body.velocity.x = -11 * 60;
                 this.game.add.tween(this._sprite).to({ y: this._sprite.y - 10 }, 500, Phaser.Easing.Sinusoidal.InOut, true, 0, -1, true);
             }
             else if (type === "buoy") {
@@ -795,7 +795,7 @@ var TProject;
                 this._sprite.animations.add("buoyAnim", Phaser.Animation.generateFrameNames("buoy_", 10001, 10096));
                 this._sprite.animations.play("buoyAnim", 24, true);
                 this._sprite.body.setSize(32, 80, 15, 15);
-                this._sprite.body.velocity.x = -6 * 60;
+                this._sprite.body.velocity.x = -9 * 60;
             }
         }
         WaterEnemy.prototype.setSpeed = function (v) {
@@ -999,7 +999,7 @@ var TProject;
             _super.apply(this, arguments);
         }
         CutsceneOne.prototype.create = function () {
-            //this.game.state.start("GameOne", true); // сразу пиздуем на первую игру
+            this.game.state.start("GameOne", true); // сразу пиздуем на первую игру
             this._bg = this.game.add.sprite(0, 0, "bg");
             this._maskSprite = this.game.add.sprite(0, 0);
             var mask = this.game.add.graphics(0, 0);
@@ -1130,23 +1130,29 @@ var TProject;
         };
         GameOne.prototype.startDolphin = function () {
             var _this = this;
-            this._dolphin = this.game.add.sprite(-60, this._water.y + 80, "playerAsset", "dolphin_10002");
+            this._dolphin = this.game.add.sprite(-60, this._water.y + 80, "playerAsset", "dolphin_free");
             this._dolphin.anchor.set(0.5);
-            this._dolphin.scale.set(0.8);
+            this._dolphin.scale.set(1);
             this._maskSprite.addChild(this._dolphin);
-            this.game.add.tween(this._dolphin).to({ x: 180, y: this._water.y + 40 }, 900, Phaser.Easing.Sinusoidal.InOut, true)
+            this._fakePlayer = this.game.add.sprite(20, -50, "playerAsset", "playerSomersault_10001");
+            this._fakePlayer.anchor.set(0.5);
+            this._fakePlayer.scale.set(0.7);
+            this._dolphin.addChild(this._fakePlayer);
+            this.game.add.tween(this._dolphin).to({ x: 180, y: this._water.y + 50 }, 1300, Phaser.Easing.Sinusoidal.InOut, true)
                 .onComplete.add(function () {
-                _this._dolphin.frameName = "dolphin_10001";
-                _this._fakePlayer = _this.game.add.sprite(_this._dolphin.x + 10, _this._dolphin.y - 40, "playerAsset", "playerSomersault_10001");
+                _this._dolphin.removeChild(_this._fakePlayer);
+                _this._fakePlayer = _this.game.add.sprite(_this._dolphin.x + 20, _this._dolphin.y - 50, "playerAsset", "playerSomersault_10001");
                 _this._fakePlayer.anchor.set(0.5);
-                _this._fakePlayer.scale.set(0.65);
+                _this._fakePlayer.scale.set(0.7);
                 _this._maskSprite.addChild(_this._fakePlayer);
                 _this._fakePlayer.animations.add("somersaultAnim", Phaser.Animation.generateFrameNames("playerSomersault_", 10001, 10020));
-                _this._fakePlayer.animations.play("somersaultAnim", 34, false);
-                _this.game.add.tween(_this._dolphin).to({ x: -60, y: _this._water.y + 80 }, 900, Phaser.Easing.Sinusoidal.InOut, true);
+                _this.game.time.events.add(100, function () {
+                    _this._fakePlayer.animations.play("somersaultAnim", 24, false);
+                });
+                _this.game.add.tween(_this._dolphin).to({ x: -60, y: _this._water.y + 80 }, 1100, Phaser.Easing.Sinusoidal.InOut, true, 0);
                 _this.game.add.tween(_this._fakePlayer)
-                    .to({ x: [_this._player.x], y: [_this._fakePlayer.y - 100, _this._fakePlayer.y] }, 450, Phaser.Easing.Sinusoidal.InOut, true, 100)
-                    .interpolation(function (v, k) { return Phaser.Math.catmullRomInterpolation(v, k); })
+                    .to({ x: [_this._fakePlayer.x + 105, _this._player.x - 10], y: [_this._fakePlayer.y - 260, _this._player.y - 20] }, 1100, Phaser.Easing.Linear.None, true, 0)
+                    .interpolation(function (v, k) { return Phaser.Math.bezierInterpolation(v, k); })
                     .onComplete.add(function () {
                     _this._fakePlayer.animations.stop("somersaultAnim");
                     _this._maskSprite.removeChild(_this._fakePlayer);
@@ -1232,7 +1238,7 @@ var TProject;
                 }
             }
             if (this._startGame) {
-                this._water.tilePosition.x += -8;
+                this._water.tilePosition.x += -9;
             }
             else {
                 this._water.tilePosition.x += -3;
@@ -1271,9 +1277,6 @@ var TProject;
             if (typeof fnc === "function") {
                 fnc();
             }
-        };
-        GameOne.prototype.waterY = function () {
-            return this._water.y;
         };
         GameOne.prototype.checkEnemyBounds = function () {
             for (var i = 0; i < this._waterEnemies.length; i++) {
