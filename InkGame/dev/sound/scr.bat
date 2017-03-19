@@ -1,0 +1,1 @@
+audiosprite --output sfx *.mp3
