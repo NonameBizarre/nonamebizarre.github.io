@@ -1,0 +1,50 @@
+{
+  "resources": [
+    "sfx.ogg",
+    "sfx.m4a",
+    "sfx.mp3",
+    "sfx.ac3"
+  ],
+  "spritemap": {
+    "bubble": {
+      "start": 0,
+      "end": 0.5224489795918368,
+      "loop": false
+    },
+    "error": {
+      "start": 2,
+      "end": 2.522448979591837,
+      "loop": false
+    },
+    "hit": {
+      "start": 4,
+      "end": 5.097142857142857,
+      "loop": false
+    },
+    "link": {
+      "start": 7,
+      "end": 7.940408163265306,
+      "loop": false
+    },
+    "playerDown": {
+      "start": 9,
+      "end": 9.783673469387756,
+      "loop": false
+    },
+    "playerHit": {
+      "start": 11,
+      "end": 11.417959183673469,
+      "loop": false
+    },
+    "rightAn": {
+      "start": 13,
+      "end": 15.455510204081634,
+      "loop": false
+    },
+    "unknowBounce": {
+      "start": 17,
+      "end": 17.47020408163265,
+      "loop": false
+    }
+  }
+}
