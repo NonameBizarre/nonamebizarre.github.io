@@ -13,6 +13,7 @@ var Game;
         Preloader.prototype.preload = function () {
             this.game.stage.backgroundColor = 0xffcc00;
             this.game.load.onFileComplete.add(this.LoadingUpdate, this);
+            //this.game.load.image('player', 'assets/mrPlayer.png');
             //  Загрузка ассетов
             //this.game.load.atlas( 'gameplay', "assets/atlass/gameplay.png", "assets/atlass/gameplay.json" );
             this.game.load.image('bgPlane', 'assets/BackPlank.png');
