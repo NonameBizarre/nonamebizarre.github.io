@@ -14,11 +14,16 @@ var Game;
         };
         Boot.prototype.create = function () {
             console.log("Boot");
-            this.input.maxPointers = 1;
+            this.input.maxPointers = 2;
             this.stage.disableVisibilityChange = true;
             this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             this.game.scale.pageAlignHorizontally = true;
             this.game.scale.pageAlignVertically = true;
+            
+            this.game.input.addPointer();
+            this.game.input.addPointer();
+            
+            this.game.stage.disableVisibilityChange = true;
             //  this.game.scale.onOrientationChange.add(this.changeOrientation, this);
             //   this.game.scale.onSizeChange.add(this.changeOrientation, this);
             //window.addEventListener("resize", this.changeOrientation.bind(this), false)
