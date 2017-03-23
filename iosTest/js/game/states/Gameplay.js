@@ -12,6 +12,8 @@ var Game;
         }
         Gameplay.prototype.create = function () {
             var newBG = this.game.add.sprite(0, 0, "player");
+            
+            var newBG1 = this.game.add.sprite(40, 0, "player");
             /*
 
             this._GameElementContainer = new OSprite(this.game, Config.defaultWidth*0.5, Config.defaultHeight*0.5);
