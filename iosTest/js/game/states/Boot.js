@@ -21,9 +21,17 @@ var Game;
             this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             this.game.scale.pageAlignHorizontally = true;
             this.game.scale.pageAlignVertically = true;
+<<<<<<< HEAD
             this.game.input.touch.preventDefault = false;
             this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
             this.game.scale.refresh();
+=======
+            
+            this.game.input.addPointer();
+            this.game.input.addPointer();
+            
+            this.game.stage.disableVisibilityChange = true;
+>>>>>>> origin/master
             //  this.game.scale.onOrientationChange.add(this.changeOrientation, this);
             //   this.game.scale.onSizeChange.add(this.changeOrientation, this);
             //window.addEventListener("resize", this.changeOrientation.bind(this), false)
