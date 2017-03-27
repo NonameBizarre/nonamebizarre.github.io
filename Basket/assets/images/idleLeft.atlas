@@ -1,0 +1,90 @@
+
+idleLeft.png
+size: 2048,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background
+  rotate: false
+  xy: 2, 39
+  size: 698, 469
+  orig: 698, 469
+  offset: 0, 0
+  index: -1
+Floor
+  rotate: false
+  xy: 702, 420
+  size: 396, 88
+  orig: 396, 88
+  offset: 0, 0
+  index: -1
+Floor2
+  rotate: false
+  xy: 1100, 426
+  size: 257, 82
+  orig: 257, 82
+  offset: 0, 0
+  index: -1
+P1_Arms
+  rotate: false
+  xy: 702, 71
+  size: 102, 75
+  orig: 102, 75
+  offset: 0, 0
+  index: -1
+P1_Body
+  rotate: false
+  xy: 870, 147
+  size: 103, 271
+  orig: 103, 271
+  offset: 0, 0
+  index: -1
+P1_Eyes0001
+  rotate: false
+  xy: 2, 2
+  size: 29, 35
+  orig: 29, 35
+  offset: 0, 0
+  index: -1
+P1_Eyes0002
+  rotate: true
+  xy: 702, 40
+  size: 29, 35
+  orig: 29, 35
+  offset: 0, 0
+  index: -1
+P2_Body
+  rotate: false
+  xy: 702, 148
+  size: 166, 270
+  orig: 166, 270
+  offset: 0, 0
+  index: -1
+P2_DownArm
+  rotate: false
+  xy: 1359, 467
+  size: 70, 41
+  orig: 70, 41
+  offset: 0, 0
+  index: -1
+P2_Eyes0001
+  rotate: false
+  xy: 806, 106
+  size: 52, 40
+  orig: 52, 40
+  offset: 0, 0
+  index: -1
+P2_Eyes0002
+  rotate: false
+  xy: 975, 333
+  size: 52, 40
+  orig: 52, 40
+  offset: 0, 0
+  index: -1
+P2_UpArm
+  rotate: false
+  xy: 975, 375
+  size: 83, 43
+  orig: 83, 43
+  offset: 0, 0
+  index: -1
