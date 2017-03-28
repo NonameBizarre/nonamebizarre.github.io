@@ -1,0 +1,34 @@
+
+GoodAttack.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BigCircle
+  rotate: false
+  xy: 2, 101
+  size: 364, 364
+  orig: 364, 364
+  offset: 0, 0
+  index: -1
+P1_Attack_Ball
+  rotate: false
+  xy: 2, 2
+  size: 97, 97
+  orig: 97, 97
+  offset: 0, 0
+  index: -1
+P3_Cutch
+  rotate: false
+  xy: 368, 261
+  size: 185, 204
+  orig: 185, 204
+  offset: 0, 0
+  index: -1
+P4_Cutch
+  rotate: false
+  xy: 368, 110
+  size: 146, 149
+  orig: 146, 149
+  offset: 0, 0
+  index: -1

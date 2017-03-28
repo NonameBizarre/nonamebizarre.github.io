@@ -1,0 +1,76 @@
+
+idleRight.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+P3_Body
+  rotate: true
+  xy: 2, 7
+  size: 119, 202
+  orig: 119, 202
+  offset: 0, 0
+  index: -1
+P3_Eyes0001
+  rotate: true
+  xy: 489, 41
+  size: 45, 48
+  orig: 45, 48
+  offset: 0, 0
+  index: -1
+P3_Eyes0002
+  rotate: true
+  xy: 539, 41
+  size: 45, 48
+  orig: 45, 48
+  offset: 0, 0
+  index: -1
+P3_LeftArm
+  rotate: false
+  xy: 414, 43
+  size: 73, 43
+  orig: 73, 43
+  offset: 0, 0
+  index: -1
+P3_RightArm
+  rotate: false
+  xy: 319, 3
+  size: 62, 38
+  orig: 62, 38
+  offset: 0, 0
+  index: -1
+P4_Body
+  rotate: true
+  xy: 206, 43
+  size: 83, 206
+  orig: 83, 206
+  offset: 0, 0
+  index: -1
+P4_Eyes0001
+  rotate: false
+  xy: 524, 88
+  size: 49, 38
+  orig: 49, 38
+  offset: 0, 0
+  index: -1
+P4_Eyes0002
+  rotate: false
+  xy: 575, 88
+  size: 49, 38
+  orig: 49, 38
+  offset: 0, 0
+  index: -1
+P4_LeftArm
+  rotate: false
+  xy: 206, 2
+  size: 111, 39
+  orig: 111, 39
+  offset: 0, 0
+  index: -1
+P4_RightArm
+  rotate: false
+  xy: 414, 88
+  size: 108, 38
+  orig: 108, 38
+  offset: 0, 0
+  index: -1

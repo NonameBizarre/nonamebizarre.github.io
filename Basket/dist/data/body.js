@@ -12,6 +12,220 @@ var TProject;
     TProject._ = _;
 })(TProject || (TProject = {}));
 
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var TProject;
+(function (TProject) {
+    // класс, в котором осуществляются основные анимации
+    // пока в состоянии крайнего дебага
+    var BasketBallAnimations = (function (_super) {
+        __extends(BasketBallAnimations, _super);
+        function BasketBallAnimations(game, x, y, cb) {
+            _super.call(this, game, x, y);
+            this._cb = cb;
+            this._containerLeft = this.game.add.sprite(0, 0);
+            this._containerRight = this.game.add.sprite(20, 10);
+            this.addChild(this._containerLeft);
+            this.addChild(this._containerRight);
+            // левый беграунд
+            this._bgL = this.game.add.sprite(-90, -60 + 20, "bg");
+            this._floorLeft = this.game.add.sprite(20, 405 + 20, "floor_left");
+            this._containerLeft.addChild(this._bgL);
+            this._containerLeft.addChild(this._floorLeft);
+            // правый беграунд
+            this._bgR = this.game.add.sprite(400, -50, "bg");
+            this._bgR.scale.set(0.5);
+            this._floorRight = this.game.add.sprite(470, 180, "floor_right");
+            this._containerRight.addChild(this._bgR);
+            this._containerRight.addChild(this._floorRight);
+            // левыая анимация
+            this._spineL = this.game.add.spine(250, 330 - 5, "idleLeft");
+            this._currentAnimationL = this._spineL.setAnimationByName(0, "animation", true);
+            this._currentAnimationL.timeScale = 0.6;
+            this._spineL.setToSetupPose();
+            this._containerLeft.addChild(this._spineL);
+            // правая
+            this._spineR = this.game.add.spine(550, 150, "idleRight");
+            this._currentAnimationR = this._spineR.setAnimationByName(0, "animation", true);
+            this._currentAnimationR.timeScale = 0.6;
+            this._spineR.setToSetupPose();
+            this._containerRight.addChild(this._spineR);
+            this._maskLeft = new Phaser.Graphics(this.game, 200, 300);
+            this._maskRight = new Phaser.Graphics(this.game, 600, 125);
+            this._containerLeft.addChild(this._maskLeft);
+            this._containerRight.addChild(this._maskRight);
+            this.initMask();
+            this.initSpine();
+            this.startAnimation();
+            // включаем анимацию победы/поражения
+        }
+        // функция, которая будет вызываться при правильном ответе
+        BasketBallAnimations.prototype.correctAnswerAnimation = function () {
+            var _this = this;
+            var tween = this.game.add.tween(this._maskLeft.scale).to({ x: 0, y: 0 }, 300, Phaser.Easing.Linear.None, true);
+            tween.onComplete.add(function () {
+                var tweenRight = _this.game.add.tween(_this._maskRight.scale).to({ x: 0, y: 0 }, 300, Phaser.Easing.Linear.None, true);
+                _this.initAttack(_this.goodAttackAnimation.bind(_this));
+            });
+        };
+        // функция, которая будет вызываться при неправильном ответе
+        BasketBallAnimations.prototype.wrongAnswerAnimation = function () {
+            var _this = this;
+            var tween = this.game.add.tween(this._maskLeft.scale).to({ x: 0, y: 0 }, 300, Phaser.Easing.Linear.None, true);
+            tween.onComplete.add(function () {
+                var tweenRight = _this.game.add.tween(_this._maskRight.scale).to({ x: 0, y: 0 }, 300, Phaser.Easing.Linear.None, true);
+                _this.initAttack(_this.badAttackAnimation.bind(_this));
+            });
+        };
+        BasketBallAnimations.prototype.restart = function () {
+            var _this = this;
+            this.hide();
+            setTimeout(function () {
+                _this.setIdleState();
+            }, 100);
+        };
+        BasketBallAnimations.prototype.initSpine = function () {
+            this._attackSpine = this.game.add.spine(370, 270 - 5, "Attack");
+            this._goodAttackSpine = this.game.add.spine(490, 145, "GoodAttack");
+            this._badAttackSpine = this.game.add.spine(490, 125, "BadAttack");
+            this._attackSpine.visible = false;
+            this._goodAttackSpine.visible = false;
+            this._badAttackSpine.visible = false;
+        };
+        BasketBallAnimations.prototype.hide = function () {
+            this._maskLeft.scale.set(0, 0);
+            this._maskRight.scale.set(0, 0);
+            this._attackSpine.visible = false;
+            this._badAttackSpine.visible = false;
+            this._goodAttackSpine.visible = false;
+        };
+        BasketBallAnimations.prototype.setIdleState = function () {
+            this._bgL.x = -90;
+            this._bgL.y = -60 + 20;
+            this._bgR.x = 400;
+            this._bgR.y = -50;
+            this._bgR.scale.set(0.5);
+            this._floorLeft.visible = true;
+            this._floorRight.visible = true;
+            this._spineL.visible = true;
+            this._spineR.visible = true;
+            this.startAnimation();
+        };
+        // тут инициализируются маски
+        BasketBallAnimations.prototype.initMask = function () {
+            this._maskLeft.beginFill(0xFFFFFF);
+            this._maskRight.beginFill(0xFFFFFF);
+            this._maskLeft.scale.set(0, 0);
+            this._maskRight.scale.set(0, 0);
+            // left circle
+            this._maskLeft.drawCircle(0, 0, 370);
+            // right circle
+            this._maskRight.drawCircle(0, 0, 250);
+            this._containerLeft.mask = this._maskLeft;
+            this._containerRight.mask = this._maskRight;
+        };
+        // здесь происходит анимация аттаки
+        BasketBallAnimations.prototype.initAttack = function (onEndCallback) {
+            var _this = this;
+            this._spineL.visible = false;
+            this._spineR.visible = false;
+            this._maskLeft.scale.set(0, 0);
+            this._bgL.y = 70;
+            this._floorLeft.visible = false;
+            var tween = this.game.add.tween(this._maskLeft.scale).to({ x: 0.6, y: 0.6 }, 300, Phaser.Easing.Linear.None, true);
+            this._attackSpine.visible = true;
+            this._currentAnimationAttack = this._attackSpine.setAnimationByName(0, "animation", false);
+            this._currentAnimationAttack.timeScale = 0.6;
+            this._attackSpine.setToSetupPose();
+            this._containerLeft.addChild(this._attackSpine);
+            this._currentAnimationAttack.onEvent = function (trackIndex, event) {
+                if (event.data.name == "Vjuh") {
+                    TProject.Config.audio.play("vjuh", 0.6);
+                    _this._bgL.y = 170;
+                    _this._currentAnimationAttack.timeScale = 0.8;
+                }
+            };
+            this._currentAnimationAttack.onEnd = function () {
+                _this._cb("attackAtimationCompleted");
+                onEndCallback();
+            };
+        };
+        // анимация победы
+        BasketBallAnimations.prototype.goodAttackAnimation = function () {
+            var _this = this;
+            //Config.audio.play("goodCatch", 0.8);
+            setTimeout(function () {
+                TProject.Config.audio.play("goodCatch", 0.8);
+            }, 300);
+            this._maskRight.scale.set(0, 0);
+            this._spineR.visible = false;
+            this._bgR.scale.set(1, 1);
+            this._floorRight.visible = false;
+            var tween = this.game.add.tween(this._maskRight.scale).to({ x: 0.9, y: 0.9 }, 200, Phaser.Easing.Linear.None, true);
+            this._goodAttackSpine.visible = true;
+            this._currentAnimationGoodAttack = this._goodAttackSpine.setAnimationByName(0, "animation", false);
+            this._currentAnimationGoodAttack.timeScale = 0.8;
+            this._goodAttackSpine.setToSetupPose();
+            this._containerRight.addChild(this._goodAttackSpine);
+            this._currentAnimationGoodAttack.onEvent = function (trackIndex, event) {
+                if (event.data.name == "startSound") {
+                    setTimeout(function () {
+                        TProject.Config.audio.play("good", 0.6);
+                    }, 300);
+                }
+            };
+            this._currentAnimationGoodAttack.onEnd = function () {
+                _this._cb("finalAnimationCompleted");
+            };
+        };
+        // анимация поражения
+        BasketBallAnimations.prototype.badAttackAnimation = function () {
+            var _this = this;
+            this._maskRight.scale.set(0, 0);
+            this._spineR.visible = false;
+            this._bgR.scale.set(1, 1);
+            this._floorRight.visible = false;
+            var tween = this.game.add.tween(this._maskRight.scale).to({ x: 1, y: 1 }, 200, Phaser.Easing.Linear.None, true);
+            this._badAttackSpine.visible = true;
+            this._badAttackSpine.scale.set(0.8, 0.8);
+            this._currentAnimationBadAttack = this._badAttackSpine.setAnimationByName(0, "animation", false);
+            this._currentAnimationBadAttack.timeScale = 0.8;
+            this._badAttackSpine.setToSetupPose();
+            this._containerRight.addChild(this._badAttackSpine);
+            this._currentAnimationBadAttack.onEvent = function (trackIndex, event) {
+                if (event.data.name == "startSound") {
+                    TProject.Config.audio.play("badCatch", 0.8);
+                    setTimeout(function () {
+                        TProject.Config.audio.play("bad", 0.6);
+                    }, 300);
+                }
+            };
+            this._currentAnimationBadAttack.onEnd = function () {
+                _this._cb("finalAnimationCompleted");
+            };
+        };
+        // тут идет начальная анимация
+        BasketBallAnimations.prototype.startAnimation = function () {
+            var _this = this;
+            var tween = this.game.add.tween(this._maskLeft.scale).to({ x: 1.1, y: 1.1 }, 500, Phaser.Easing.Sinusoidal.Out, true);
+            tween.onComplete.add(function () {
+                _this._cb("firstLeftMaskOpen");
+                var tweenLeftSmall = _this.game.add.tween(_this._maskLeft.scale).to({ x: 1, y: 1 }, 100, Phaser.Easing.Sinusoidal.Out, true);
+                var tweenRight = _this.game.add.tween(_this._maskRight.scale).to({ x: 1.1, y: 1.1 }, 500, Phaser.Easing.Sinusoidal.Out, true);
+                tweenRight.onComplete.add(function () {
+                    var tweenRightSmall = _this.game.add.tween(_this._maskRight.scale).to({ x: 1, y: 1 }, 100, Phaser.Easing.Sinusoidal.Out, true);
+                    _this._cb("firstRightMaskOpen");
+                }, _this);
+            }, this);
+        };
+        return BasketBallAnimations;
+    })(Phaser.Sprite);
+    TProject.BasketBallAnimations = BasketBallAnimations;
+})(TProject || (TProject = {}));
+
 var TProject;
 (function (TProject) {
     var Config = (function () {
@@ -73,49 +287,284 @@ var TProject;
     var GameUI = (function (_super) {
         __extends(GameUI, _super);
         function GameUI(game, cb) {
-            var _this = this;
             _super.call(this, game, 0.0, 0.0);
             this._cb = cb;
-            this._question = this.game.add.text(59.0, 110.0, "213123", { font: "Poppins", fontSize: "30px", fontWeight: "bold", fill: "#000000" });
-            this.addChild(this._question);
-            this._throwBtn = this.game.add.sprite(this.game.world.centerX + 75, 140.0 + this.game.height - 250, "ball_throw");
-            this._throwText = this.game.add.text(this._throwBtn.width / 2, this._throwBtn.height / 2, "Throw", { font: "Poppins", fontSize: "30px", fontWeight: "bold", fill: "#FFFFFF" });
+            this._btnIsOver = false;
+            this._btnIsDown = false;
+            this._upperTxt = game.add.text(250, 65, "INBOUND THE BALL TO YOUR TEAMMATE!", { font: "Poppins", fontSize: "36px", fontWeight: "bold", fill: "#ff6600", align: "center", wordWrap: true, wordWrapWidth: 450 });
+            this._upperTxt.lineSpacing = -10;
+            this._upperTxt.anchor.set(0.5);
+            this._solveTxt = game.add.text(game.width, game.world.centerY + 80, "SOLVE THIS PROBLEM: ", { font: "Poppins", fontSize: "30px", fontWeight: "bold", fill: "#ff6600" });
+            this._solveTxt.anchor.set(1, 1);
+            this._question = this.game.add.text(this._solveTxt.centerX, game.world.centerY + 80, "213123", { font: "Poppins", fontSize: "30px", fontWeight: "bold", fill: "#000000" });
+            this._question.anchor.set(0.5, 0);
+            this._ballShadow = game.add.sprite(this.game.width - 80, this.game.height - 7, "ball_shadow");
+            this._ballShadow.anchor.set(0.5);
+            this._throwBtn = this.game.add.sprite(this.game.width + 60, game.height - 55);
+            this._throwBtn.anchor.set(0.5);
+            this._ball = game.add.sprite(0, 0, "ball_throw");
+            this._ball.anchor.set(0.5);
+            this._throwText = this.game.add.text(0, 0, "Throw", { font: "Poppins", fontSize: "32px", fontWeight: "bold", fill: "#ffffff", align: "center", wordWrap: true, wordWrapWidth: 100 });
             this._throwText.anchor.set(0.5);
-            this._throwBtn.addChild(this._throwText);
-            this._throwBtn.inputEnabled = true;
-            this._throwBtn.events.onInputOver.add(function () {
-                _this._throwText.fill = "#FFEB3B";
-            }, this);
-            this._throwBtn.events.onInputUp.add(this.submit, this);
-            this._throwBtn.events.onInputOut.add(function () {
-                _this._throwText.fill = "#FFFFFF";
-            });
-            this.addChild(this._throwBtn);
+            this._throwText.lineSpacing = -10;
+            this._problemString = this.game.add.text(0, 20, "PROBLEM", { font: "Poppins", fontSize: "24px", fontWeight: "bold", fill: "#ffffff", align: "center", wordWrap: true, wordWrapWidth: 100 });
+            this._problemString.anchor.set(0.5);
+            // this._throwBtn.events.onInputOver.add(() => {
+            //     if (this._answer.text._text) {
+            //         this._btnIsOver = true;
+            //         this._throwText.fill = "#F7F21A";
+            //         if (this._btnIsDown) {
+            //             this._ball.scale.set(0.85);
+            //         }
+            //     }
+            // }, this);
+            // this._throwBtn.events.onInputOut.add(() => {
+            //     if (this._answer.text._text) {
+            //         this._btnIsOver = false;
+            //         this._throwText.fill = this._problemString.alpha? "#00FF00":"#FFFFFF";
+            //         if (this._btnIsDown) {
+            //             this._ball.scale.set(1);
+            //         }
+            //     }
+            // }, this);
+            // this._throwBtn.events.onInputDown.add(() => {
+            //     if (this._answer.text._text) {
+            //         this._btnIsDown = true;
+            //         this._ball.scale.set(0.85);
+            //     }
+            // }, this);
+            // this._throwBtn.events.onInputUp.add(() => {
+            //     this._btnIsDown = false;
+            //     if (this._btnIsOver) {
+            //         this._ball.scale.set(1);
+            //         this.submit(this._restart);
+            //     }
+            // }, this); 
             this.addText();
+            this._answerTxt = game.add.text(this._answer.centerX + 10, this.game.height - 65, "ANSWER:", { font: "Poppins", fontSize: "30px", fontWeight: "bold", fill: "#666666" });
+            this._answerTxt.anchor.set(0.5, 1);
+            this._correctAnswerTxt = game.add.text(250, 120, "", { font: "Poppins", fontSize: "24px", fontWeight: "bold", fill: "#000000", align: "center", wordWrap: true, wordWrapWidth: 450 });
+            this._correctAnswerTxt.anchor.set(0.5);
+            this.addChild(this._upperTxt);
+            this.addChild(this._solveTxt);
+            this.addChild(this._question);
+            this.addChild(this._ballShadow);
+            this.addChild(this._throwBtn);
+            this._throwBtn.addChild(this._ball);
+            this._throwBtn.addChild(this._throwText);
+            this._throwBtn.addChild(this._problemString);
+            this.addChild(this._correctAnswerTxt);
+            ;
+            this._btmGroup = game.add.group();
+            this._btmGroup.add(this._solveTxt);
+            this._btmGroup.add(this._question);
+            this._btmGroup.add(this._answerTxt);
+            this._btmGroup.add(this._answer);
+            this.init();
+            //this.showUpperUI();
+            //this.showLowerUI();
         }
+        GameUI.prototype.init = function () {
+            var _this = this;
+            this._answer.inputEnabled = false;
+            this._upperTxt.alpha = 0;
+            this._upperTxt.scale.set(0.8);
+            this._btmGroup.alpha = 0;
+            this._answer.inputEnabled = false;
+            this._answer.blockInput = true;
+            this._throwBtn.inputEnabled = false;
+            this._correctAnswerTxt.alpha = 0;
+            // this._throwBtn.visible = false;
+            this._ballShadow.scale.set(0);
+            this._upperTxt.setText("INBOUND THE BALL TO YOUR TEAMMATE!");
+            this._upperTxt.y = 65;
+            this._upperTxt.fontSize = 36;
+            this._upperTxt.lineSpacing = -10;
+            this._throwBtn.position.set(this.game.width + 60, this.game.height - 55);
+            this._ball.scale.set(1);
+            this._throwText.setText("Throw");
+            this._throwText.fontSize = 32;
+            this._throwText.fill = "#ffffff";
+            this._throwText.y = 0;
+            this._problemString.alpha = 0;
+            this._throwBtn.events.onInputUp.removeAll();
+            this._throwBtn.events.onInputDown.removeAll();
+            this._throwBtn.events.onInputOver.removeAll();
+            this._throwBtn.events.onInputOut.removeAll();
+            this._throwBtn.events.onInputUp.add(function () {
+                if (_this._answer.text._text) {
+                    _this._btnIsDown = false;
+                    if (_this._btnIsOver) {
+                        _this._ball.scale.set(1);
+                        _this.submit();
+                    }
+                }
+            }, this);
+            this._throwBtn.events.onInputOver.add(function () {
+                if (_this._answer.text._text) {
+                    _this._btnIsOver = true;
+                    _this._throwText.fill = "#F7F21A";
+                    if (_this._btnIsDown) {
+                        _this._ball.scale.set(0.85);
+                    }
+                }
+            }, this);
+            this._throwBtn.events.onInputOut.add(function () {
+                if (_this._answer.text._text) {
+                    _this._btnIsOver = false;
+                    _this._throwText.fill = _this._problemString.alpha ? "#00FF00" : "#FFFFFF";
+                    if (_this._btnIsDown) {
+                        _this._ball.scale.set(1);
+                    }
+                }
+            }, this);
+            this._throwBtn.events.onInputDown.add(function () {
+                if (_this._answer.text._text) {
+                    _this._btnIsDown = true;
+                    _this._ball.scale.set(0.85);
+                }
+            }, this);
+        };
+        GameUI.prototype.showUpperUI = function () {
+            TProject._.log(this._answer.text._text);
+            this.game.add.tween(this._upperTxt.scale).to({ x: 1, y: 1 }, 400, Phaser.Easing.Linear.None, true);
+            this.game.add.tween(this._upperTxt).to({ alpha: 1 }, 400, Phaser.Easing.Linear.None, true);
+        };
+        GameUI.prototype.showLowerUI = function () {
+            var _this = this;
+            var tween = this.game.add.tween(this._btmGroup).to({ alpha: 1 }, 500, Phaser.Easing.Linear.None, true);
+            tween.onComplete.add(function () {
+                _this._answer.inputEnabled = true;
+            });
+            this.game.add.tween(this._throwBtn).to({ x: this.game.width - 80 }, 300, Phaser.Easing.Linear.None, true).
+                onComplete.add(function () {
+                _this._throwBtn.inputEnabled = true;
+            });
+        };
         GameUI.prototype.setQuestion = function (question) {
             this._question.setText(question);
             TProject._.log(question);
         };
         // обработка нажатия на "throw"
         GameUI.prototype.submit = function () {
+            var _this = this;
+            this._answer.inputEnabled = false;
             var value = this._answer.text._text;
-            if (value == "") {
-                return;
-            }
+            // if (value == "") {
+            //     return;
+            // }
+            TProject.Config.audio.play("button", 0.6);
+            this._throwBtn.inputEnabled = false;
             if (this._cb) {
                 this._cb(value);
             }
             this._answer.setText("");
-            // тут, возможно, надо вставить всякие анимации
+            this.game.add.tween(this._upperTxt).to({ alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
+            var tween = this.game.add.tween(this._throwBtn).to({ alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
+            tween.onComplete.add(function () {
+                _this._throwBtn.y = -60;
+                _this._throwBtn.alpha = 1;
+                _this._throwText.fill = "#FFFFFF";
+                _this._upperTxt.scale.set(0);
+                _this._upperTxt.alpha = 1;
+            });
+            this._throwBtn.events.onInputUp.removeAll();
+            this._throwBtn.events.onInputDown.removeAll();
+            this._throwBtn.events.onInputOver.removeAll();
+            this._throwBtn.events.onInputOut.removeAll();
+            this._throwBtn.events.onInputUp.add(function () {
+                _this._btnIsDown = false;
+                if (_this._btnIsOver) {
+                    _this._restartCallback();
+                    TProject.Config.audio.play("button", 0.6);
+                }
+            }, this);
+            this._throwBtn.events.onInputOver.add(function () {
+                _this._btnIsOver = true;
+                _this._throwText.fill = "#F7F21A";
+                if (_this._btnIsDown) {
+                    _this._ball.scale.set(0.85);
+                }
+            }, this);
+            this._throwBtn.events.onInputOut.add(function () {
+                _this._btnIsOver = false;
+                _this._throwText.fill = _this._problemString.alpha ? "#00FF00" : "#FFFFFF";
+                if (_this._btnIsDown) {
+                    _this._ball.scale.set(1);
+                }
+            }, this);
+            this._throwBtn.events.onInputDown.add(function () {
+                _this._btnIsDown = true;
+                _this._ball.scale.set(0.85);
+            }, this);
+        };
+        GameUI.prototype.updateLowerUI = function (isRightAnswer, rightAnswer) {
+            var _this = this;
+            if (!isRightAnswer && rightAnswer) {
+                this._correctAnswerTxt.setText("correct answer: " + rightAnswer);
+                this._throwText.setText("NEW PROBLEM");
+                this._throwText.fontSize = 26;
+                TProject._.log(this._answer.text._text);
+                this.game.add.tween(this._correctAnswerTxt).to({ alpha: 1 }, 500, Phaser.Easing.Linear.None, true);
+            }
+            else if (isRightAnswer) {
+                this._throwText.setText("NEXT");
+                this._throwText.fontSize = 36;
+                this._throwText.y -= 5;
+                this._throwText.fill = "#00ff00";
+                this._problemString.alpha = 1;
+                TProject._.log(this._answer.text._text);
+            }
+            this.game.add.tween(this._ballShadow.scale).to({ y: 1, x: 1 }, 300, Phaser.Easing.Linear.None, true);
+            var tween = this.game.add.tween(this._throwBtn).to({ y: this.game.height - 55 }, 300, Phaser.Easing.Linear.None, true);
+            tween.onComplete.add(function () {
+                TProject.Config.audio.play("buttonFallDown", 0.6).allowMultiple = true;
+                _this.game.add.tween(_this._ballShadow.scale).to({ y: 0.7, x: 0.7 }, 100, Phaser.Easing.Linear.None, true);
+                _this.game.add.tween(_this._throwBtn).to({ y: _this._throwBtn.y - 50 }, 100, Phaser.Easing.Linear.None, true).onComplete.add(function () {
+                    _this.game.add.tween(_this._ballShadow.scale).to({ y: 1, x: 1 }, 600, Phaser.Easing.Bounce.Out, true);
+                    //Config.audio.play("buttonFallDown", 0.6).allowMultiple = true;
+                    setTimeout(function () {
+                        TProject.Config.audio.play("buttonFallDown", 0.6).allowMultiple = true;
+                        setTimeout(function () {
+                            TProject.Config.audio.play("buttonFallDown", 0.6).allowMultiple = true;
+                        }, 200);
+                    }, 250);
+                    _this.game.add.tween(_this._throwBtn).to({ y: _this._throwBtn.y + 50 }, 600, Phaser.Easing.Bounce.Out, true).onComplete.add(function () {
+                        _this._throwBtn.inputEnabled = true;
+                    });
+                });
+            });
+        };
+        Object.defineProperty(GameUI.prototype, "restartCallback", {
+            set: function (cb) {
+                this._restartCallback = cb;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        GameUI.prototype.updateUpperUI = function (isRightAnswer) {
+            var _this = this;
+            if (!isRightAnswer) {
+                this._upperTxt.setText("PICKED OFF!");
+                this._upperTxt.fontSize = 52;
+            }
+            else {
+                this._upperTxt.setText("GREAT CATCH!");
+                this._upperTxt.lineSpacing = -20;
+                this._upperTxt.fontSize = 60;
+                this._upperTxt.y = 100;
+            }
+            this.game.add.tween(this._upperTxt.scale).to({ x: 1.1, y: 1.1 }, 400, Phaser.Easing.Linear.None, true).onComplete.add(function () {
+                _this.game.add.tween(_this._upperTxt.scale).to({ x: 1, y: 1 }, 100, Phaser.Easing.Linear.None, true);
+            });
         };
         GameUI.prototype.addText = function () {
-            this._answer = this.game.add.inputField(-110 + this.game.world.centerX, 140.0 + this.game.height - 200, {
+            this._answer = this.game.add.inputField(55 + this.game.world.centerX, this.game.height - 70, {
                 font: "30px Poppins",
                 fill: "#000000",
                 fillAlpha: 1,
                 fontWeight: "bold",
-                width: 150,
+                width: 140,
                 padding: 8,
                 borderWidth: 1,
                 borderColor: "#000000",
@@ -125,6 +574,7 @@ var TProject;
                 zoom: false,
                 cursorColor: "#000"
             });
+            this._answer.scale.set(1, 1.2);
             //this.addChild(this.answer);
             this._answer.setText("");
         };
@@ -477,7 +927,7 @@ var TProject;
             return rightAns;
         };
         ParsingText.prototype.nextQuestion = function () {
-            this.currentQ++;
+            this.currentQ = (this.currentQ + 1) % this.aqArray.length;
         };
         ParsingText.prototype.shuffleArray = function () {
             this.currentQ = 0;
@@ -614,11 +1064,16 @@ var TProject;
             if (TProject.Main.DEBUG) {
                 this.game.time.advancedTiming = true;
             }
-            this._bg = this.game.add.sprite(0, 0, "bg");
+            this._isRightAns = false;
+            this.game.stage.setBackgroundColor("#ffcc33");
+            // this._bg = this.game.add.sprite(0, 0, "bg");
             this._pasrsingText = new TProject.ParsingText(this.game);
+            this._basketBallAnimations = new TProject.BasketBallAnimations(this.game, 0, 0, this.onAnimation.bind(this));
+            this.game.stage.addChild(this._basketBallAnimations);
             this._gameUI = new TProject.GameUI(this.game, this.onThrow.bind(this));
             this.game.stage.addChild(this._gameUI);
             this.myinit();
+            this._gameUI.restartCallback = this.restart.bind(this);
         };
         // тут инициализация каких-то штук важный,
         // который будут использоваться при replay
@@ -642,15 +1097,54 @@ var TProject;
         // обработка клика на "throw"
         Body.prototype.onThrow = function (answer) {
             TProject._.log("THROW!");
-            if (this._pasrsingText.getCurrentA() == answer) {
+            var currA = this._pasrsingText.getCurrentA();
+            //Нужно передавать в GameUI информацию о том, правильный был ответ или нет
+            //для того, чтобы корректно отображать информацию вызовом функции без аргументов
+            if (currA == answer) {
                 TProject._.log("correct answer");
+                this._isRightAns = true;
+                this._basketBallAnimations.correctAnswerAnimation();
             }
             else {
-                TProject._.log("wrong answer " + this._pasrsingText.getCurrentA() + " : " + answer);
+                TProject._.log("wrong answer " + currA + " : " + answer);
+                // Также, передаём в GameUI информацию о том, какой был правильный ответ
+                this._isRightAns = false;
+                this._basketBallAnimations.wrongAnswerAnimation();
             }
             // устанвливаем новый вопрос
+            // this._pasrsingText.nextQuestion();
+            // this._gameUI.setQuestion(this._pasrsingText.getCurrentQ());
+        };
+        Body.prototype.restart = function () {
+            this._basketBallAnimations.restart();
             this._pasrsingText.nextQuestion();
+            this._gameUI.init();
             this._gameUI.setQuestion(this._pasrsingText.getCurrentQ());
+        };
+        // обработка калбэков от анимации
+        Body.prototype.onAnimation = function (stage) {
+            var _this = this;
+            switch (stage) {
+                case "firstLeftMaskOpen":
+                    TProject._.log("left animation has finished");
+                    this._gameUI.showUpperUI();
+                    break;
+                case "firstRightMaskOpen":
+                    TProject._.log("right animation has finished");
+                    //this._gameUI.updateLowerUI(true);
+                    this.game.time.events.add(500, function () {
+                        _this._gameUI.showLowerUI();
+                    });
+                    break;
+                case "attackAtimationCompleted":
+                    TProject._.log("attack animation has finished");
+                    this._gameUI.updateUpperUI(this._isRightAns);
+                    break;
+                case "finalAnimationCompleted":
+                    TProject._.log("final animation has finished");
+                    this._gameUI.updateLowerUI(this._isRightAns, this._pasrsingText.getCurrentA());
+                    break;
+            }
         };
         // Если мы хотим резко удалить со сцены какую-нибудь хуйню перед закрытием, то лучше делать это тут.
         Body.prototype.shutdown = function () {
@@ -693,12 +1187,19 @@ var TProject;
             this.game.load.image("mainMenu", "assets/images/mainMenu.png");
             this.game.load.image("bg", "assets/images/Background.png");
             this.game.load.image("ball_throw", "assets/images/P1_Attack_Ball.png");
+            this.game.load.image("ball_shadow", "assets/images/BallShadow.png");
+            this.game.load.image("floor_left", "assets/images/Floor.png");
+            this.game.load.image("floor_right", "assets/images/Floor2.png");
             //Spine
             this.game.load.spine("idleLeft", "assets/images/idleLeft.json");
+            this.game.load.spine("idleRight", "assets/images/idleRight.json");
+            this.game.load.spine("Attack", "assets/images/Attack.json");
+            this.game.load.spine("GoodAttack", "assets/images/GoodAttack.json");
+            this.game.load.spine("BadAttack", "assets/images/BadAttack.json");
             //
             this.game.load.text('questions', 'assets/questions.txt');
             //Загружаем звуки
-            //this.game.load.audiosprite("sfx", ["assets/sounds/sfx.mp3","assets/sounds/sfx.ogg"], "assets/sounds/sfx.json");
+            this.game.load.audiosprite("sfx", ["assets/sounds/sfx.mp3", "assets/sounds/sfx.ogg"], "assets/sounds/sfx.json");
         };
         Boot.prototype.create = function () {
             var _this = this;
@@ -729,7 +1230,7 @@ var TProject;
                 text = this.game.add.text(-1000, -1000, ".  ", { font: "Poppins", fontSize: "28px", fontWeight: "normal", fill: "#00CC00" });
                 text.parent.removeChild(text);
                 text = null;
-                // Config.audio = this.game.add.audioSprite("sfx");
+                TProject.Config.audio = this.game.add.audioSprite("sfx");
                 if (window["SKIP_MENU"] == true) {
                     this.game.state.start("Body", true);
                 }

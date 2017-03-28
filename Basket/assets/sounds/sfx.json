@@ -1,0 +1,45 @@
+{
+  "resources": [
+    "sfx.ogg",
+    "sfx.m4a",
+    "sfx.mp3",
+    "sfx.ac3"
+  ],
+  "spritemap": {
+    "badCatch": {
+      "start": 0,
+      "end": 0.5224489795918368,
+      "loop": false
+    },
+    "button": {
+      "start": 2,
+      "end": 2.522448979591837,
+      "loop": false
+    },
+    "buttonFallDown": {
+      "start": 4,
+      "end": 4.377233560090703,
+      "loop": false
+    },
+    "good": {
+      "start": 6,
+      "end": 8.142040816326531,
+      "loop": false
+    },
+    "vjuh": {
+      "start": 10,
+      "end": 10.783673469387756,
+      "loop": false
+    },
+    "bad": {
+      "start": 12,
+      "end": 13.675442176870748,
+      "loop": false
+    },
+    "goodCatch": {
+      "start": 15,
+      "end": 15.877369614512471,
+      "loop": false
+    }
+  }
+}
