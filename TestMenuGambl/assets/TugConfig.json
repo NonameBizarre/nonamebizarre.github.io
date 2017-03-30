@@ -1,0 +1,53 @@
+{
+	"effortLow": 0.33,
+	"effortOpt": 0.5,
+	"effortHigh": 0.66,
+	"effort": [
+		[0.070, 0.2],
+		[0.085, 0.2],
+		[0.100, 0.3]
+	],
+
+	"strengthAtLow": 35,
+	"strengthAtOpt": 100,
+	"strengthAtHigh": 45,
+	"strengthToSpeed": 0.5,
+
+
+	"maxRounds": 5,
+
+	"checkTime": 0.25,
+	"moveDistance": 15,
+
+	"moveTime": 1,
+	"moveTransition": "easeOutElastic",
+
+	"iaMashTimeMin": [0.30, 0.10, 0.10],
+	"iaMashTimeMax": [0.27, 0.17, 0.17],
+	"iaCheckTimeMin": [0.9, 0.7, 0.4],
+	"iaCheckTimeMax": [1, 0.8, 0.5],
+
+
+	"iaBalance": [1, 1, 1.5, 2, 2.5],
+
+	"loseGroundSoundTime": 0.1,
+
+	"gumballLoseGroundSoundsIds": ["tug_gumball_lose_ground1", "tug_gumball_lose_ground2"],
+	"gumballLoseGroundSoundsChances": [50, 50],
+
+	"darwinLoseGroundSoundsIds": ["tug_darwin_lose_ground1", "tug_darwin_lose_ground2"],
+	"darwinLoseGroundSoundsChances": [50, 50],
+
+	"teamPullSoundTime": 0.1,
+
+	"gumballPullSoundsIds": ["tug_pullteam1_1", "tug_pullteam1_2", "tug_pullteam1_3"],
+	"gumballPullSoundsChances": [30, 30, 30],
+
+	"darwinPullSoundsIds": ["tug_pullteam2_1", "tug_pullteam2_2", "tug_pullteam2_3"],
+	"darwinPullSoundsChances": [30, 30, 30],
+
+	"bgm": "bgm_games3",
+	"fanfare": "fanfare",
+	"win": "win",
+	"lose": "lose"
+}

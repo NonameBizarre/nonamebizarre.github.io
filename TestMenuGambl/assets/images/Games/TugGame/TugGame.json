@@ -1,0 +1,59 @@
+﻿{"frames": {
+
+"hud_faces0001":
+{
+	"frame": {"x":0,"y":0,"w":35,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":35},
+	"sourceSize": {"w":35,"h":35}
+},
+"hud_faces0002":
+{
+	"frame": {"x":0,"y":35,"w":35,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":35},
+	"sourceSize": {"w":35,"h":35}
+},
+"hud_faces0000":
+{
+	"frame": {"x":0,"y":70,"w":35,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":35},
+	"sourceSize": {"w":35,"h":35}
+},
+"rope_meter_scale0000":
+{
+	"frame": {"x":35,"y":70,"w":18,"h":77},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":77},
+	"sourceSize": {"w":18,"h":77}
+},
+"rope_meter_frame0000":
+{
+	"frame": {"x":0,"y":147,"w":32,"h":91},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":91},
+	"sourceSize": {"w":32,"h":91}
+},
+"rope_meter_gauge0000":
+{
+	"frame": {"x":32,"y":147,"w":18,"h":7},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":7},
+	"sourceSize": {"w":18,"h":7}
+}},
+"meta": {
+	"app": "Adobe Animate",
+	"version": "16.1.0.86",
+	"image": "TugGame.png",
+	"format": "RGBA8888",
+	"size": {"w":64,"h":256},
+	"scale": "1"
+}
+}

@@ -1,0 +1,35 @@
+﻿{"frames": {
+
+"joust_action_bg0000":
+{
+	"frame": {"x":2,"y":2,"w":640,"h":480},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":640,"h":480},
+	"sourceSize": {"w":640,"h":480}
+},
+"menu_crowd0000":
+{
+	"frame": {"x":2,"y":484,"w":693,"h":142},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":693,"h":142},
+	"sourceSize": {"w":693,"h":142}
+},
+"separator0000":
+{
+	"frame": {"x":697,"y":2,"w":41,"h":497},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":41,"h":497},
+	"sourceSize": {"w":41,"h":497}
+}},
+"meta": {
+	"app": "Adobe Animate",
+	"version": "16.1.0.86",
+	"image": "Menu.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1"
+}
+}
