@@ -229,7 +229,7 @@ var TProject;
         }
         return LocalConfig;
     }());
-    LocalConfig.CURRENT_STATE = "TugGame";
+    LocalConfig.CURRENT_STATE = "MainMenu";
     TProject.LocalConfig = LocalConfig;
 })(TProject || (TProject = {}));
 
