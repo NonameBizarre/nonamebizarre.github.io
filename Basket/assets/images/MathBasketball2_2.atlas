@@ -1,0 +1,76 @@
+
+MathBasketball2_2.png
+size: 512,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+E2Arm1
+  rotate: false
+  xy: 172, 31
+  size: 72, 25
+  orig: 72, 25
+  offset: 0, 0
+  index: -1
+E2Arm2
+  rotate: false
+  xy: 345, 101
+  size: 71, 25
+  orig: 71, 25
+  offset: 0, 0
+  index: -1
+E2TryingToDenyPass
+  rotate: true
+  xy: 172, 58
+  size: 68, 171
+  orig: 68, 171
+  offset: 0, 0
+  index: -1
+P2Arm1
+  rotate: false
+  xy: 246, 30
+  size: 48, 26
+  orig: 48, 26
+  offset: 0, 0
+  index: -1
+P2Arm2
+  rotate: false
+  xy: 345, 68
+  size: 52, 31
+  orig: 52, 31
+  offset: 0, 0
+  index: -1
+P2TryingToGetBall
+  rotate: true
+  xy: 2, 28
+  size: 98, 168
+  orig: 98, 168
+  offset: 0, 0
+  index: -1
+Symbol 3
+  rotate: true
+  xy: 296, 27
+  size: 29, 31
+  orig: 29, 31
+  offset: 0, 0
+  index: -1
+Symbol 4
+  rotate: true
+  xy: 418, 97
+  size: 29, 31
+  orig: 29, 31
+  offset: 0, 0
+  index: -1
+Symbol 5
+  rotate: false
+  xy: 2, 2
+  size: 32, 24
+  orig: 32, 24
+  offset: 0, 0
+  index: -1
+Symbol 6
+  rotate: false
+  xy: 36, 2
+  size: 32, 24
+  orig: 32, 24
+  offset: 0, 0
+  index: -1

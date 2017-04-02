@@ -1,0 +1,27 @@
+﻿{"frames": {
+
+"levelCross0000":
+{
+	"frame": {"x":2,"y":2,"w":43,"h":37},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":43,"h":37},
+	"sourceSize": {"w":43,"h":37}
+},
+"levelCross0001":
+{
+	"frame": {"x":2,"y":41,"w":43,"h":37},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":43,"h":37},
+	"sourceSize": {"w":43,"h":37}
+}},
+"meta": {
+	"app": "Adobe Animate",
+	"version": "15.1.0.210",
+	"image": "hearts.png",
+	"format": "RGBA8888",
+	"size": {"w":64,"h":128},
+	"scale": "1"
+}
+}

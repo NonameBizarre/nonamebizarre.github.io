@@ -1,0 +1,41 @@
+
+MathBasketball2_7.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BigCircle
+  rotate: false
+  xy: 2, 55
+  size: 364, 364
+  orig: 364, 364
+  offset: 0, 0
+  index: -1
+E2Reachiing
+  rotate: false
+  xy: 659, 5
+  size: 169, 171
+  orig: 169, 171
+  offset: 0, 0
+  index: -1
+E2Stealing
+  rotate: false
+  xy: 644, 178
+  size: 250, 241
+  orig: 250, 241
+  offset: 0, 0
+  index: -1
+P2BallStolen
+  rotate: true
+  xy: 368, 2
+  size: 174, 289
+  orig: 174, 289
+  offset: 0, 0
+  index: -1
+P2DribblingAround
+  rotate: false
+  xy: 368, 178
+  size: 274, 241
+  orig: 274, 241
+  offset: 0, 0
+  index: -1

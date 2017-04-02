@@ -1,0 +1,48 @@
+
+MathBasketball3_1.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+E3Arm1Static
+  rotate: false
+  xy: 528, 48
+  size: 93, 75
+  orig: 93, 75
+  offset: 0, 0
+  index: -1
+E3Eyes
+  rotate: false
+  xy: 2, 2
+  size: 26, 8
+  orig: 26, 8
+  offset: 0, 0
+  index: -1
+P3Arm1Static
+  rotate: false
+  xy: 437, 37
+  size: 89, 86
+  orig: 89, 86
+  offset: 0, 0
+  index: -1
+P3Arm2Static
+  rotate: false
+  xy: 623, 65
+  size: 95, 58
+  orig: 95, 58
+  offset: 0, 0
+  index: -1
+Symbol 1
+  rotate: true
+  xy: 234, 16
+  size: 107, 201
+  orig: 107, 201
+  offset: 0, 0
+  index: -1
+Symbol 2
+  rotate: true
+  xy: 2, 12
+  size: 111, 230
+  orig: 111, 230
+  offset: 0, 0
+  index: -1

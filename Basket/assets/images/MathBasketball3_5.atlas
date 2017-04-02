@@ -1,0 +1,27 @@
+
+MathBasketball3_5.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Basketball
+  rotate: false
+  xy: 539, 66
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+E3Blocking
+  rotate: true
+  xy: 290, 26
+  size: 136, 247
+  orig: 136, 247
+  offset: 0, 0
+  index: -1
+P3JumpHook
+  rotate: true
+  xy: 2, 2
+  size: 160, 286
+  orig: 160, 286
+  offset: 0, 0
+  index: -1

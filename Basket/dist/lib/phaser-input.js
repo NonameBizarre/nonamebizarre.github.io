@@ -42,10 +42,28 @@ var PhaserInput;
             this.element.value = this.value;
             this.element.type = InputType[type];
             this.element.addEventListener('focusin', function () {
+               // console.log("focusin 1");
+
+                _this.timerTest = new Date().getTime();
+                //_this.element.focus();
                 _this.focusIn.dispatch();
             });
-            this.element.addEventListener('focusout', function () {
-                _this.focusOut.dispatch();
+            this.element.addEventListener('focusout', function (event) {
+                var ttime = new Date().getTime();
+
+                if (ttime - _this.timerTest < 120) {
+                    event = event || window.event // кросс-браузерно
+                    if (event.stopPropagation) {
+                        event.stopPropagation()
+                    } else {
+                        // Вариант Internet Explorer:
+                        event.cancelBubble = true
+                    }
+                    _this.element.focus();
+                    //console.log("focusout 1", event);
+                    return false;
+                }
+                
             });
             document.body.appendChild(this.element);
         }
@@ -111,6 +129,8 @@ var PhaserInput;
                     if (kbAppeared_1 && originalWidth_1 === window.innerWidth && originalHeight_1 === window.innerHeight) {
                         _this.focusOut.dispatch();
                         clearInterval(interval_1);
+                       // console.log("focusout 2")
+                        //e.preventDefault();
                     }
                 }, 50);
             }
@@ -235,17 +255,32 @@ var PhaserInput;
             
 */
             _this.domElement.focusIn.add(function(){
-                this.timerTest = new Date().getTime();
+                
+
+                //this.canFocusOut = false;
             });
 
             _this.domElement.focusOut.add(function () {
 
-                var timeTest = Math.abs(this.timerTest - new Date().getTime());
+                //console.log("begin");
 
-                if (timeTest < 120) {
-                    _this.domElement.focus();
-                    return;
-                }
+                // var timeTest = Math.abs(_this.timerTest - new Date().getTime());
+
+                // if (timeTest < 120) {
+                //     _this.domElement.focus();
+                //     return null;
+                // }
+
+                // if (!this.canFocusOut) {
+                //     this.canFocusOut = true;
+                //     this.timerTest = new Date().getTime();
+                //     return null;
+                // }
+
+                //this.canFocusOut = false;
+
+                //console.log("hm");
+
 
                 //console.log("domElement focusOut", 232, timeTest);
 
@@ -385,6 +420,9 @@ var PhaserInput;
         InputField.prototype.keyUpProcessor = function () {
             this.domElement.addKeyUpListener(this.keyListener.bind(this));
             this.domElement.focus();
+            this.domElement.disabled = true;
+            let _this = this;
+            setTimeout(function () { _this.domElement.focus(); }, 10);
             if (this.blockInput === true) {
                 this.domElement.blockKeyDownEvents();
             }

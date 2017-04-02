@@ -1,0 +1,34 @@
+
+MathBasketball2.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BODY
+  rotate: true
+  xy: 2, 25
+  size: 97, 167
+  orig: 97, 167
+  offset: 0, 0
+  index: -1
+P2ArmsHoldingBallStatic
+  rotate: true
+  xy: 171, 32
+  size: 90, 54
+  orig: 90, 54
+  offset: 0, 0
+  index: -1
+empty_yes
+  rotate: false
+  xy: 171, 2
+  size: 30, 28
+  orig: 30, 28
+  offset: 0, 0
+  index: -1
+empty_yes1
+  rotate: false
+  xy: 203, 2
+  size: 30, 28
+  orig: 30, 28
+  offset: 0, 0
+  index: -1

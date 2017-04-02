@@ -1,0 +1,13 @@
+
+MathBasketball2_6_1.png
+size: 256,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+DefenderDusted
+  rotate: false
+  xy: 2, 2
+  size: 197, 167
+  orig: 197, 167
+  offset: 0, 0
+  index: -1

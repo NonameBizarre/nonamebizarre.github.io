@@ -1,0 +1,20 @@
+
+MathBasketball3_3.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Basketball
+  rotate: false
+  xy: 208, 75
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+P3andE3
+  rotate: false
+  xy: 2, 2
+  size: 204, 169
+  orig: 204, 169
+  offset: 0, 0
+  index: -1

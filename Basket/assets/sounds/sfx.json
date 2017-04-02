@@ -11,34 +11,49 @@
       "end": 0.5224489795918368,
       "loop": false
     },
-    "button": {
+    "bump": {
       "start": 2,
-      "end": 2.522448979591837,
+      "end": 2.8881632653061224,
+      "loop": false
+    },
+    "button": {
+      "start": 4,
+      "end": 4.522448979591837,
       "loop": false
     },
     "buttonFallDown": {
-      "start": 4,
-      "end": 4.377233560090703,
+      "start": 6,
+      "end": 6.377233560090703,
+      "loop": false
+    },
+    "finalThrow": {
+      "start": 8,
+      "end": 8.313469387755102,
+      "loop": false
+    },
+    "goal": {
+      "start": 10,
+      "end": 11.14938775510204,
       "loop": false
     },
     "good": {
-      "start": 6,
-      "end": 8.142040816326531,
+      "start": 13,
+      "end": 15.142040816326531,
       "loop": false
     },
     "vjuh": {
-      "start": 10,
-      "end": 10.783673469387756,
+      "start": 17,
+      "end": 17.783673469387754,
       "loop": false
     },
     "bad": {
-      "start": 12,
-      "end": 13.675442176870748,
+      "start": 19,
+      "end": 20.67544217687075,
       "loop": false
     },
     "goodCatch": {
-      "start": 15,
-      "end": 15.877369614512471,
+      "start": 22,
+      "end": 22.87736961451247,
       "loop": false
     }
   }
