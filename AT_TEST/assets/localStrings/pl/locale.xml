@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmltext>
+
+	<item id="title">Mroźna walka</item>
+	<item id="play">Graj</item>
+	<item id="instructions">Instrukcje</item>
+	<item id="inst1">Zbieraj kryształy i monety</item>
+	<item id="inst2">Korzystaj ostrożnie ze specjalnych platform</item>
+	<item id="inst3">Unikaj Lodowego Króla i innych zagrożeń</item>
+	<item id="inst4">Skacz na włączniki</item>
+	<item id="continueText">Kontynuuj</item>
+	<item id="levelselect">Wybierz królewnę, którą chcesz uratować:</item>
+	<item id="IntroText">Do uratowania:</item>
+	<item id="SavedPrincess">Uratowana postać:</item>
+	<item id="loser">Masz pecha!</item>
+	<item id="loseText">Lodowy Król zwyciężył</item>
+	<item id="trapped">Królewna jest nadal uwięziona!</item>
+	<item id="complete">Gratulacje!</item>
+	<item id="complete2">Udało Ci się pokonać Lodowego Króla i ocalić wszystkie królewny! Zadanie wykonane.</item>
+	<item id="Level">Poziom</item>
+	<item id="Score">Wynik</item>
+
+	<PrincessNames type="array">
+		<value id="1">Królewna Pszczoła</value>
+		<value id="2">Królewna Obcych</value>
+		<value id="3">Królewna Śniadania</value>
+		<value id="4">Królewna Waty Cukrowej</value>
+		<value id="5">Królewna Ciastko</value>
+		<value id="6">Doktor Królewna</value>
+		<value id="7">Królewna Ognia</value>
+		<value id="8">Królewna Duch</value>
+		<value id="9">Mini Królewna</value>
+		<value id="10">Królewna Staruszka</value>
+		<value id="11">Pomarańczowa Królewna</value>
+		<value id="12">Królewna Orzeszek</value>
+		<value id="13">Królewna Przepiękna</value>
+		<value id="14">Królewna Szlamu</value>
+		<value id="15">Królewnę Grudkowego Kosmosu</value>
+		<value id="16">Królewna Tost</value>
+		<value id="17">Królewna Żółw</value>
+		<value id="18">Królewna Wojownik</value>
+		<value id="19">Królewna Dżungli</value>
+		<value id="20">Królewna Balonowa</value>
+	</PrincessNames>
+	
+</xmltext>

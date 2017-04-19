@@ -1,0 +1,34 @@
+    @font-face{
+        font-family:"Lubalin_CnObl";
+        src:url("LubalinFonts/c91ae4f0-5bfe-49f1-b74d-049898852cda.eot?#iefix");
+        src:url("LubalinFonts/c91ae4f0-5bfe-49f1-b74d-049898852cda.eot?#iefix") format("eot"),url("LubalinFonts/ed34c13e-ad9a-4e5d-ae40-c14b7ce0a35c.woff2") format("woff2"),url("LubalinFonts/f8979e2f-9b91-4d89-adda-ab2bc198880a.woff") format("woff"),url("LubalinFonts/2d40c847-ccfd-469a-9818-914b5f0d036f.ttf") format("truetype"),url("LubalinFonts/6277eb87-2b52-48b1-86cf-173686e35ea5.svg#6277eb87-2b52-48b1-86cf-173686e35ea5") format("svg");
+    }
+    @font-face{
+        font-family:"Lubalin_Book";
+        src:url("LubalinFonts/0dab238d-5720-4998-9086-5bde904a6510.eot?#iefix");
+        src:url("LubalinFonts/0dab238d-5720-4998-9086-5bde904a6510.eot?#iefix") format("eot"),url("LubalinFonts/2ab09d74-941a-4fa5-8f1d-c651c952f188.woff2") format("woff2"),url("LubalinFonts/f526a9d3-6990-4e60-8793-ceeb7789bb63.woff") format("woff"),url("LubalinFonts/7e09fa8b-3eaa-4cc9-bf88-c8837abce225.ttf") format("truetype"),url("LubalinFonts/155f297e-1326-4de9-995e-3e27fd74fabd.svg#155f297e-1326-4de9-995e-3e27fd74fabd") format("svg");
+    }
+    @font-face{
+        font-family:"Lubalin_D14";
+        src:url("LubalinFonts/be32f107-9bf9-49b8-bf30-8207605522fe.eot?#iefix");
+        src:url("LubalinFonts/be32f107-9bf9-49b8-bf30-8207605522fe.eot?#iefix") format("eot"),url("LubalinFonts/91b45ee7-5fa4-4549-962d-29aeb05bcda6.woff2") format("woff2"),url("LubalinFonts/4a8bedba-b14c-4318-88a6-8d69afedd4db.woff") format("woff"),url("LubalinFonts/82cfef9b-0c80-405b-acaa-bf37bdfeea93.ttf") format("truetype"),url("LubalinFonts/64ee6d4a-2d7b-45dc-8de7-73c2bfa842a3.svg#64ee6d4a-2d7b-45dc-8de7-73c2bfa842a3") format("svg");
+    }
+	@font-face{
+		font-family:"Lubalin_Ara";
+		src:url("LubalinFonts/acb449e5-5a1f-4de5-bde2-dc279da9b1ea.eot?#iefix");
+		src:url("LubalinFonts/acb449e5-5a1f-4de5-bde2-dc279da9b1ea.eot?#iefix") format("eot"),url("LubalinFonts/9d704a14-5422-42e5-9593-c3058bf31035.woff2") format("woff2"),url("LubalinFonts/822e1975-6bb1-44bd-abb9-6a9db91c54ab.woff") format("woff"),url("LubalinFonts/fc9ee47d-9dfe-48ce-92e2-41caa651c657.ttf") format("truetype"),url("LubalinFonts/3f65929b-b81b-4c90-82d3-1780314f22df.svg#3f65929b-b81b-4c90-82d3-1780314f22df") format("svg");
+	}
+	
+	@font-face{
+		font-family:"Fred Fredburger W04 Regular";
+		src:url("Fredburger/d42c5ee6-b697-45d5-bfb3-eebdbc97e4f6.eot?#iefix");
+		src:url("Fredburger/d42c5ee6-b697-45d5-bfb3-eebdbc97e4f6.eot?#iefix") format("eot"),url("Fredburger/41e7b4a4-2c34-4816-a2eb-b9632cbda617.woff2") format("woff2"),url("Fredburger/080a5ca5-a071-4c64-8802-4e4a35dd8da6.woff") format("woff"),url("Fredburger/7a90531b-ba9a-45c5-8567-7c522910e5dc.ttf") format("truetype"),url("Fredburger/55679da0-9d40-4a66-9bfa-b95d4b788a98.svg#55679da0-9d40-4a66-9bfa-b95d4b788a98") format("svg");
+	}
+
+	@font-face{
+		font-family:"Fred Fredburger W04 Bold";
+		src:url("Fredburger/89491ce2-9625-467f-a318-737491c929db.eot?#iefix");
+		src:url("Fredburger/89491ce2-9625-467f-a318-737491c929db.eot?#iefix") format("eot"),url("Fredburger/fe8b00a0-6cfb-47dc-89e0-f415d266bcdd.woff2") format("woff2"),url("Fredburger/57cd44ac-2c12-429c-a5a6-2d14217ad8e6.woff") format("woff"),url("Fredburger/9cf6beaf-243e-4671-b64b-03f277688019.ttf") format("truetype"),url("Fredburger/35874c30-a01a-44a7-9b02-9463d647cb4a.svg#35874c30-a01a-44a7-9b02-9463d647cb4a") format("svg");
+	}
+
+

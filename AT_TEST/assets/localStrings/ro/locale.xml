@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmltext>
+
+	<item id="title">Bătaia îngheţată</item>
+	<item id="play">Joacă</item>
+	<item id="instructions">Instrucţiuni</item>
+	<item id="inst1">Adună pietre preţioase şi monede</item>
+	<item id="inst2">Foloseşte cu atenţie platformele speciale</item>
+	<item id="inst3">Evită-l pe Împăratul gheţii dar şi celelalte pericole</item>
+	<item id="inst4">Sari pe comutatoare</item>
+	<item id="continueText">Continuă</item>
+	<item id="levelselect">Alege o prinţesă de salvat:</item>
+	<item id="IntroText">Salvează:</item>
+	<item id="SavedPrincess">Ai salvat:</item>
+	<item id="loser">Ghinion!</item>
+	<item id="loseText">Împăratul gheţii te-a înfrânt.</item>
+	<item id="trapped">Prinţesa e încă ferecată!</item>
+	<item id="complete">Felicitări!</item>
+	<item id="complete2">L-ai înfrânt pe Împăratul gheţii şi ai salvat toate prinţesele! Misiunea ta aici s-a încheiat.</item>
+	<item id="Level">Nivel</item>
+	<item id="Score">Scor</item>
+
+	<PrincessNames type="array">
+		<value id="1">Prinţesa Albină</value>
+		<value id="2">Prinţesa Extraterestră</value>
+		<value id="3">Prinţesa Dejunel</value>
+		<value id="4">Prinţesa Vată de Zahăr</value>
+		<value id="5">Prinţesa Pişcot</value>
+		<value id="6">Prinţesa Doctor</value>
+		<value id="7">Prinţesa Flamă</value>
+		<value id="8">Prinţesa Fantomă</value>
+		<value id="9">Prinţesa Mini</value>
+		<value id="10">Prinţesa Bătrână</value>
+		<value id="11">Prinţesa Portocalie</value>
+		<value id="12">Prinţesa Alună</value>
+		<value id="13">Prinţesa Frumoasă</value>
+		<value id="14">Prințesa Măzgă</value>
+		<value id="15">Prințesa Spațiului cu Bulgări (PSB)</value>
+		<value id="16">Prinţesa Pâine Prăjită</value>
+		<value id="17">Prinţesa Ţestoasă</value>
+		<value id="18">Prinţesa Războinică</value>
+		<value id="19">Prinţesa Junglei</value>
+		<value id="20">Prinţesa Gumiţă</value>
+	</PrincessNames>
+	
+</xmltext>

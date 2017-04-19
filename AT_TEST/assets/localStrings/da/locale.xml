@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmltext>
+
+	<item id="title">Kuldegysende kamp</item>
+	<item id="play">Spil</item>
+	<item id="instructions">Instruktioner</item>
+	<item id="inst1">Saml juveler og mønter op</item>
+	<item id="inst2">Vær forsigtig med at bruge specialplatforme</item>
+	<item id="inst3">Undgå Iskongen og andre farer</item>
+	<item id="inst4">Hop på kontakterne</item>
+	<item id="continueText">Fortsæt</item>
+	<item id="levelselect">Vælg en prinsesse, du vil redde:</item>
+	<item id="IntroText">Red:</item>
+	<item id="SavedPrincess">Du reddede:</item>
+	<item id="loser">Rent uheld!</item>
+	<item id="loseText">Iskongen har besejret dig.</item>
+	<item id="trapped">Prinsessen holdes stadig fanget!</item>
+	<item id="complete">Tillykke!</item>
+	<item id="complete2">Du besejrede Iskongen og reddede alle prinsesserne! Din mission er fuldført.</item>
+	<item id="Level">Niveau</item>
+	<item id="Score">Point</item>
+
+	<PrincessNames type="array">
+		<value id="1">Biprinsessen</value>
+		<value id="2">Alienprinsessen</value>
+		<value id="3">Morgenmadsprinsessen</value>
+		<value id="4">Sukkervatprinsessen</value>
+		<value id="5">Prinsesse Småkage</value>
+		<value id="6">Doktor Prinsesse</value>
+		<value id="7">Flammeprinsessen</value>
+		<value id="8">Spøgelsesprinsessen</value>
+		<value id="9">Miniprinsessen</value>
+		<value id="10">Den gamle prinsesse</value>
+		<value id="11">Appelsinprinsessen</value>
+		<value id="12">Nøddeprinsessen</value>
+		<value id="13">Prinsesse Smuk</value>
+		<value id="14">Slimprinsessen</value>
+		<value id="15">Klumperumsprinsessen</value>
+		<value id="16">Toastprinsessen</value>
+		<value id="17">Skildpaddeprinsessen</value>
+		<value id="18">Krigerprinsessen</value>
+		<value id="19">Jungleprinsessen</value>
+		<value id="20">Prinsesse Sukkermås</value>
+	</PrincessNames>
+	
+</xmltext>

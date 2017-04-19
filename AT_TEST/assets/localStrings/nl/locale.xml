@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmltext>
+
+	<item id="title">Vriesgevecht</item>
+	<item id="play">Spelen</item>
+	<item id="instructions">Instructies</item>
+	<item id="inst1">Verzamel edelstenen en munten</item>
+	<item id="inst2">Gebruik de speciale platforms voorzichtig</item>
+	<item id="inst3">Ontwijk de IJskoning en andere gevaren</item>
+	<item id="inst4">Spring op schakelaars</item>
+	<item id="continueText">Verder</item>
+	<item id="levelselect">Kies een prinses om te redden:</item>
+	<item id="IntroText">Redden:</item>
+	<item id="SavedPrincess">Je hebt gered:</item>
+	<item id="loser">Pech gehad!</item>
+	<item id="loseText">De IJskoning heeft je verslagen.</item>
+	<item id="trapped">De prinses zit nog steeds vast!</item>
+	<item id="complete">Gefeliciteerd!</item>
+	<item id="complete2">Je hebt de IJskoning verslagen en alle prinsessen gered! Je hebt de klus geklaard.</item>
+	<item id="Level">Niveau</item>
+	<item id="Score">Score</item>
+
+	<PrincessNames type="array">
+		<value id="1">Bijenprinses</value>
+		<value id="2">Alienprinses</value>
+		<value id="3">Ontbijtprinses</value>
+		<value id="4">Suikerspinprinses</value>
+		<value id="5">Prinses Koekje</value>
+		<value id="6">Dokterprinses</value>
+		<value id="7">Vuurprinses</value>
+		<value id="8">Spookprinses</value>
+		<value id="9">Miniprinses</value>
+		<value id="10">Oma Prinses</value>
+		<value id="11">Sinaasappelprinses</value>
+		<value id="12">Pindaprinses</value>
+		<value id="13">Prinses Wonderschoon</value>
+		<value id="14">Slijmprinses</value>
+		<value id="15">Ruimteklontprinses</value>
+		<value id="16">Toastprinses</value>
+		<value id="17">Schildpadprinses</value>
+		<value id="18">Vechtprinses</value>
+		<value id="19">Jungleprinses</value>
+		<value id="20">Prinses Bubbelien</value>
+	</PrincessNames>
+	
+</xmltext>

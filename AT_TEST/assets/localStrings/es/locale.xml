@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmltext>
+
+	<item id="title">Pelea en la nieve</item>
+	<item id="play">Jugar</item>
+	<item id="instructions">Instrucciones</item>
+	<item id="inst1">Recoge joyas y monedas</item>
+	<item id="inst2">Usa las plataformas especiales con cuidado</item>
+	<item id="inst3">Evita al Rey Hielo y los demás peligros</item>
+	<item id="inst4">Salta sobre los interruptores</item>
+	<item id="continueText">Continuar</item>
+	<item id="levelselect">Selecciona la princesa que quieres rescatar:</item>
+	<item id="IntroText">Rescate:</item>
+	<item id="SavedPrincess">Has rescatado:</item>
+	<item id="loser">¡Mala suerte!</item>
+	<item id="loseText">El Rey Hielo te ha vencido.</item>
+	<item id="trapped">¡La princesa aún está cautiva!</item>
+	<item id="complete">¡Felicidades!</item>
+	<item id="complete2">¡Has derrotado al Rey Hielo y has salvado a todas las princesas! Tu trabajo aquí ha terminado.</item>
+	<item id="Level">Nivel</item>
+	<item id="Score">Puntuación</item>
+
+	<PrincessNames type="array">
+		<value id="1">Princesa Abeja</value>
+		<value id="2">Princesa Alien</value>
+		<value id="3">Princesa Desayuno</value>
+		<value id="4">Princesa Algodón de azúcar</value>
+		<value id="5">Princesa Galleta</value>
+		<value id="6">Doctora Princesa</value>
+		<value id="7">Princesa Llama</value>
+		<value id="8">Princesa fantasma</value>
+		<value id="9">Mini Princesa</value>
+		<value id="10">Princesa Anciana</value>
+		<value id="11">Princesa Naranja</value>
+		<value id="12">Princesa Cacahuete</value>
+		<value id="13">Princesa Bella</value>
+		<value id="14">Princesa Lodo</value>
+		<value id="15">Princesa del Espacio Bultos</value>
+		<value id="16">Princesa Tostada</value>
+		<value id="17">Princesa Tortuga</value>
+		<value id="18">Princesa Guerrera</value>
+		<value id="19">Princesa Salvaje</value>
+		<value id="20">Princesa Chicle</value>
+	</PrincessNames>
+	
+</xmltext>

@@ -1,0 +1,120 @@
+{
+  "resources": [
+    "sfx.ogg",
+    "sfx.m4a",
+    "sfx.mp3",
+    "sfx.ac3"
+  ],
+  "spritemap": {
+    "bGGameLoop": {
+      "start": 0,
+      "end": 46.55020408163265,
+      "loop": true
+    },
+    "bGLoop)": {
+      "start": 48,
+      "end": 57.66530612244898,
+      "loop": true
+    },
+    "bounce": {
+      "start": 59,
+      "end": 59.496326530612244,
+      "loop": false
+    },
+    "burnOver": {
+      "start": 61,
+      "end": 61.83591836734694,
+      "loop": false
+    },
+    "button": {
+      "start": 63,
+      "end": 63.78367346938776,
+      "loop": false
+    },
+    "buttonOver": {
+      "start": 65,
+      "end": 65.20897959183674,
+      "loop": false
+    },
+    "cake": {
+      "start": 67,
+      "end": 68.17551020408163,
+      "loop": false
+    },
+    "caughtOnEnemyHit": {
+      "start": 70,
+      "end": 71.09714285714286,
+      "loop": false
+    },
+    "cheese": {
+      "start": 73,
+      "end": 73.36571428571429,
+      "loop": false
+    },
+    "cup": {
+      "start": 75,
+      "end": 75.44408163265307,
+      "loop": false
+    },
+    "drum": {
+      "start": 77,
+      "end": 78.17551020408163,
+      "loop": false
+    },
+    "fallInWater": {
+      "start": 80,
+      "end": 81.98530612244897,
+      "loop": false
+    },
+    "fullCharge": {
+      "start": 83,
+      "end": 84.41061224489796,
+      "loop": false
+    },
+    "iceBreakWin": {
+      "start": 86,
+      "end": 86.65306122448979,
+      "loop": false
+    },
+    "levelComplete": {
+      "start": 88,
+      "end": 90.76897959183674,
+      "loop": false
+    },
+    "levelFail": {
+      "start": 92,
+      "end": 93.17551020408163,
+      "loop": false
+    },
+    "powerUp": {
+      "start": 95,
+      "end": 96.38448979591837,
+      "loop": false
+    },
+    "screamBurn": {
+      "start": 98,
+      "end": 99.07102040816326,
+      "loop": false
+    },
+    "screamEnemy": {
+      "start": 101,
+      "end": 101.99265306122449,
+      "loop": false
+    },
+    "switch": {
+      "start": 103,
+      "end": 104.01877551020408,
+      "loop": false
+    },
+    "sword": {
+      "start": 106,
+      "end": 107.98530612244897,
+      "loop": false
+    },
+    "unlock": {
+      "start": 109,
+      "end": 111.61224489795919,
+      "loop": false
+    }
+  }
+}

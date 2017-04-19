@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmltext>
+
+	<item id="title">Заскрежена битка</item>
+	<item id="play">Играй</item>
+	<item id="instructions">Инструкции</item>
+	<item id="inst1">Събирай скъпоценни камъни и монетки</item>
+	<item id="inst2">Използвай внимателно специалните платформи</item>
+	<item id="inst3">Избягвай Цар Студ и другите опасности</item>
+	<item id="inst4">Скачай върху превключвателите</item>
+	<item id="continueText">Продължи</item>
+	<item id="levelselect">Избери коя принцеса да спасяваш:</item>
+	<item id="IntroText">Спаси:</item>
+	<item id="SavedPrincess">Ти спаси:</item>
+	<item id="loser">Нямаше късмет!</item>
+	<item id="loseText">Цар Студ те победи.</item>
+	<item id="trapped">Принцесата все още е в плен!</item>
+	<item id="complete">Поздравления!</item>
+	<item id="complete2">Ти победи Цар Студ и спаси всички принцеси! Твоята мисия тук приключи.</item>
+	<item id="Level">Ниво</item>
+	<item id="Score">Резултат</item>
+
+	<PrincessNames type="array">
+		<value id="1">Принцеса Пчела</value>
+		<value id="2">Принцеса Извънземна</value>
+		<value id="3">Принцеса Закуска</value>
+		<value id="4">Принцеса Захарен памук</value>
+		<value id="5">Принцеса Бисквитка</value>
+		<value id="6">Д-р Прицесна</value>
+		<value id="7">Принцеса Огън</value>
+		<value id="8">Принцеса Дух</value>
+		<value id="9">Мини принцеса</value>
+		<value id="10">Принцеса Стара лейди</value>
+		<value id="11">Принцеса Оранжева</value>
+		<value id="12">Принцеса Фъстъче</value>
+		<value id="13">Принцеса Хубавка</value>
+		<value id="14">Принцеса Желина</value>
+		<value id="15">Принцесата на Пихтиената вселена</value>
+		<value id="16">Принцеса Препечена филийка</value>
+		<value id="17">Принцеса Костенурка</value>
+		<value id="18">Принцеса воин</value>
+		<value id="19">Принцеса Джунгла</value>
+		<value id="20">Принцеса Сладкодъвка</value>
+	</PrincessNames>
+	
+</xmltext>

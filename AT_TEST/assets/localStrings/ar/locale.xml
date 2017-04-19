@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmltext>
+
+	<item id="title">نضال الصقيع</item>
+	<item id="play">إلعب</item>
+	<item id="instructions">تعليمات</item>
+	<item id="inst1"> إلتقط الجواهر والقطع النقدية</item>
+	<item id="inst2"> استخدم المنصات الخاصة بعناية</item>
+	<item id="inst3">تجنب ملك الجليد والمخاطر الأخرى</item>
+	<item id="inst4">أقفز على المفاتح الكهربائية </item>
+	<item id="continueText">الصفحة الأولى</item>
+	<item id="levelselect">إنتقي أميرة لأنقاذها:</item>
+	<item id="IntroText">أنقذ:</item>
+	<item id="SavedPrincess">لقد أنقذت:   </item>
+	<item id="loser">حظ سيئ! </item>
+	<item id="loseText">ملك الجليد تغلب عليك.</item>
+	<item id="trapped">الأميرة ما زالت محتجزة! </item>
+	<item id="complete">تهانينا!</item>
+	<item id="complete2">تغلبت على ملك الجليد وأنقذت جميع الأميرات! إنتهى عملك.</item>
+	<item id="Level">المستوى</item>
+	<item id="Score">النتيجة</item>
+
+	<PrincessNames type="array">
+		<value id="1">الأميرة بي</value>
+		<value id="2">الأميرة الفضائية</value>
+		<value id="3">الأميرة بريكفاست</value>
+		<value id="4">أميرة حلوى القطن</value>
+		<value id="5">أميرة الكعك </value>
+		<value id="6">الأميرة الطبيبة</value>
+		<value id="7">أميرة اللهب</value>
+		<value id="8">الأميرة الشبح</value>
+		<value id="9">الأميرة الصغيرة</value>
+		<value id="10">الأميرة الهرمة </value>
+		<value id="11">الأميرة البرتقالية</value>
+		<value id="12"> أميرة الفول السوداني</value>
+		<value id="13">الأميرة الجميلة</value>
+		<value id="14">أميرة الطين</value>
+		<value id="15">أميرة الفضاء الوعر</value>
+		<value id="16">الأميرة توست</value>
+		<value id="17">الأميرة السلحفاة</value>
+		<value id="18">الأميرة المحاربة</value>
+		<value id="19">أميرة الغابة</value>
+		<value id="20">أميرة العلكة</value>
+	</PrincessNames>
+	
+</xmltext>

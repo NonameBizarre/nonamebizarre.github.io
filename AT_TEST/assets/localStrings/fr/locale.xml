@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmltext>
+
+	<item id="title">Combat glacial</item>
+	<item id="play">Jouer</item>
+	<item id="instructions">Instructions</item>
+	<item id="inst1">Ramasse des cristaux et des pièces</item>
+	<item id="inst2">Utilise les plateformes spéciales avec précaution</item>
+	<item id="inst3">Évite le Roi des Glaces et tous autres dangers</item>
+	<item id="inst4">Saute sur les interrupteurs</item>
+	<item id="continueText">Continuer</item>
+	<item id="levelselect">Choisis une princesse à sauver :</item>
+	<item id="IntroText">Sauver :</item>
+	<item id="SavedPrincess">Tu as sauvé :</item>
+	<item id="loser">Pas de chance !</item>
+	<item id="loseText">Le Roi des Glaces t'a vaincu.</item>
+	<item id="trapped">La princesse est toujours emprisonnée !</item>
+	<item id="complete">Félicitations !</item>
+	<item id="complete2">Tu as battu le Roi des Glaces et sauvé toutes les princesses ! Ta mission est terminée.</item>
+	<item id="Level">Niveau</item>
+	<item id="Score">Score</item>
+
+	<PrincessNames type="array">
+		<value id="1">Princesse Abeille</value>
+		<value id="2">Princesse Alien</value>
+		<value id="3">Princesse Petit-déj</value>
+		<value id="4">Princesse Barbe à papa</value>
+		<value id="5">Princesse Cookie</value>
+		<value id="6">Princesse Doctoresse</value>
+		<value id="7">Princesse des Flammes</value>
+		<value id="8">Princesse Fantôme</value>
+		<value id="9">Princesse Mini</value>
+		<value id="10">Princesse Âgée</value>
+		<value id="11">Princesse Orange</value>
+		<value id="12">Princesse Cacahuète</value>
+		<value id="13">Princesse Beauté</value>
+		<value id="14">Princesse Baveuse</value>
+		<value id="15">Princesse Lumpy Space</value>
+		<value id="16">Princesse Toast</value>
+		<value id="17">Princesse Tortue</value>
+		<value id="18">Princesse Guerrière</value>
+		<value id="19">Princesse Jungle</value>
+		<value id="20">Princesse Chewing Gum</value>
+	</PrincessNames>
+	
+</xmltext>

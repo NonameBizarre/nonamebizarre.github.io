@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmltext>
+
+	<item id="title">Ледяная битва</item>
+	<item id="play">Играть</item>
+	<item id="instructions">Инструкция</item>
+	<item id="inst1">Собирай кристаллы и монеты</item>
+	<item id="inst2">Осторожно пользуйся специальными платформами</item>
+	<item id="inst3">Избегай Снежного Короля и других опасностей</item>
+	<item id="inst4">Прыгай на переключатели</item>
+	<item id="continueText">Далее</item>
+	<item id="levelselect">Выбери принцессу, которую хочешь спасти:</item>
+	<item id="IntroText">Спасти:</item>
+	<item id="SavedPrincess">Ты спас:</item>
+	<item id="loser">Не вышло!</item>
+	<item id="loseText">Снежный Король тебя победил.</item>
+	<item id="trapped">Принцесса все еще в плену!</item>
+	<item id="complete">Поздравляем!</item>
+	<item id="complete2">Снежный Король повержен, а все принцессы спасены! Ты отлично потрудился.</item>
+	<item id="Level">Уровень</item>
+	<item id="Score">Счет</item>
+
+	<PrincessNames type="array">
+		<value id="1">Принцесса Пчела</value>
+		<value id="2">Инопланетная Принцесса</value>
+		<value id="3">Принцесса Завтрак</value>
+		<value id="4">Принцесса Сладкая Вата</value>
+		<value id="5">Принцесса Печенька</value>
+		<value id="6">Доктор Принцесса</value>
+		<value id="7">Принцесса Пламя</value>
+		<value id="8">Принцесса Призрак</value>
+		<value id="9">Мини-принцесса</value>
+		<value id="10">Принцесса Старушка</value>
+		<value id="11">Оранжевая Принцесса</value>
+		<value id="12">Принцесса Арахис</value>
+		<value id="13">Принцесса Красавица</value>
+		<value id="14">Принцесса Слизь</value>
+		<value id="15">Принцесса Пупырчатого Королевства</value>
+		<value id="16">Принцесса Тост</value>
+		<value id="17">Принцесса Черепаха</value>
+		<value id="18">Принцесса Воин</value>
+		<value id="19">Принцесса Джунглей</value>
+		<value id="20">Принцесса Бубыльгум</value>
+	</PrincessNames>
+	
+</xmltext>

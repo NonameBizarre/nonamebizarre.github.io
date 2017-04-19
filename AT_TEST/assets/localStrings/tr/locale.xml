@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmltext>
+
+	<item id="title">Buzlu Savaş</item>
+	<item id="play">Oyna</item>
+	<item id="instructions">Komutlar</item>
+	<item id="inst1">Mücevher ve jeton topla</item>
+	<item id="inst2">Özel platformları dikkatli kullan</item>
+	<item id="inst3">Buz Kralı ve diğer tehlikelerden sakın</item>
+	<item id="inst4">Şalterlerin üstüne zıpla</item>
+	<item id="continueText">Devam</item>
+	<item id="levelselect">Kurtarmak için bir prenses seç:</item>
+	<item id="IntroText">Kurtar:</item>
+	<item id="SavedPrincess">Kurtardın: </item>
+	<item id="loser">Hay Aksi!</item>
+	<item id="loseText">Buz Kralı seni yendi.</item>
+	<item id="trapped">Prenses hala hapis!</item>
+	<item id="complete">Tebrikler!</item>
+	<item id="complete2">Buz Kralı'nı yendin ve bütün prensesleri kurtardın! Buradaki görevin tamamlandı.</item>
+	<item id="Level">Seviye</item>
+	<item id="Score">Skor</item>
+
+	<PrincessNames type="array">
+		<value id="1">Arı Prenses</value>
+		<value id="2">Uzaylı Prenses</value>
+		<value id="3">Kahvaltı Prensesi</value>
+		<value id="4">Pamuk Şeker Prenses</value>
+		<value id="5">Prenses Kurabiye</value>
+		<value id="6">Doktor Prenses</value>
+		<value id="7">Ateş Prensesi</value>
+		<value id="8">Hayalet Prenses</value>
+		<value id="9">Mini Prenses</value>
+		<value id="10">Yaşlı Teyze Prenses</value>
+		<value id="11">Portakal Prenses</value>
+		<value id="12">Yer Fıstığı Prenses</value>
+		<value id="13">Prenses Güzel</value>
+		<value id="14">Sümük Prenses</value>
+		<value id="15">Yumrular Prensesi</value>
+		<value id="16">Tost Prenses</value>
+		<value id="17">Kaplumbağa Prenses</value>
+		<value id="18">Savaşçı Prenses</value>
+		<value id="19">Orman Prensesi</value>
+		<value id="20">Prenses Ciklet</value>
+	</PrincessNames>
+	
+</xmltext>

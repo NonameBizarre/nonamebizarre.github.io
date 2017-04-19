@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmltext>
+
+	<item id="title">Kallt krig</item>
+	<item id="play">Spela</item>
+	<item id="instructions">Instruktioner</item>
+	<item id="inst1">Plocka upp ädelstenar och mynt</item>
+	<item id="inst2">Tänk på hur du använder specialplattformarna</item>
+	<item id="inst3">Undvik Iskungen och andra faror</item>
+	<item id="inst4">Hoppa på omkopplare</item>
+	<item id="continueText">Fortsätt</item>
+	<item id="levelselect">Välj vilken prinsessa du vill rädda:</item>
+	<item id="IntroText">Rädda:</item>
+	<item id="SavedPrincess">Du räddade:</item>
+	<item id="loser">Otur!</item>
+	<item id="loseText">Iskungen besegrade dig.</item>
+	<item id="trapped">Prinsessan är fortfarande fången!</item>
+	<item id="complete">Grattis!</item>
+	<item id="complete2">Du besegrade Iskungen och räddade alla prinsessor! Jobbet är gjort.</item>
+	<item id="Level">Nivå</item>
+	<item id="Score">Poäng</item>
+
+	<PrincessNames type="array">
+		<value id="1">Biprinsessan</value>
+		<value id="2">Rymdprinsessan</value>
+		<value id="3">Frukostprinsessan</value>
+		<value id="4">Sockervaddsprinsessan</value>
+		<value id="5">Kakprinsessan</value>
+		<value id="6">Doktorsprinsessan</value>
+		<value id="7">Eldprinsessan</value>
+		<value id="8">Spökprinsessan</value>
+		<value id="9">Miniprinsessan</value>
+		<value id="10">Tantprincessan</value>
+		<value id="11">Apelsinprinsessan</value>
+		<value id="12">Jordnötsprinsessan</value>
+		<value id="13">Prinsessan Vacker</value>
+		<value id="14">Slimeprinsessan</value>
+		<value id="15">Klumprymdprinsessan</value>
+		<value id="16">Rostbrödsprinsessan</value>
+		<value id="17">Sköldpaddsprinsessan</value>
+		<value id="18">Krigarprinsessan</value>
+		<value id="19">Jungelprinsessan</value>
+		<value id="20">Prinsessan Tuggummi</value>
+	</PrincessNames>
+	
+</xmltext>

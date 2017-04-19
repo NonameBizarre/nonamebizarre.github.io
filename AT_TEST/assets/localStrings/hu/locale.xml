@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmltext>
+
+	<item id="title">Fagyos bunyó</item>
+	<item id="play">Játék</item>
+	<item id="instructions">Útmutató</item>
+	<item id="inst1">Gyűjtsd össze a drágaköveket és érméket</item>
+	<item id="inst2">A speciális emelvényeket óvatosan használd</item>
+	<item id="inst3">Kerüld el a Jégkirályt és más veszélyeket</item>
+	<item id="inst4">Ugorj rá a kapcsolókra</item>
+	<item id="continueText">Folytatás</item>
+	<item id="levelselect">Válaszd ki, hogy melyik hercegnőt szeretnéd megmenteni:</item>
+	<item id="IntroText">Megmentendő hercegnő:</item>
+	<item id="SavedPrincess">Megmentett hercegnő:</item>
+	<item id="loser">A manóba!</item>
+	<item id="loseText">A Jégkirály legyőzött téged.</item>
+	<item id="trapped">A hercegnő még mindig fogságban van!</item>
+	<item id="complete">Gratulálunk!</item>
+	<item id="complete2">Legyőzted a Jégkirályt, és minden hercegnőt sikerült kiszabadítanod! Most már jöhet a pihenés!</item>
+	<item id="Level">Szint</item>
+	<item id="Score">Pontszám</item>
+
+	<PrincessNames type="array">
+		<value id="1">Méh hercegnő</value>
+		<value id="2">Idegen hercegnő</value>
+		<value id="3">Reggeli hercegnő</value>
+		<value id="4">Vattacukor hercegnő</value>
+		<value id="5">Süti hercegnő</value>
+		<value id="6">Doktor Hercegnő</value>
+		<value id="7">Láng hercegnő</value>
+		<value id="8">Szellem hercegnő</value>
+		<value id="9">Mini hercegnő</value>
+		<value id="10">Idős hercegnő</value>
+		<value id="11">Narancssárga hercegnő</value>
+		<value id="12">Mogyoró hercegnő</value>
+		<value id="13">Gyönyörű hercegnő</value>
+		<value id="14">Nyálka hercegnő</value>
+		<value id="15">Puffancs hercegnő</value>
+		<value id="16">Pirítós hercegnő </value>
+		<value id="17">Teknős hercegnő</value>
+		<value id="18">Harcos hercegnő</value>
+		<value id="19">Dzsungel hercegnő</value>
+		<value id="20">Buborék hercegnő</value>
+	</PrincessNames>
+	
+</xmltext>

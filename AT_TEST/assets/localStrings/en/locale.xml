@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmltext>
+
+	<item id="title">Frosty Fight</item>
+	<item id="play">Play</item>
+	<item id="instructions">Instructions</item>
+	<item id="inst1">Pick up gems and coins</item>
+	<item id="inst2">Use special platforms carefully</item>
+	<item id="inst3">Avoid the Ice King and other dangers</item>
+	<item id="inst4">Jump on switches</item>
+	<item id="continueText">Continue</item>
+	<item id="levelselect">Choose a princess to rescue:</item>
+	<item id="IntroText">Rescue:</item>
+	<item id="SavedPrincess">You rescued:</item>
+	<item id="loser">Bad Luck!</item>
+	<item id="loseText">The Ice King has defeated you.</item>
+	<item id="trapped">The princess is still trapped!</item>
+	<item id="complete">Congratulations!</item>
+	<item id="complete2">You defeated the Ice King and saved all the princesses! Your work here is done.</item>
+	<item id="Level">Level</item>
+	<item id="Score">Score</item>
+
+	<PrincessNames type="array">
+		<value id="1">Bee Princess</value>
+		<value id="2">Alien Princess</value>
+		<value id="3">Breakfast Princess</value>
+		<value id="4">Cotton Candy Princess</value>
+		<value id="5">Princess Cookie</value>
+		<value id="6">Doctor Princess</value>
+		<value id="7">Flame Princess</value>
+		<value id="8">Ghost Princess</value>
+		<value id="9">Mini Princess</value>
+		<value id="10">Old Lady Princess</value>
+		<value id="11">Orange Princess</value>
+		<value id="12">Peanut Princess</value>
+		<value id="13">Princess Beautiful</value>
+		<value id="14">Slime Princess</value>
+		<value id="15">Lumpy Space Princess</value>
+		<value id="16">Toast Princess</value>
+		<value id="17">Turtle Princess</value>
+		<value id="18">Warrior Princess</value>
+		<value id="19">Jungle Princess</value>
+		<value id="20">Princess Bubblegum</value>
+	</PrincessNames>
+	
+</xmltext>
