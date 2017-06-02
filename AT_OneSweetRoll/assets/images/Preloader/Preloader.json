@@ -1,0 +1,27 @@
+﻿{"frames": {
+
+"bgProress0000":
+{
+	"frame": {"x":2,"y":2,"w":423,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":423,"h":80},
+	"sourceSize": {"w":423,"h":80}
+},
+"preloaderFooter0000":
+{
+	"frame": {"x":2,"y":84,"w":331,"h":53},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":331,"h":53},
+	"sourceSize": {"w":331,"h":53}
+}},
+"meta": {
+	"app": "Adobe Animate",
+	"version": "16.1.0.86",
+	"image": "Preloader.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":512},
+	"scale": "1"
+}
+}

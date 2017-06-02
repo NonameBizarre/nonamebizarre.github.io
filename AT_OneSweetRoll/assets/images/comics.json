@@ -1,0 +1,100 @@
+{"frames": [
+
+{
+	"filename": "cb_mc",
+	"frame": {"x":1153,"y":37,"w":251,"h":283},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":251,"h":283},
+	"sourceSize": {"w":256,"h":286}
+},
+{
+	"filename": "Comix1_mc",
+	"frame": {"x":2,"y":2,"w":819,"h":480},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":819,"h":480},
+	"sourceSize": {"w":819,"h":480}
+},
+{
+	"filename": "Comix2_mc",
+	"frame": {"x":2,"y":486,"w":720,"h":480},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":480},
+	"sourceSize": {"w":720,"h":480}
+},
+{
+	"filename": "Comix3_mc",
+	"frame": {"x":2,"y":970,"w":720,"h":480},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":480},
+	"sourceSize": {"w":720,"h":480}
+},
+{
+	"filename": "Comix4_mc",
+	"frame": {"x":726,"y":486,"w":720,"h":480},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":480},
+	"sourceSize": {"w":720,"h":480}
+},
+{
+	"filename": "Comix5_mc",
+	"frame": {"x":726,"y":970,"w":720,"h":480},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":480},
+	"sourceSize": {"w":720,"h":480}
+},
+{
+	"filename": "comix_text1",
+	"frame": {"x":1072,"y":324,"w":235,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":1,"w":235,"h":101},
+	"sourceSize": {"w":250,"h":126}
+},
+{
+	"filename": "comix_text2",
+	"frame": {"x":1153,"y":2,"w":257,"h":31},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":39,"y":2,"w":257,"h":31},
+	"sourceSize": {"w":335,"h":44}
+},
+{
+	"filename": "comixBubble",
+	"frame": {"x":825,"y":2,"w":324,"h":183},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":324,"h":183},
+	"sourceSize": {"w":324,"h":183}
+},
+{
+	"filename": "playAgainButton",
+	"frame": {"x":825,"y":189,"w":243,"h":125},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":243,"h":125},
+	"sourceSize": {"w":243,"h":125}
+},
+{
+	"filename": "playButton",
+	"frame": {"x":825,"y":318,"w":243,"h":125},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":243,"h":125},
+	"sourceSize": {"w":243,"h":125}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "comics.png",
+	"format": "RGBA8888",
+	"size": {"w":1448,"h":1452},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:076dd80e49293e2d63e7acc9e131ade4:f3754d3fe9e983ad51c988c7e6a62b3a:387528ed3cc267106240bd434de037c4$"
+}
+}

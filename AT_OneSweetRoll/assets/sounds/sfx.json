@@ -1,0 +1,70 @@
+{
+  "resources": [
+    "sfx.ogg",
+    "sfx.m4a",
+    "sfx.mp3",
+    "sfx.ac3"
+  ],
+  "spritemap": {
+    "sound 278": {
+      "start": 0,
+      "end": 2.6122448979591835,
+      "loop": false
+    },
+    "sound 288": {
+      "start": 4,
+      "end": 4.653061224489796,
+      "loop": false
+    },
+    "sound 329 (bell)": {
+      "start": 6,
+      "end": 6.6269387755102045,
+      "loop": false
+    },
+    "sound 639 (splash)": {
+      "start": 8,
+      "end": 8.835918367346938,
+      "loop": false
+    },
+    "sound 640 (pop)": {
+      "start": 10,
+      "end": 10.417959183673469,
+      "loop": false
+    },
+    "sound 641 (block_don)": {
+      "start": 12,
+      "end": 12.182857142857143,
+      "loop": false
+    },
+    "sound 642 (jump)": {
+      "start": 14,
+      "end": 14.417959183673469,
+      "loop": false
+    },
+    "sound 643 (finish)": {
+      "start": 16,
+      "end": 17.071020408163264,
+      "loop": false
+    },
+    "sound 644 (ingame_music)": {
+      "start": 19,
+      "end": 53.89959183673469,
+      "loop": false
+    },
+    "sound 645 (dead_don)": {
+      "start": 55,
+      "end": 55.47020408163265,
+      "loop": false
+    },
+    "sound 646 (bosses)": {
+      "start": 57,
+      "end": 109.19265306122449,
+      "loop": false
+    },
+    "sound 647 (maintheme)": {
+      "start": 111,
+      "end": 145.29877551020408,
+      "loop": false
+    }
+  }
+}
