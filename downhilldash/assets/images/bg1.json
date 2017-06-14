@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "bgstreetMC_1",
+	"frame": {"x":1,"y":1,"w":752,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":752,"h":500},
+	"sourceSize": {"w":752,"h":500}
+},
+{
+	"filename": "bgstreetMC_2",
+	"frame": {"x":1,"y":503,"w":752,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":752,"h":500},
+	"sourceSize": {"w":752,"h":500}
+},
+{
+	"filename": "bgstreetMC_3",
+	"frame": {"x":1,"y":1005,"w":752,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":752,"h":500},
+	"sourceSize": {"w":752,"h":500}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "bg1.png",
+	"format": "RGBA8888",
+	"size": {"w":754,"h":1506},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:b3c227abcb14e241aabe99589de5f22e:c24d16f06b32bf06cfa6f7da8b0043b0:cbf4247910d37c7ab9f89792907cb5a9$"
+}
+}
