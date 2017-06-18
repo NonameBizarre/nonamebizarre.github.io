@@ -1,0 +1,170 @@
+{
+  "resources": [
+    "sfx.ogg",
+    "sfx.m4a",
+    "sfx.mp3",
+    "sfx.ac3"
+  ],
+  "spritemap": {
+    "sound 1 (sfx_windloop)": {
+      "start": 0,
+      "end": 8.333061224489796,
+      "loop": true
+    },
+    "sound 10 (sfx_fall3)": {
+      "start": 10,
+      "end": 11.097142857142858,
+      "loop": false
+    },
+    "sound 11 (sfx_button_over)": {
+      "start": 13,
+      "end": 13.208979591836735,
+      "loop": false
+    },
+    "sound 12 (sfx_startlight1)": {
+      "start": 15,
+      "end": 15.391836734693877,
+      "loop": false
+    },
+    "sound 13 (sfx_button)": {
+      "start": 17,
+      "end": 17.18285714285714,
+      "loop": false
+    },
+    "sound 14 (music_gameover)": {
+      "start": 19,
+      "end": 23.205714285714286,
+      "loop": false
+    },
+    "sound 15 (sfx_startlight2)": {
+      "start": 25,
+      "end": 25.548571428571428,
+      "loop": false
+    },
+    "sound 16 (music_game)": {
+      "start": 27,
+      "end": 40.16571428571429,
+      "loop": true
+    },
+    "sound 17 (sfx_pickup)": {
+      "start": 42,
+      "end": 43.097142857142856,
+      "loop": false
+    },
+    "sound 18 (sfx_step1)": {
+      "start": 45,
+      "end": 46.071020408163264,
+      "loop": false
+    },
+    "sound 19 (sfx_step2)": {
+      "start": 48,
+      "end": 49.071020408163264,
+      "loop": false
+    },
+    "sound 2 (sfx_star)": {
+      "start": 51,
+      "end": 51.88816326530612,
+      "loop": false
+    },
+    "sound 20 (sfx_scream_3)": {
+      "start": 53,
+      "end": 54.35836734693878,
+      "loop": false
+    },
+    "sound 21 (sfx_scream_2)": {
+      "start": 56,
+      "end": 56.83591836734694,
+      "loop": false
+    },
+    "sound 22 (sfx.airhorm)": {
+      "start": 58,
+      "end": 59.776326530612245,
+      "loop": false
+    },
+    "sound 23 (sfx_scream_1)": {
+      "start": 61,
+      "end": 62.14938775510204,
+      "loop": false
+    },
+    "sound 24 (sfx_ow2)": {
+      "start": 64,
+      "end": 64.23510204081633,
+      "loop": false
+    },
+    "sound 25 (sfx_ow1)": {
+      "start": 66,
+      "end": 66.20897959183674,
+      "loop": false
+    },
+    "sound 26 (sfx_applause)": {
+      "start": 68,
+      "end": 71.16081632653061,
+      "loop": false
+    },
+    "sound 27 (sfx_panel)": {
+      "start": 73,
+      "end": 73.65306122448979,
+      "loop": false
+    },
+    "sound 28 (music_splash)": {
+      "start": 75,
+      "end": 91.50938775510204,
+      "loop": true
+    },
+    "sound 29 (sfx_hittree)": {
+      "start": 93,
+      "end": 94.25387755102041,
+      "loop": false
+    },
+    "sound 3 (sfx_laugh_2)": {
+      "start": 96,
+      "end": 97.35836734693878,
+      "loop": false
+    },
+    "sound 30 (sfx_hitrock)": {
+      "start": 99,
+      "end": 100.09714285714286,
+      "loop": false
+    },
+    "sound 31 (sfx_skiturnhard2)": {
+      "start": 102,
+      "end": 103.04489795918367,
+      "loop": false
+    },
+    "sound 32 (sfx_skiturnhard1)": {
+      "start": 105,
+      "end": 105.80979591836734,
+      "loop": false
+    },
+    "sound 4 (sfx_skiaway)": {
+      "start": 107,
+      "end": 108.8808163265306,
+      "loop": false
+    },
+    "sound 5 (sfx_laugh_3)": {
+      "start": 110,
+      "end": 111.35836734693878,
+      "loop": false
+    },
+    "sound 6 (sfx_skiloop)": {
+      "start": 113,
+      "end": 118.64244897959183,
+      "loop": true
+    },
+    "sound 7 (sfx_laugh_1)": {
+      "start": 120,
+      "end": 122.63836734693878,
+      "loop": false
+    },
+    "sound 8 (sfx_fall1)": {
+      "start": 124,
+      "end": 124.99265306122449,
+      "loop": false
+    },
+    "sound 9 (sfx_fall2)": {
+      "start": 126,
+      "end": 126.75755102040816,
+      "loop": false
+    }
+  }
+}
