@@ -1,0 +1,138 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>"Pokerist: Texas Holdem Poker" by KamaGames 2017</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+</head>
+<body style="margin:0px; ">
+
+<!--<script src="mraid.js"></script>-->
+<script src="lib/phaser_custom.js"></script>
+<script src="lib/core.min.js"></script>
+<script src="release/game.js?id=0"></script>
+
+<script>
+    var orientation = "l";
+    var baseURL = "";
+    var tableName = "table"; //table_red, table, table_vip
+    var bgName = "back_b.png"; // back_b, back_r
+    var installBtnText = "INSTALL"; // back_b, back_r
+    var waitingTime = 30; //sec
+    var lang = "ru";
+    var mraid;
+    var game;
+    var tutorial = true;
+    var impressionTrackers = ["{% ImpTracker %}"];
+    var clickTrackers = ["{% Click %}", "{% ClickTarget %}"];
+    var targetLink = "{% ClickTarget %}";
+    var impressionTracked = false;
+    var clickTracked = false;
+    var bidID = "{%BidID%}";
+    var campaign = "{%CampaignID%}";
+    var creative = "{%CreativeID%}";
+    var useCustomClose = false;
+
+    window["tutorial"] = tutorial;
+    window["tableName"] = tableName;
+
+    var trackEvent = function (param) {
+    };
+
+    var trackClick = function () {
+        sendClicks();
+        mraid ? mraid.open(targetLink) : window.open(targetLink);
+    };
+    var closeClick = function () {
+        if (mraid)
+            mraid.close();
+    };
+    var showAd = function () {
+        if (mraid) {
+            mraid.removeEventListener('ready', showAd);
+            if (mraid.isViewable()) {
+                sendImpression();
+            }
+            else {
+                mraid.addEventListener('viewableChange', trackViewableChange);
+            }
+        }
+        if (mraid) {
+            mraid.setOrientationProperties({allowOrientationChange: false});
+            mraid.useCustomClose(useCustomClose);
+        }
+        game = new mygame.Game();
+    };
+    var trackViewableChange = function (viewable) {
+        if (viewable) {
+            mraid.removeEventListener('viewableChange', trackViewableChange);
+            sendImpression();
+        }
+    };
+    var sendClicks = function () {
+        if (!impressionTracked) {
+            sendImpression();
+        }
+        if (!clickTracked) {
+            var hiddenSpan = document.createElement('span');
+            hiddenSpan.style.display = 'none';
+            clickTrackers.forEach(function (tracker) {
+                var img = document.createElement('img');
+                img.src = tracker;
+                hiddenSpan.appendChild(img);
+                document.body.appendChild(hiddenSpan);
+            });
+            clickTracked = true;
+            trackEvent("sendClicks");
+        }
+    };
+    var sendImpression = function () {
+        if (!impressionTracked) {
+            var hiddenSpan = document.createElement('span');
+            hiddenSpan.style.display = 'none';
+            impressionTrackers.forEach(function (tracker) {
+                var img = document.createElement('img');
+                img.src = tracker;
+                hiddenSpan.appendChild(img);
+                document.body.appendChild(hiddenSpan);
+            });
+            impressionTracked = true;
+            trackEvent("sendImpression");
+        }
+    };
+    if (mraid && mraid.getState() === 'loading') {
+        mraid.addEventListener('ready', showAd);
+    } else {
+        showAd();
+    }
+
+    window.addEventListener('resize', function () {
+        resizeGame();
+    });
+    function resizeGame() {
+//        try {
+//            if (game.state.current == 'Preloader') {
+//                game.state.states.Preloader.ChangeSize();
+//            }
+//            if (game.state.current == 'Preloader') {
+//                game.state.states.Preloader.ChangeSize();
+//            }
+//            if (game.state.current == 'PlayState') {
+//                game.state.states.PlayState.ChangeSize();
+//            }
+//        } catch (e) {
+//        }
+    }
+
+
+</script>
+<style>
+    .appodeal-inner {
+        width: 100% !important;
+        height: 100% !important;
+    }
+</style>
+<div id="mdsp-creative" style="margin: 0px; display: block;"></div>
+</body>
+</html>
