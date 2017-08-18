@@ -1,0 +1,239 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>"Pokerist: Texas Holdem Poker" by KamaGames 2017</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+</head>
+<body style="margin:0px; ">
+<script src="mraid.js"></script>
+<script src="lib/phaser-arcade-physicsAndCore.min.js"></script>
+<script src="lib/Base64.js"></script>
+<script src="release/game.js"></script>
+<script>
+    var sounds = true;
+    var baseURL = "";
+    var mraid;
+    var game;
+    var playTime = 0;
+    var impressionTrackers = ["{% ImpTracker %}"];
+    var clickTrackers = ["{% Click %}", "{% ClickTarget %}"];
+    var targetLink = "{% ClickTarget %}";
+    var impressionTracked = false;
+    var clickTracked = false;
+    var innerMode = "client";
+    var bidID = "{%BidID%}";
+    var campaign = "{%CampaignID%}";
+    var creative = "{%CreativeID%}";
+    var debug = false;
+    var mixpanelToken = "PUT YOUR TOKEN HERE";
+    var isLandscape = true;
+    var customClose = {};
+    var useCustomCloseButton = true;
+    var closeBtnTimer = 5000;
+
+    var backSoundVal = 0.05; /* [0;1]*/
+    var giftTime = 500; /*ms*/
+    var playerWaintingTime = 5000; /* ms;*/
+    var tutorial = true;
+    var chipPrices = [500, 100, 50, 10];
+    var playerStartBalance = 1850;
+
+    var endGameTimer = 50000;
+    var showIndicator = true;
+    var indicatorValue = 50000; /* milliseconds or rounds*/
+    var pictureID = 3;
+    var animatePicture = true;
+    var particlesPicture = true;
+    var showSecondsOnIndicator = true;
+
+    var lang = 'en';
+
+    var gameStarted = function () {
+        if (debug) console.log("gameStarted");
+        setTimeout(showButton, closeBtnTimer);
+    };
+
+    var trackEvent = function (value, params) {
+        if (mixpanelToken) {
+            if (params == null) {
+                params = {};
+            }
+            if (mraid) {
+                params["mraidVersion"] = mraid.getVersion();
+            } else {
+                params["mraidVersion"] = "mraid is undefined";
+            }
+            params["CreativeID"] = "{%CreativeID%}";
+            params["ClickTarget"] = "{%ClickTarget%}";
+            params["AdID"] = "{%AdID%}";
+            params["BidID"] = "{%BidID%}";
+            params["Click"] = "{%Click%}";
+            params["IURL"] = "{%IURL%}";
+            params["ImpTracker "] = "{%ImpTracker%}";
+            params["CampaignID"] = "{%CampaignID%}";
+            params["App"] = "{%App%}";
+            params["AppName"] = "{%AppName%}";
+            params["Os"] = "{%Os%}";
+            params["DeviceID"] = "{%DeviceID%}";
+            params["SSP"] = "{%SSP%}";
+            params["Event"] = "{%Event%}";
+            params["ClickTarget"] = "{%CreativeID%}";
+            params["Country"] = "{%Country%}";
+            params["token"] = mixpanelToken;
+            params["bidID "] = bidID;
+            var data = {
+                "event": value,
+                "campaign": campaign,
+                "creative": creative,
+                "properties": params
+            };
+            params["sounds"] = sounds;
+            var encode = Base64.encode(JSON.stringify(data));
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", 'https://api.mixpanel.com/track/?data=' + encode, true);
+            xhr.send();
+        }
+    };
+
+    var clickClose = function () {
+        trackEvent("clickClose", {
+            "playTime": playTime.toString() + " sec",
+            "endGameTimer": endGameTimer,
+            "useCustomCloseButton": useCustomCloseButton,
+            "closeBtnTimer": closeBtnTimer
+        });
+        if (debug) console.log('clickClose');
+        if (mraid) mraid.close();
+    };
+
+    var trackClick = function () {
+        sendClicks();
+        mraid ? mraid.open(targetLink) : window.open(targetLink);
+    };
+
+    var showAd = function () {
+        if (mraid) {
+            mraid.removeEventListener('ready', showAd);
+            if (mraid.isViewable()) {
+                sendImpression();
+            }
+            else {
+                mraid.addEventListener('viewableChange', trackViewableChange);
+            }
+            mraid.useCustomClose(useCustomCloseButton);
+        }
+        game = new mygame.Game();
+    };
+
+    var showButton = function () {
+        if (useCustomCloseButton) {
+            customClose = document.getElementById('gameCloseButton');
+            customClose.style.visibility = 'visible';
+            customClose.style.display = 'block';
+        }
+        else if (mraid)
+            mraid.useCustomClose(false);
+    };
+    var trackViewableChange = function (viewable) {
+        if (viewable) {
+            mraid.removeEventListener('viewableChange', trackViewableChange);
+            sendImpression();
+        }
+    };
+    var sendClicks = function () {
+        if (!impressionTracked) {
+            sendImpression();
+        }
+        if (!clickTracked) {
+            var hiddenSpan = document.createElement('span');
+            hiddenSpan.style.display = 'none';
+            clickTrackers.forEach(function (tracker) {
+                var img = document.createElement('img');
+                img.src = tracker;
+                hiddenSpan.appendChild(img);
+                document.body.appendChild(hiddenSpan);
+            });
+            clickTracked = true;
+            trackEvent("sendClicks", {
+                "endGameTimer": endGameTimer,
+                "useCustomCloseButton": useCustomCloseButton,
+                "closeBtnTimer": closeBtnTimer
+            });
+        }
+    };
+    var sendImpression = function () {
+        if (!impressionTracked) {
+            var hiddenSpan = document.createElement('span');
+            hiddenSpan.style.display = 'none';
+            impressionTrackers.forEach(function (tracker) {
+                var img = document.createElement('img');
+                img.src = tracker;
+                hiddenSpan.appendChild(img);
+                document.body.appendChild(hiddenSpan);
+            });
+            impressionTracked = true;
+
+            trackEvent("sendImpression", {
+                "endGameTimer": endGameTimer,
+                "useCustomCloseButton": useCustomCloseButton,
+                "closeBtnTimer": closeBtnTimer
+            });
+        }
+    };
+    if (mraid && mraid.getState() === 'loading') {
+        mraid.addEventListener('ready', showAd);
+    } else {
+        showAd();
+    }
+
+    window.addEventListener('resize', function () {
+        resizeGame();
+    });
+    function resizeGame() {
+        try {
+            if (game.state.current == 'Preloader') {
+                game.state.states.Preloader.ChangeSize();
+            }
+            if (game.state.current == 'PlayState') {
+                if (document.documentElement.clientWidth > document.documentElement.clientHeight) {
+                    Controller.Instance.orientation = Controller.LANDSCAPE;
+                } else {
+                    Controller.Instance.orientation = Controller.PORTRAIT;
+                }
+            }
+        } catch (e) {
+        }
+    }
+</script>
+<style>
+    .appodeal-inner {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    #gameCloseButton {
+        image-resolution: 300dpi;
+        position: fixed;
+        right: 5px;
+        top: 5px;
+        z-index: 999599;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        position: fixed;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        background: url('data:image/png;base64,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') no-repeat;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        -webkit-tap-highlight-color: transparent;
+    }
+</style>
+<div id="mdsp-creative" style="margin: 0px; display: block;"></div>
+<div id="gameCloseButton" style="visibility:hidden; display:none" onclick="clickClose()"></div>
+</body>
+</html>
