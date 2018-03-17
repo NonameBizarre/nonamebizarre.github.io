@@ -1,0 +1,149 @@
+<html>
+	<head>
+		<title>Three.js Test Qubite</title>
+
+		<style type="text/css">
+			body {margin: 0; background-color: #f0f0f0;}
+			canvas {widht: 100%; height: 100%;};
+		</style>
+
+	</head>
+
+	<body>
+		
+		<script src="js/three.js"></script>
+		<script src="js/OrbitControls.js"></script>
+
+		<script src="js/ColladaLoader.js"></script>
+		<script src="js/Detector.js"></script>
+		<script src="js/stats.min.js"></script>
+
+		<script type="text/javascript">
+			var clock = new THREE.Clock();
+
+			var scene = new THREE.Scene();
+			//scene.background = new THREE.Color( 0xf0f0f0 );
+
+			var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+			camera.position.y = 7;
+			camera.position.z = 25;
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setPixelRatio( window.devicePixelRatio );
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			document.body.appendChild(renderer.domElement);
+
+			/*var materialDeer = new THREE.MeshBasicMaterial();
+			materialDeer.map = THREE.ImageUtils.loadTexture('assets/models/materials/Deer.png');
+			materialDeer.side = THREE.DoubleSide;*/
+
+			//var elf;
+
+			// loading manager
+			/*var loadingManager = new THREE.LoadingManager( function() {
+				scene.add( elf );
+				
+			} );*/
+			
+			// collada
+			/*var textureLoader = new THREE.TextureLoader();
+			var texture = textureLoader.load('assets/models/materials/Deer.png');*/
+
+			var loader = new THREE.ColladaLoader();
+
+			loader.load( 'assets/models/Deer.dae', function ( collada ) {
+					
+					//collada.scene.traverse(function (node) {
+				    /*if (node.isMesh) {
+				    	console.log(node.material)
+				      node.material.map = texture;
+				    }*/
+
+				    var avatar = collada.scene;
+				    avatar.traverse( function(child) {
+                    if (child instanceof THREE.Mesh) {
+	                        child.material = new THREE.MeshBasicMaterial( { vertexColors: true } );
+	                    }
+	                });
+					
+					//avatar.scale.set(0.256, 0.256, 0.256)
+
+					scene.add( avatar );
+					//console.log(avatar)
+
+				//} );
+			});
+
+			//loader.load( 'assets/models/Deer.dae', function ( collada ) {
+			/*loader.load( 'assets/models/Deer.dae', function ( collada ) {
+				elf = collada.scene;
+				console.log(elf.material);
+			} );*/
+
+			var ambientLight = new THREE.AmbientLight(0xFFFFFF, 1);
+			scene.add(ambientLight);
+
+			var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.8 );
+			directionalLight.position.set( 1, 1, 0 ).normalize();
+			scene.add( directionalLight );
+
+			var stats = new Stats();
+			document.body.appendChild( stats.dom );
+
+			window.addEventListener('resize', function()
+			{
+				var width = window.innerWidth;
+				var height = window.innerHeight;
+				renderer.setSize(width, height);
+				camera.aspect = width / height;
+				camera.updateProjectionMatrix();
+			});
+
+			
+
+			controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+			
+
+			camera.position.z = 3;
+
+			
+			/*var geometry = new THREE.BoxGeometry( 2, 2, 2 );
+
+			for ( var i = 0; i < geometry.faces.length; i += 2 ) {
+
+				var hex = Math.random() * 0xffffff;
+				geometry.faces[ i ].color.setHex( hex );
+				geometry.faces[ i + 1 ].color.setHex( hex );
+
+			}
+
+			var material = new THREE.MeshBasicMaterial( { vertexColors: THREE.FaceColors, overdraw: 0.5 } );
+
+			cube = new THREE.Mesh( geometry, material );
+			scene.add( cube );*/
+
+			var update = function() 
+			{
+				//var delta = clock.getDelta();
+				stats.update();
+			};
+
+			var render = function () 
+			{
+				// body...
+				renderer.render(scene, camera);
+			};
+
+			var GameLoop = function() 
+			{
+				requestAnimationFrame( GameLoop );
+
+				update();
+				render();
+			}
+
+			GameLoop();
+		</script>
+	</body>
+</html>
